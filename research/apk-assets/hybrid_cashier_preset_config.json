@@ -1,0 +1,37 @@
+{
+  "enable_hybrid_cashier": true,
+  "enable_hybrid_pages": [
+    "*"
+  ],
+  "enable_options": {
+    "check_offline_package": true,
+    "network_types": []
+  },
+  "grey_flag": "",
+  "hybrid_cashier_path": "/web-cashier/v7.47.0/index.html?use_shark=directpay&prerender_merged_enable=1&preset=1",
+  "hybrid_user_flag": "preset_7470",
+  "neo_configurations": {
+    "enable_check_upsepay_status": true,
+    "enable_loading": true,
+    "enable_neo_bridge": true,
+    "enable_neo_prerender_bridge": true,
+    "enable_neo_request_bridge": false,
+    "nsr_options": {
+      "enable_all_pages": false,
+      "enable_nsr": false,
+      "enable_nsr_downgrade": false,
+      "enable_nsr_keep": false,
+      "nsr_business_limit_time": 2500,
+      "nsr_delay": 0,
+      "nsr_pages": []
+    }
+  },
+  "nest_configurations": {
+    "degrade_destination_cashier": "native_standard_cashier",
+    "degrade_jump_data": {
+      "cashier_url": ""
+    },
+    "enable_degrade": false,
+    "enable_offline_degrade": true
+  }
+}

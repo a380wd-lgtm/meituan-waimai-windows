@@ -1,0 +1,24 @@
+{
+  "easyGoVersion": "1.0",
+  "client": "com.sankuai.meituan.takeoutnew",
+  "logicEntities": [
+    {
+      "head": {
+        "function": "magicwindow",
+        "required": "true"
+      },
+      "body": {
+        "mode": "0",
+        "defaultDualActivities": {
+          "mainPages": "com.sankuai.waimai.business.page.homepage.MainActivity",
+          "relatedPage": "com.sankuai.waimai.business.page.kingkong.KingKongActivity"
+        },
+        "transActivities": [ "com.sankuai.waimai.foundation.core.base.activity.transfer.TransferActivity" ],
+        "UX": {
+          "supportRotationUxCompat": "true",
+          "isDraggable": "true"
+        }
+      }
+    }
+  ]
+}

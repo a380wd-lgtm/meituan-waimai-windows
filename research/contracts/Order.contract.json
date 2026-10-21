@@ -1,0 +1,1098 @@
+{
+  "evidence_id": "ev_4a9be17fa5daf89e6752599968f215f33f404b26dc7d77d3463a41cb8a9fea88",
+  "class_name": "com.sankuai.waimai.business.order.api.model.Order",
+  "field_count": 74,
+  "method_count": 112,
+  "inner_class_count": 5,
+  "fields": [
+    {
+      "name": "LEG_ORDER_BY_ADDRESS",
+      "reported_type": "java.lang.Integer"
+    },
+    {
+      "name": "LEG_ORDER_BY_DESC",
+      "reported_type": "java.lang.Integer"
+    },
+    {
+      "name": "LEG_ORDER_BY_DESC2",
+      "reported_type": "java.lang.Integer"
+    },
+    {
+      "name": "LEG_ORDER_BY_PRODUCT",
+      "reported_type": "java.lang.Integer"
+    },
+    {
+      "name": "LEG_ORDER_BY_PRODUCT_LIST",
+      "reported_type": "java.lang.Integer"
+    },
+    {
+      "name": "adType",
+      "reported_type": "int"
+    },
+    {
+      "name": "appDeliveryTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "arrivalTime",
+      "reported_type": "long"
+    },
+    {
+      "name": "autoPopupFeedback",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "bizLine",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "bizType",
+      "reported_type": "int"
+    },
+    {
+      "name": "businessType",
+      "reported_type": "int"
+    },
+    {
+      "name": "buttonTypeList",
+      "reported_type": "java.util.List<com.sankuai.waimai.business.order.api.model.ButtonItem>"
+    },
+    {
+      "name": "canFeedback",
+      "reported_type": "int"
+    },
+    {
+      "name": "caution",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    },
+    {
+      "name": "chargeInfo",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "commentStatus",
+      "reported_type": "int"
+    },
+    {
+      "name": "deliverPackInfo",
+      "reported_type": "java.util.List<com.sankuai.waimai.business.order.api.model.OrderDeliverPackInfo>"
+    },
+    {
+      "name": "deliveryStatus",
+      "reported_type": "int"
+    },
+    {
+      "name": "displayProductPic",
+      "reported_type": "int"
+    },
+    {
+      "name": "displayStyle",
+      "reported_type": "int"
+    },
+    {
+      "name": "fastSubmitOrderType",
+      "reported_type": "int"
+    },
+    {
+      "name": "feedbackPreviewResult",
+      "reported_type": "com.sankuai.waimai.business.order.api.model.c"
+    },
+    {
+      "name": "foodList",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.domain.core.order.OrderedFood>"
+    },
+    {
+      "name": "foodListArray",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "foodNames",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "formatOrderTime",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "hasStatusBubble",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "hashId",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "invoiceTaxpayerId",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "invoiceTitle",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "invoiceType",
+      "reported_type": "int"
+    },
+    {
+      "name": "isComment",
+      "reported_type": "int"
+    },
+    {
+      "name": "isDeletable",
+      "reported_type": "int"
+    },
+    {
+      "name": "isPoiOpen",
+      "reported_type": "int"
+    },
+    {
+      "name": "isShowOrderAgain",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "latitude",
+      "reported_type": "int"
+    },
+    {
+      "name": "liveInfo",
+      "reported_type": "com.sankuai.waimai.business.order.api.model.LiveInfo"
+    },
+    {
+      "name": "longitude",
+      "reported_type": "int"
+    },
+    {
+      "name": "mDinersOption",
+      "reported_type": "com.sankuai.waimai.business.order.api.model.DinersOption"
+    },
+    {
+      "name": "mPoiExtensionInfo",
+      "reported_type": "com.sankuai.waimai.business.order.api.model.Order$a"
+    },
+    {
+      "name": "orderConfirmViewId",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "orderId",
+      "reported_type": "long"
+    },
+    {
+      "name": "orderTime",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "orderUnDeleteReason",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "payStatus",
+      "reported_type": "int"
+    },
+    {
+      "name": "poiId",
+      "reported_type": "long"
+    },
+    {
+      "name": "poiIdStr",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiName",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiPhone",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiPic",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiStatus",
+      "reported_type": "int"
+    },
+    {
+      "name": "productCount",
+      "reported_type": "int"
+    },
+    {
+      "name": "productCountExtraDesc",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "productDescription",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "productKinds",
+      "reported_type": "int"
+    },
+    {
+      "name": "productList",
+      "reported_type": "java.util.ArrayList<com.sankuai.waimai.business.order.api.model.Order$b>"
+    },
+    {
+      "name": "productMultilineDescription",
+      "reported_type": "java.util.List<java.lang.String>"
+    },
+    {
+      "name": "recepientAddress",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "recepientPhone",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "remainPayTime",
+      "reported_type": "long"
+    },
+    {
+      "name": "restaurantScheme",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "shippingServiceType",
+      "reported_type": "int"
+    },
+    {
+      "name": "status",
+      "reported_type": "int"
+    },
+    {
+      "name": "statusDescription",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "stimulateCommentSimpleDesc",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "subBizType",
+      "reported_type": "int"
+    },
+    {
+      "name": "subDeliveryInfoList",
+      "reported_type": "java.util.List<com.sankuai.waimai.business.order.api.model.SubDeliveryInfo>"
+    },
+    {
+      "name": "total",
+      "reported_type": "double"
+    },
+    {
+      "name": "trackingInfo",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "unavailableFoodList",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "unavailableFoodTitle",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "virtualOrder",
+      "reported_type": "int"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "displayNewStyle",
+      "reported_signature": "displayNewStyle(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "displayProductPic",
+      "reported_signature": "displayProductPic(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "getAdType",
+      "reported_signature": "getAdType(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getAppDeliveryTip",
+      "reported_signature": "getAppDeliveryTip(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getBizLine",
+      "reported_signature": "getBizLine(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getCanFeedback",
+      "reported_signature": "getCanFeedback(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getCaution",
+      "reported_signature": "getCaution(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getChargeInfo",
+      "reported_signature": "getChargeInfo(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getCommentStatus",
+      "reported_signature": "getCommentStatus(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getDeliverPackInfo",
+      "reported_signature": "getDeliverPackInfo(): java.util.List<com.sankuai.waimai.business.order.api.model.OrderDeliverPackInfo>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/util/List;"
+    },
+    {
+      "name": "getDeliveryStatus",
+      "reported_signature": "getDeliveryStatus(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getDinersOption",
+      "reported_signature": "getDinersOption(): com.sankuai.waimai.business.order.api.model.DinersOption",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/business/order/api/model/DinersOption;"
+    },
+    {
+      "name": "getFeedbackPreviewResult",
+      "reported_signature": "getFeedbackPreviewResult(): com.sankuai.waimai.business.order.api.model.c",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/business/order/api/model/c;"
+    },
+    {
+      "name": "getFoodList",
+      "reported_signature": "getFoodList(): java.util.List<com.sankuai.waimai.platform.domain.core.order.OrderedFood>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/util/List;"
+    },
+    {
+      "name": "getFoodListArray",
+      "reported_signature": "getFoodListArray(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getFoodNames",
+      "reported_signature": "getFoodNames(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getHashId",
+      "reported_signature": "getHashId(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getInvoiceTaxpayerId",
+      "reported_signature": "getInvoiceTaxpayerId(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getInvoiceTitle",
+      "reported_signature": "getInvoiceTitle(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getInvoiceType",
+      "reported_signature": "getInvoiceType(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getIsComment",
+      "reported_signature": "getIsComment(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getIsPoiOpen",
+      "reported_signature": "getIsPoiOpen(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getLatitude",
+      "reported_signature": "getLatitude(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getLiveInfo",
+      "reported_signature": "getLiveInfo(): com.sankuai.waimai.business.order.api.model.LiveInfo",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/business/order/api/model/LiveInfo;"
+    },
+    {
+      "name": "getLongitude",
+      "reported_signature": "getLongitude(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getOrderId",
+      "reported_signature": "getOrderId(): long",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()J"
+    },
+    {
+      "name": "getOrderTime",
+      "reported_signature": "getOrderTime(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getOrderUnDeleteReason",
+      "reported_signature": "getOrderUnDeleteReason(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPayStatus",
+      "reported_signature": "getPayStatus(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getPoiId",
+      "reported_signature": "getPoiId(): long",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()J"
+    },
+    {
+      "name": "getPoiIdStr",
+      "reported_signature": "getPoiIdStr(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPoiName",
+      "reported_signature": "getPoiName(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPoiPhone",
+      "reported_signature": "getPoiPhone(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPoiPic",
+      "reported_signature": "getPoiPic(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getRecepientAddress",
+      "reported_signature": "getRecepientAddress(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getRecepientPhone",
+      "reported_signature": "getRecepientPhone(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getRemainPayTime",
+      "reported_signature": "getRemainPayTime(): long",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()J"
+    },
+    {
+      "name": "getShippingServiceType",
+      "reported_signature": "getShippingServiceType(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getStatus",
+      "reported_signature": "getStatus(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getStatusDescription",
+      "reported_signature": "getStatusDescription(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getSubDeliveryInfoList",
+      "reported_signature": "getSubDeliveryInfoList(): java.util.List<com.sankuai.waimai.business.order.api.model.SubDeliveryInfo>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/util/List;"
+    },
+    {
+      "name": "getTotal",
+      "reported_signature": "getTotal(): double",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()D"
+    },
+    {
+      "name": "getUnavailableFoodList",
+      "reported_signature": "getUnavailableFoodList(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getUnavailableFoodTitle",
+      "reported_signature": "getUnavailableFoodTitle(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getVirtualOrder",
+      "reported_signature": "getVirtualOrder(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "isAutoPopupFeedback",
+      "reported_signature": "isAutoPopupFeedback(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isComment",
+      "reported_signature": "isComment(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "isDeletable",
+      "reported_signature": "isDeletable(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isHasStatusBubble",
+      "reported_signature": "isHasStatusBubble(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isLegOrder",
+      "reported_signature": "isLegOrder(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isLegOrderByAddress",
+      "reported_signature": "isLegOrderByAddress(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isLegOrderByDesc",
+      "reported_signature": "isLegOrderByDesc(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isLegOrderByProduct",
+      "reported_signature": "isLegOrderByProduct(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isLegOrderType",
+      "reported_signature": "isLegOrderType(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isRollGoodStuffOrderType",
+      "reported_signature": "isRollGoodStuffOrderType(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isShowOrderAgain",
+      "reported_signature": "isShowOrderAgain(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isStimulateCommentOrder",
+      "reported_signature": "isStimulateCommentOrder(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "parseBtnTypeList",
+      "reported_signature": "parseBtnTypeList(org.json.JSONArray): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONArray;)V"
+    },
+    {
+      "name": "parseTrackingInfo",
+      "reported_signature": "parseTrackingInfo(): com.sankuai.waimai.business.order.api.model.Order$TrackingInfo",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/business/order/api/model/Order$TrackingInfo;"
+    },
+    {
+      "name": "setAdType",
+      "reported_signature": "setAdType(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setAppDeliveryTip",
+      "reported_signature": "setAppDeliveryTip(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setAutoPopupFeedback",
+      "reported_signature": "setAutoPopupFeedback(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "setBizLine",
+      "reported_signature": "setBizLine(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setCanFeedback",
+      "reported_signature": "setCanFeedback(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setCaution",
+      "reported_signature": "setCaution(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setChargeInfo",
+      "reported_signature": "setChargeInfo(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setComment",
+      "reported_signature": "setComment(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setCommentStatus",
+      "reported_signature": "setCommentStatus(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setDeletable",
+      "reported_signature": "setDeletable(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setDeliverPackInfo",
+      "reported_signature": "setDeliverPackInfo(java.util.List<com.sankuai.waimai.business.order.api.model.OrderDeliverPackInfo>): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/util/List;)V"
+    },
+    {
+      "name": "setDeliveryStatus",
+      "reported_signature": "setDeliveryStatus(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setDinersOption",
+      "reported_signature": "setDinersOption(com.sankuai.waimai.business.order.api.model.DinersOption): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/business/order/api/model/DinersOption;)V"
+    },
+    {
+      "name": "setDisplayProductPic",
+      "reported_signature": "setDisplayProductPic(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setDisplayStyle",
+      "reported_signature": "setDisplayStyle(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setFeedbackPreviewResult",
+      "reported_signature": "setFeedbackPreviewResult(com.sankuai.waimai.business.order.api.model.c): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/business/order/api/model/c;)V"
+    },
+    {
+      "name": "setFoodList",
+      "reported_signature": "setFoodList(java.util.List<com.sankuai.waimai.platform.domain.core.order.OrderedFood>): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/util/List;)V"
+    },
+    {
+      "name": "setFoodListArray",
+      "reported_signature": "setFoodListArray(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setFoodNames",
+      "reported_signature": "setFoodNames(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setHasStatusBubble",
+      "reported_signature": "setHasStatusBubble(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "setHashId",
+      "reported_signature": "setHashId(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setInvoiceTitle",
+      "reported_signature": "setInvoiceTitle(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setInvoiceType",
+      "reported_signature": "setInvoiceType(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setIsComment",
+      "reported_signature": "setIsComment(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setIsPoiOpen",
+      "reported_signature": "setIsPoiOpen(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setLatitude",
+      "reported_signature": "setLatitude(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setLiveInfo",
+      "reported_signature": "setLiveInfo(com.sankuai.waimai.business.order.api.model.LiveInfo): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/business/order/api/model/LiveInfo;)V"
+    },
+    {
+      "name": "setLongitude",
+      "reported_signature": "setLongitude(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setOrderId",
+      "reported_signature": "setOrderId(long): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J)V"
+    },
+    {
+      "name": "setOrderTime",
+      "reported_signature": "setOrderTime(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setOrderUnDeleteReason",
+      "reported_signature": "setOrderUnDeleteReason(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setPayStatus",
+      "reported_signature": "setPayStatus(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setPoiId",
+      "reported_signature": "setPoiId(long): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J)V"
+    },
+    {
+      "name": "setPoiIdStr",
+      "reported_signature": "setPoiIdStr(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setPoiName",
+      "reported_signature": "setPoiName(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setPoiPhone",
+      "reported_signature": "setPoiPhone(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setPoiPic",
+      "reported_signature": "setPoiPic(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setRecepientAddress",
+      "reported_signature": "setRecepientAddress(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setRecepientPhone",
+      "reported_signature": "setRecepientPhone(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setRemainPayTime",
+      "reported_signature": "setRemainPayTime(long): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J)V"
+    },
+    {
+      "name": "setShippingServiceType",
+      "reported_signature": "setShippingServiceType(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setShowOrderAgain",
+      "reported_signature": "setShowOrderAgain(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "setStatus",
+      "reported_signature": "setStatus(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setStatusDescription",
+      "reported_signature": "setStatusDescription(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setStimulateCommentSimpleDesc",
+      "reported_signature": "setStimulateCommentSimpleDesc(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setSubDeliveryInfoList",
+      "reported_signature": "setSubDeliveryInfoList(java.util.List<com.sankuai.waimai.business.order.api.model.SubDeliveryInfo>): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/util/List;)V"
+    },
+    {
+      "name": "setTaxpayerId",
+      "reported_signature": "setTaxpayerId(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setTotal",
+      "reported_signature": "setTotal(double): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(D)V"
+    },
+    {
+      "name": "setUnavailableFoodList",
+      "reported_signature": "setUnavailableFoodList(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setUnavailableFoodTitle",
+      "reported_signature": "setUnavailableFoodTitle(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setVirtualOrder",
+      "reported_signature": "setVirtualOrder(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    }
+  ],
+  "inner_classes": [
+    "com.sankuai.waimai.business.order.api.model.Order.Deserializer",
+    "com.sankuai.waimai.business.order.api.model.Order.TrackingInfo",
+    "com.sankuai.waimai.business.order.api.model.Order.a",
+    "com.sankuai.waimai.business.order.api.model.Order.b",
+    "com.sankuai.waimai.business.order.api.model.Order.c"
+  ]
+}

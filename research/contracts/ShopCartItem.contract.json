@@ -1,0 +1,141 @@
+{
+  "evidence_id": "ev_94a34d540d503cfb7f1ef28c32375589d599ea4635377cc1f9a5a86aac97b52a",
+  "class_name": "com.sankuai.waimai.business.restaurant.base.shopcart.ShopCartItem",
+  "field_count": 6,
+  "method_count": 15,
+  "inner_class_count": 0,
+  "fields": [
+    {
+      "name": "actTags",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.widget.tag.api.d>"
+    },
+    {
+      "name": "activityIconUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    },
+    {
+      "name": "food",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.order.OrderedFood"
+    },
+    {
+      "name": "nxItemCount",
+      "reported_type": "int"
+    },
+    {
+      "name": "pocketId",
+      "reported_type": "int"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(int): void",
+      "overload_index": 1,
+      "is_constructor": true,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(com.sankuai.waimai.business.restaurant.base.shopcart.ShopCartItem): void",
+      "overload_index": 2,
+      "is_constructor": true,
+      "dex_descriptor": "(Lcom/sankuai/waimai/business/restaurant/base/shopcart/ShopCartItem;)V"
+    },
+    {
+      "name": "getFood",
+      "reported_signature": "getFood(): com.sankuai.waimai.platform.domain.core.order.OrderedFood",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/order/OrderedFood;"
+    },
+    {
+      "name": "getFoodAttrArr",
+      "reported_signature": "getFoodAttrArr(): com.sankuai.waimai.platform.domain.core.goods.GoodsAttr[]",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()[Lcom/sankuai/waimai/platform/domain/core/goods/GoodsAttr;"
+    },
+    {
+      "name": "getFoodCount",
+      "reported_signature": "getFoodCount(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getFoodSku",
+      "reported_signature": "getFoodSku(): com.sankuai.waimai.platform.domain.core.goods.GoodsSku",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/goods/GoodsSku;"
+    },
+    {
+      "name": "getFoodSpu",
+      "reported_signature": "getFoodSpu(): com.sankuai.waimai.platform.domain.core.goods.GoodsSpu",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/goods/GoodsSpu;"
+    },
+    {
+      "name": "getNXItemCount",
+      "reported_signature": "getNXItemCount(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "isFoodAvailable",
+      "reported_signature": "isFoodAvailable(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isPocket",
+      "reported_signature": "isPocket(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "setFoodCount",
+      "reported_signature": "setFoodCount(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setNXItemCount",
+      "reported_signature": "setNXItemCount(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "toString",
+      "reported_signature": "toString(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    }
+  ],
+  "inner_classes": []
+}

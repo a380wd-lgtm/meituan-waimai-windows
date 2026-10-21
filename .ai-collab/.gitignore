@@ -1,0 +1,7 @@
+# Runtime collaboration artifacts; keep binding.json reviewable.
+/claims/
+/requests/
+/results/
+/runs/
+*.tmp
+*.lock

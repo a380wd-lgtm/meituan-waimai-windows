@@ -1,0 +1,12 @@
+# 忽略超大原始二进制制品（保留元数据、SHA-256 证据摘要与重现脚本）
+package/*.apk
+rea-evidence-bundle.json
+
+# 编译产物与临时目录
+windows-client/**/bin/
+windows-client/**/obj/
+*.user
+*.suo
+.vs/
+__pycache__/
+*.pyc

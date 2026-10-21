@@ -1,0 +1,550 @@
+{
+    "i18n.countryByCityId":
+    {
+        "542600": "HK",
+        "810001": "HK",
+        "542100": "SA",
+        "1150000081": "SA",
+        "1150000078": "SA",
+        "1150000092" : "SA",
+        "1150000093" : "SA",
+        "1150000094" : "SA",
+        "1150000095" : "SA",
+        "1150000090" : "SA",
+        "1150000091" : "SA",
+        "1150000133" : "SA",
+        "1150000134" : "SA",
+        "1150000135" : "SA",
+        "1150000014" : "SA",
+        "1150000136" : "SA",
+        "1150000015" : "SA",
+        "1150000096" : "SA",
+        "1150000130" : "SA",
+        "1150000097" : "SA",
+        "1150000098" : "SA",
+        "1150000131" : "SA",
+        "1150000132" : "SA",
+        "1150000099" : "SA",
+        "1150000126" : "SA",
+        "1150000127" : "SA",
+        "1150000128" : "SA",
+        "1150000129" : "SA",
+        "1150000023" : "SA",
+        "1150000144" : "SA",
+        "1150000024" : "SA",
+        "1150000145" : "SA",
+        "1150000146" : "SA",
+        "1150000025" : "SA",
+        "1150000147" : "SA",
+        "1150000026" : "SA",
+        "1150000140" : "SA",
+        "1150000020" : "SA",
+        "1150000141" : "SA",
+        "1150000021" : "SA",
+        "1150000142" : "SA",
+        "1150000022" : "SA",
+        "1150000143" : "SA",
+        "1150000137" : "SA",
+        "1150000016" : "SA",
+        "1150000017" : "SA",
+        "1150000138" : "SA",
+        "1150000018" : "SA",
+        "1150000139" : "SA",
+        "1150000019" : "SA",
+        "1150000150" : "SA",
+        "1150000034" : "SA",
+        "1150000155" : "SA",
+        "1150000035" : "SA",
+        "1150000156" : "SA",
+        "1150000036" : "SA",
+        "1150000157" : "SA",
+        "1150000158" : "SA",
+        "1150000037" : "SA",
+        "1150000030" : "SA",
+        "1150000151" : "SA",
+        "1150000031" : "SA",
+        "1150000152" : "SA",
+        "1150000032" : "SA",
+        "1150000153" : "SA",
+        "1150000033" : "SA",
+        "1150000154" : "SA",
+        "1150000148" : "SA",
+        "1150000027" : "SA",
+        "1150000028" : "SA",
+        "1150000149" : "SA",
+        "1150000029" : "SA",
+        "1150000160" : "SA",
+        "1150000161" : "SA",
+        "1150000040" : "SA",
+        "1150000045" : "SA",
+        "1150000046" : "SA",
+        "1150000047" : "SA",
+        "1150000048" : "SA",
+        "1150000041" : "SA",
+        "1150000162" : "SA",
+        "1150000042" : "SA",
+        "1150000043" : "SA",
+        "1150000044" : "SA",
+        "1150000159" : "SA",
+        "1150000038" : "SA",
+        "1150000039" : "SA",
+        "1150000050" : "SA",
+        "1150000051" : "SA",
+        "1150000056" : "SA",
+        "1150000057" : "SA",
+        "1150000058" : "SA",
+        "1150000059" : "SA",
+        "1150000052" : "SA",
+        "1150000053" : "SA",
+        "1150000054" : "SA",
+        "1150000055" : "SA",
+        "1150000049" : "SA",
+        "1150000060" : "SA",
+        "1150000061" : "SA",
+        "1150000062" : "SA",
+        "1150000100" : "SA",
+        "1150000067" : "SA",
+        "1150000101" : "SA",
+        "1150000068" : "SA",
+        "1150000102" : "SA",
+        "1150000069" : "SA",
+        "1150000103" : "SA",
+        "1150000063" : "SA",
+        "1150000064" : "SA",
+        "1150000065" : "SA",
+        "1150000066" : "SA",
+        "1150000070" : "SA",
+        "1150000071" : "SA",
+        "1150000072" : "SA",
+        "1150000073" : "SA",
+        "1150000111" : "SA",
+        "1150000079" : "SA",
+        "1150000112" : "SA",
+        "1150000113" : "SA",
+        "1150000114" : "SA",
+        "1150000074" : "SA",
+        "1150000075" : "SA",
+        "1150000076" : "SA",
+        "1150000077" : "SA",
+        "1150000110" : "SA",
+        "1150000108" : "SA",
+        "1150000109" : "SA",
+        "1150000104" : "SA",
+        "1150000105" : "SA",
+        "1150000106" : "SA",
+        "1150000107" : "SA",
+        "1150000082" : "SA",
+        "1150000083" : "SA",
+        "1150000084" : "SA",
+        "1150000080" : "SA",
+        "1150000089" : "SA",
+        "1150000122" : "SA",
+        "1150000123" : "SA",
+        "1150000124" : "SA",
+        "1150000125" : "SA",
+        "1150000085" : "SA",
+        "1150000086" : "SA",
+        "1150000087" : "SA",
+        "1150000120" : "SA",
+        "1150000088" : "SA",
+        "1150000121" : "SA",
+        "1150000119" : "SA",
+        "1150000115" : "SA",
+        "1150000116" : "SA",
+        "1150000117" : "SA",
+        "1150000118" : "SA"
+    },
+    "i18n.capitalCityIdByRegionMap":
+    {
+        "HK": "810001",
+        "SA": "1150000081"
+    },
+    "i18n.supportRegion.common":
+    {
+        "HK":
+        {
+            "supportLocales":
+            [
+                "zh-HK",
+                "en",
+                "zh"
+            ]
+        },
+        "SA":
+        {
+            "supportLocales":
+            [
+                "ar",
+                "en"
+            ]
+        }
+    },
+    "i18n.optimalLocaleByCountry":
+    {
+        "HK": "zz-ZZ",
+        "SA": "zz-ZZ"
+    },
+    "i18n.timeZoneByCityIdMap":
+    {
+        "542600": "Asia/Hong_Kong",
+        "810001": "Asia/Hong_Kong",
+        "542100": "Asia/Riyadh",
+        "1150000081": "Asia/Riyadh",
+        "1150000078": "Asia/Riyadh",
+        "110100": "Asia/Shanghai",
+        "1150000092" : "Asia/Riyadh",
+        "1150000093" : "Asia/Riyadh",
+        "1150000094" : "Asia/Riyadh",
+        "1150000095" : "Asia/Riyadh",
+        "1150000090" : "Asia/Riyadh",
+        "1150000091" : "Asia/Riyadh",
+        "1150000133" : "Asia/Riyadh",
+        "1150000134" : "Asia/Riyadh",
+        "1150000135" : "Asia/Riyadh",
+        "1150000014" : "Asia/Riyadh",
+        "1150000136" : "Asia/Riyadh",
+        "1150000015" : "Asia/Riyadh",
+        "1150000096" : "Asia/Riyadh",
+        "1150000130" : "Asia/Riyadh",
+        "1150000097" : "Asia/Riyadh",
+        "1150000098" : "Asia/Riyadh",
+        "1150000131" : "Asia/Riyadh",
+        "1150000132" : "Asia/Riyadh",
+        "1150000099" : "Asia/Riyadh",
+        "1150000126" : "Asia/Riyadh",
+        "1150000127" : "Asia/Riyadh",
+        "1150000128" : "Asia/Riyadh",
+        "1150000129" : "Asia/Riyadh",
+        "1150000023" : "Asia/Riyadh",
+        "1150000144" : "Asia/Riyadh",
+        "1150000024" : "Asia/Riyadh",
+        "1150000145" : "Asia/Riyadh",
+        "1150000146" : "Asia/Riyadh",
+        "1150000025" : "Asia/Riyadh",
+        "1150000147" : "Asia/Riyadh",
+        "1150000026" : "Asia/Riyadh",
+        "1150000140" : "Asia/Riyadh",
+        "1150000020" : "Asia/Riyadh",
+        "1150000141" : "Asia/Riyadh",
+        "1150000021" : "Asia/Riyadh",
+        "1150000142" : "Asia/Riyadh",
+        "1150000022" : "Asia/Riyadh",
+        "1150000143" : "Asia/Riyadh",
+        "1150000137" : "Asia/Riyadh",
+        "1150000016" : "Asia/Riyadh",
+        "1150000017" : "Asia/Riyadh",
+        "1150000138" : "Asia/Riyadh",
+        "1150000018" : "Asia/Riyadh",
+        "1150000139" : "Asia/Riyadh",
+        "1150000019" : "Asia/Riyadh",
+        "1150000150" : "Asia/Riyadh",
+        "1150000034" : "Asia/Riyadh",
+        "1150000155" : "Asia/Riyadh",
+        "1150000035" : "Asia/Riyadh",
+        "1150000156" : "Asia/Riyadh",
+        "1150000036" : "Asia/Riyadh",
+        "1150000157" : "Asia/Riyadh",
+        "1150000158" : "Asia/Riyadh",
+        "1150000037" : "Asia/Riyadh",
+        "1150000030" : "Asia/Riyadh",
+        "1150000151" : "Asia/Riyadh",
+        "1150000031" : "Asia/Riyadh",
+        "1150000152" : "Asia/Riyadh",
+        "1150000032" : "Asia/Riyadh",
+        "1150000153" : "Asia/Riyadh",
+        "1150000033" : "Asia/Riyadh",
+        "1150000154" : "Asia/Riyadh",
+        "1150000148" : "Asia/Riyadh",
+        "1150000027" : "Asia/Riyadh",
+        "1150000028" : "Asia/Riyadh",
+        "1150000149" : "Asia/Riyadh",
+        "1150000029" : "Asia/Riyadh",
+        "1150000160" : "Asia/Riyadh",
+        "1150000161" : "Asia/Riyadh",
+        "1150000040" : "Asia/Riyadh",
+        "1150000045" : "Asia/Riyadh",
+        "1150000046" : "Asia/Riyadh",
+        "1150000047" : "Asia/Riyadh",
+        "1150000048" : "Asia/Riyadh",
+        "1150000041" : "Asia/Riyadh",
+        "1150000162" : "Asia/Riyadh",
+        "1150000042" : "Asia/Riyadh",
+        "1150000043" : "Asia/Riyadh",
+        "1150000044" : "Asia/Riyadh",
+        "1150000159" : "Asia/Riyadh",
+        "1150000038" : "Asia/Riyadh",
+        "1150000039" : "Asia/Riyadh",
+        "1150000050" : "Asia/Riyadh",
+        "1150000051" : "Asia/Riyadh",
+        "1150000056" : "Asia/Riyadh",
+        "1150000057" : "Asia/Riyadh",
+        "1150000058" : "Asia/Riyadh",
+        "1150000059" : "Asia/Riyadh",
+        "1150000052" : "Asia/Riyadh",
+        "1150000053" : "Asia/Riyadh",
+        "1150000054" : "Asia/Riyadh",
+        "1150000055" : "Asia/Riyadh",
+        "1150000049" : "Asia/Riyadh",
+        "1150000060" : "Asia/Riyadh",
+        "1150000061" : "Asia/Riyadh",
+        "1150000062" : "Asia/Riyadh",
+        "1150000100" : "Asia/Riyadh",
+        "1150000067" : "Asia/Riyadh",
+        "1150000101" : "Asia/Riyadh",
+        "1150000068" : "Asia/Riyadh",
+        "1150000102" : "Asia/Riyadh",
+        "1150000069" : "Asia/Riyadh",
+        "1150000103" : "Asia/Riyadh",
+        "1150000063" : "Asia/Riyadh",
+        "1150000064" : "Asia/Riyadh",
+        "1150000065" : "Asia/Riyadh",
+        "1150000066" : "Asia/Riyadh",
+        "1150000070" : "Asia/Riyadh",
+        "1150000071" : "Asia/Riyadh",
+        "1150000072" : "Asia/Riyadh",
+        "1150000073" : "Asia/Riyadh",
+        "1150000111" : "Asia/Riyadh",
+        "1150000079" : "Asia/Riyadh",
+        "1150000112" : "Asia/Riyadh",
+        "1150000113" : "Asia/Riyadh",
+        "1150000114" : "Asia/Riyadh",
+        "1150000074" : "Asia/Riyadh",
+        "1150000075" : "Asia/Riyadh",
+        "1150000076" : "Asia/Riyadh",
+        "1150000077" : "Asia/Riyadh",
+        "1150000110" : "Asia/Riyadh",
+        "1150000108" : "Asia/Riyadh",
+        "1150000109" : "Asia/Riyadh",
+        "1150000104" : "Asia/Riyadh",
+        "1150000105" : "Asia/Riyadh",
+        "1150000106" : "Asia/Riyadh",
+        "1150000107" : "Asia/Riyadh",
+        "1150000082" : "Asia/Riyadh",
+        "1150000083" : "Asia/Riyadh",
+        "1150000084" : "Asia/Riyadh",
+        "1150000080" : "Asia/Riyadh",
+        "1150000089" : "Asia/Riyadh",
+        "1150000122" : "Asia/Riyadh",
+        "1150000123" : "Asia/Riyadh",
+        "1150000124" : "Asia/Riyadh",
+        "1150000125" : "Asia/Riyadh",
+        "1150000085" : "Asia/Riyadh",
+        "1150000086" : "Asia/Riyadh",
+        "1150000087" : "Asia/Riyadh",
+        "1150000120" : "Asia/Riyadh",
+        "1150000088" : "Asia/Riyadh",
+        "1150000121" : "Asia/Riyadh",
+        "1150000119" : "Asia/Riyadh",
+        "1150000115" : "Asia/Riyadh",
+        "1150000116" : "Asia/Riyadh",
+        "1150000117" : "Asia/Riyadh",
+        "1150000118" : "Asia/Riyadh"
+    },
+    "i18n.customizedLocale":
+    {
+        "ar": "ar-u-nu-latn-ca-gregory"
+    },
+    "i18n.region2Currency":
+    {
+        "HK": "HKD",
+        "CN": "CNY",
+        "JP": "JPY",
+        "SA": "SAR"
+    },
+    "i18n.currencyLocaleInfoConfigMap":
+    {
+        "HKD-default":
+        {
+            "currencySymbol": "$"
+        },
+        "SAR-default":
+        {
+            "currencySymbol": "ر.س.‏"
+        },
+        "SAR-en":
+        {
+            "currencySymbol": "SAR"
+        }
+    },
+    "i18n.currencyInfoConfigMap":
+    {
+        "default":
+        {
+            "ratio": 100,
+            "fractionPlaces": 2
+        }
+    },
+    "i18n.dateTimeLocaleConfigMap":
+    {
+        "default":
+        {
+            "dateTimePatterns":
+            [
+                "HH:mm:ss",
+                "HH:mm",
+                "dd/MM/yyyy",
+                "dd/MM/yy",
+                "MMM yyyy",
+                "EEE,dd MMM",
+                "dd MMM",
+                "{1},{0}"
+            ],
+            "durationPatterns":
+            [
+                "{0} sec",
+                "{0} min",
+                "{0} hr",
+                "{0} day",
+                "{1} min, {0} sec",
+                "{1} hr, {0} min",
+                "{1} day, {0} hr"
+            ]
+        },
+        "zz-ZZ":
+        {
+            "dateTimePatterns":
+            [
+                "HH:mm:ss",
+                "HH:mm",
+                "dd/MM/yyyy",
+                "dd/MM/yy",
+                "MMM yyyy",
+                "EEE,dd MMM",
+                "dd MMM",
+                "{1},{0}"
+            ],
+            "durationPatterns":
+            [
+                "{0} sec",
+                "{0} min",
+                "{0} hr",
+                "{0} day",
+                "{1} min, {0} sec",
+                "{1} hr, {0} min",
+                "{1} day, {0} hr"
+            ]
+        },
+        "zh":
+        {
+            "dateTimePatterns":
+            [
+                "HH:mm:ss",
+                "HH:mm",
+                "yyyy年M月d日",
+                "yy年M月d日",
+                "yyyy年M月",
+                "M月d日 EEE",
+                "M月d日",
+                "{1} {0}"
+            ],
+            "durationPatterns":
+            [
+                "{0} sec",
+                "{0} min",
+                "{0} hr",
+                "{0} day",
+                "{1} min, {0} sec",
+                "{1} hr, {0} min",
+                "{1} day, {0} hr"
+            ]
+        },
+        "zh-HK":
+        {
+            "dateTimePatterns":
+            [
+                "HH:mm:ss",
+                "HH:mm",
+                "yyyy年M月d日",
+                "yy年M月d日",
+                "yyyy年M月",
+                "M月d日 EEE",
+                "M月d日",
+                "{1} {0}"
+            ],
+            "durationPatterns":
+            [
+                "{0} sec",
+                "{0} min",
+                "{0} hr",
+                "{0} day",
+                "{1} min, {0} sec",
+                "{1} hr, {0} min",
+                "{1} day, {0} hr"
+            ]
+        },
+        "en":
+        {
+            "dateTimePatterns":
+            [
+                "HH:mm:ss",
+                "HH:mm",
+                "d MMM yyyy",
+                "d MMM yy",
+                "MMM yyyy",
+                "EEE,d MMM",
+                "d MMM",
+                "{1} 'at' {0}"
+            ],
+            "durationPatterns":
+            [
+                "{0} sec",
+                "{0} min",
+                "{0} hr",
+                "{0} day",
+                "{1} min, {0} sec",
+                "{1} hr, {0} min",
+                "{1} day, {0} hr"
+            ]
+        },
+        "ar":
+        {
+            "dateTimePatterns":
+            [
+                "h:mm:ss a",
+                "h:mm a",
+                "dd/MM/yyyy",
+                "dd/MM/yy",
+                "MMM yyyy",
+                "EEE، d MMM",
+                "d MMM",
+                "{1}، {0}"
+            ],
+            "durationPatterns":
+            [
+                "{0} ث",
+                "{0} د",
+                "{0} س",
+                "{0} يوم",
+                "{1} د {0} ث",
+                "{1} س {0} د",
+                "{1} يوم {0} س"
+            ]
+        }
+    },
+    "i18n.distancePrecision":
+    {
+        "kilometer": 1,
+        "meter": 0,
+        "mile": 1,
+        "yard": 0
+    },
+    "i18n.distancePattern":
+    {
+        "default":
+        {
+            "measurementSystem": "metric",
+            "kilometer": "{0} km",
+            "meter": "{0}m",
+            "mile": "{0} mi",
+            "yard": "{0} yd"
+        },
+        "ar":
+        {
+            "measurementSystem": "metric",
+            "kilometer": "{0} كم",
+            "meter": "{0} م",
+            "mile": "{0} ميل",
+            "yard": "{0} ياردة"
+        }
+    }
+}

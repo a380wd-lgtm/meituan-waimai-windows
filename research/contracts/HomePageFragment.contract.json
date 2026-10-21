@@ -1,0 +1,982 @@
+{
+  "evidence_id": "ev_0bc703301317bab3292863b1eb72b6f3438b71f5b4004b994f2d2f3ab270e664",
+  "class_name": "com.sankuai.waimai.business.page.home.HomePageFragment",
+  "field_count": 90,
+  "method_count": 81,
+  "inner_class_count": 42,
+  "fields": [
+    {
+      "name": "A",
+      "reported_type": "android.view.ViewGroup"
+    },
+    {
+      "name": "A0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "B",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "B0",
+      "reported_type": "android.app.Dialog"
+    },
+    {
+      "name": "C",
+      "reported_type": "android.view.View"
+    },
+    {
+      "name": "C0",
+      "reported_type": "int"
+    },
+    {
+      "name": "D0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "E0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "F0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "G0",
+      "reported_type": "android.view.ViewStub"
+    },
+    {
+      "name": "H0",
+      "reported_type": "com.sankuai.waimai.business.page.common.deepeat.panel.b"
+    },
+    {
+      "name": "I0",
+      "reported_type": "android.view.ViewStub"
+    },
+    {
+      "name": "J0",
+      "reported_type": "com.sankuai.waimai.business.page.home.list.future.refresh.l"
+    },
+    {
+      "name": "K0",
+      "reported_type": "int"
+    },
+    {
+      "name": "L0",
+      "reported_type": "com.sankuai.waimai.business.page.homepage.MainActivity$g"
+    },
+    {
+      "name": "M",
+      "reported_type": "com.sankuai.waimai.business.page.home.HomePageFragment$k"
+    },
+    {
+      "name": "M0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "N0",
+      "reported_type": "com.dianping.live.live.audience.component.playcontroll.g"
+    },
+    {
+      "name": "O0",
+      "reported_type": "int"
+    },
+    {
+      "name": "P0",
+      "reported_type": "com.sankuai.waimai.business.page.home.HomePageFragment$j"
+    },
+    {
+      "name": "Q0",
+      "reported_type": "com.sankuai.waimai.business.page.home.HomePageFragment$RcmdCouponClickReceiver"
+    },
+    {
+      "name": "R0",
+      "reported_type": "com.sankuai.waimai.business.page.home.HomePageFragment$i"
+    },
+    {
+      "name": "S",
+      "reported_type": "com.sankuai.waimai.business.page.home.scan.c"
+    },
+    {
+      "name": "S0",
+      "reported_type": "int"
+    },
+    {
+      "name": "T",
+      "reported_type": "com.sankuai.waimai.business.page.home.HomePageFragment$l"
+    },
+    {
+      "name": "T0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "U",
+      "reported_type": "com.sankuai.waimai.business.page.home.actionbar.k0"
+    },
+    {
+      "name": "U0",
+      "reported_type": "int"
+    },
+    {
+      "name": "V",
+      "reported_type": "com.sankuai.waimai.business.page.home.actionbar.h"
+    },
+    {
+      "name": "V0",
+      "reported_type": "int"
+    },
+    {
+      "name": "W",
+      "reported_type": "com.sankuai.waimai.business.page.home.basal.PreLoadLinearLayoutManager"
+    },
+    {
+      "name": "W0",
+      "reported_type": "com.sankuai.waimai.business.page.home.HomePageFragment$p"
+    },
+    {
+      "name": "X",
+      "reported_type": "com.sankuai.waimai.business.page.home.basal.c"
+    },
+    {
+      "name": "X0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "Y",
+      "reported_type": "android.view.ViewStub"
+    },
+    {
+      "name": "Y0",
+      "reported_type": "com.sankuai.waimai.business.page.home.WMHomePageFragment$a"
+    },
+    {
+      "name": "Z",
+      "reported_type": "android.view.ViewStub"
+    },
+    {
+      "name": "Z0",
+      "reported_type": "java.util.concurrent.atomic.AtomicBoolean"
+    },
+    {
+      "name": "a0",
+      "reported_type": "com.sankuai.waimai.business.page.home.factory.a"
+    },
+    {
+      "name": "a1",
+      "reported_type": "android.os.Handler"
+    },
+    {
+      "name": "b0",
+      "reported_type": "com.sankuai.waimai.business.page.home.layer.i"
+    },
+    {
+      "name": "b1",
+      "reported_type": "com.sankuai.waimai.business.page.home.HomePageFragment$z"
+    },
+    {
+      "name": "c0",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "c1",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    },
+    {
+      "name": "d0",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.twolevel.RefreshHeaderHelper"
+    },
+    {
+      "name": "d1",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "e0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "e1",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "f0",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.twolevel.strategy.d"
+    },
+    {
+      "name": "f1",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "g0",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.twolevel.h"
+    },
+    {
+      "name": "h",
+      "reported_type": "com.sankuai.waimai.business.page.home.basal.HomePageNestedScrollRecyclerView"
+    },
+    {
+      "name": "h0",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.secondfloor.view.f"
+    },
+    {
+      "name": "i",
+      "reported_type": "com.sankuai.waimai.business.page.home.helper.c"
+    },
+    {
+      "name": "i0",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.secondfloor.view.h"
+    },
+    {
+      "name": "j",
+      "reported_type": "com.sankuai.waimai.business.page.home.locate.c"
+    },
+    {
+      "name": "j0",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.twolevel.j"
+    },
+    {
+      "name": "k",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.HomePullToRefreshView"
+    },
+    {
+      "name": "k0",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.twolevel.report.a"
+    },
+    {
+      "name": "l",
+      "reported_type": "com.sankuai.waimai.business.page.home.HomePageFragment$l0"
+    },
+    {
+      "name": "l0",
+      "reported_type": "androidx.lifecycle.s<java.lang.Boolean>"
+    },
+    {
+      "name": "m",
+      "reported_type": "com.sankuai.waimai.business.page.home.a0"
+    },
+    {
+      "name": "m0",
+      "reported_type": "int"
+    },
+    {
+      "name": "n",
+      "reported_type": "com.sankuai.waimai.business.page.home.i"
+    },
+    {
+      "name": "n0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "o",
+      "reported_type": "com.sankuai.waimai.business.page.home.basal.a"
+    },
+    {
+      "name": "o0",
+      "reported_type": "int"
+    },
+    {
+      "name": "p",
+      "reported_type": "com.sankuai.waimai.business.page.home.d0"
+    },
+    {
+      "name": "p0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "q",
+      "reported_type": "com.sankuai.waimai.business.page.home.i0"
+    },
+    {
+      "name": "q0",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "r",
+      "reported_type": "com.sankuai.waimai.business.page.home.h"
+    },
+    {
+      "name": "r0",
+      "reported_type": "com.sankuai.waimai.business.page.home.list.future.modulelistheader.c"
+    },
+    {
+      "name": "s",
+      "reported_type": "com.sankuai.waimai.business.page.home.z"
+    },
+    {
+      "name": "s0",
+      "reported_type": "com.sankuai.waimai.business.page.home.x"
+    },
+    {
+      "name": "t",
+      "reported_type": "com.sankuai.waimai.business.page.home.actionbar.v0"
+    },
+    {
+      "name": "t0",
+      "reported_type": "com.sankuai.waimai.pouch.viewmodel.a"
+    },
+    {
+      "name": "u",
+      "reported_type": "com.sankuai.waimai.business.page.home.q"
+    },
+    {
+      "name": "u0",
+      "reported_type": "rx.Subscription"
+    },
+    {
+      "name": "v",
+      "reported_type": "com.sankuai.waimai.business.page.home.layer.f"
+    },
+    {
+      "name": "v0",
+      "reported_type": "com.sankuai.waimai.business.page.home.l"
+    },
+    {
+      "name": "w",
+      "reported_type": "com.sankuai.waimai.business.page.home.head.promotion.c"
+    },
+    {
+      "name": "w0",
+      "reported_type": "com.sankuai.waimai.business.page.home.m"
+    },
+    {
+      "name": "x",
+      "reported_type": "com.sankuai.waimai.business.page.home.widget.WmHomeRooView"
+    },
+    {
+      "name": "x0",
+      "reported_type": "com.sankuai.waimai.popup.o"
+    },
+    {
+      "name": "y",
+      "reported_type": "android.view.ViewGroup"
+    },
+    {
+      "name": "y0",
+      "reported_type": "com.sankuai.waimai.business.page.home.k"
+    },
+    {
+      "name": "z",
+      "reported_type": "android.view.ViewGroup"
+    },
+    {
+      "name": "z0",
+      "reported_type": "com.sankuai.waimai.business.page.common.list.feedback.k"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "A3",
+      "reported_signature": "A3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "A4",
+      "reported_signature": "A4(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "B3",
+      "reported_signature": "B3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "B4",
+      "reported_signature": "B4(com.sankuai.waimai.platform.widget.filterbar.view.controller.FilterBarViewController$a): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/platform/widget/filterbar/view/controller/FilterBarViewController$a;)V"
+    },
+    {
+      "name": "C4",
+      "reported_signature": "C4(android.view.ViewStub, android.view.ViewStub): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/view/ViewStub;Landroid/view/ViewStub;)V"
+    },
+    {
+      "name": "D4",
+      "reported_signature": "D4(boolean, int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(ZI)V"
+    },
+    {
+      "name": "E3",
+      "reported_signature": "E3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "E4",
+      "reported_signature": "E4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "F3",
+      "reported_signature": "F3(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "F4",
+      "reported_signature": "F4(boolean): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)Z"
+    },
+    {
+      "name": "G3",
+      "reported_signature": "G3(): com.sankuai.waimai.business.page.home.layer.f",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/business/page/home/layer/f;"
+    },
+    {
+      "name": "G4",
+      "reported_signature": "G4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "H3",
+      "reported_signature": "H3(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "H4",
+      "reported_signature": "H4(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "I3",
+      "reported_signature": "I3(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "I4",
+      "reported_signature": "I4(com.sankuai.waimai.platform.domain.core.channel.a): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/platform/domain/core/channel/a;)V"
+    },
+    {
+      "name": "J",
+      "reported_signature": "J(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "J4",
+      "reported_signature": "J4(long, java.util.ArrayList<java.lang.String>, java.util.ArrayList<com.sankuai.waimai.platform.widget.filterbar.view.model.SliderSelectData>): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(JLjava/util/ArrayList;Ljava/util/ArrayList;)V"
+    },
+    {
+      "name": "K3",
+      "reported_signature": "K3(long): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J)V"
+    },
+    {
+      "name": "K4",
+      "reported_signature": "K4(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "L4",
+      "reported_signature": "L4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "M3",
+      "reported_signature": "M3(com.sankuai.waimai.business.page.common.list.model.b): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/business/page/common/list/model/b;)V"
+    },
+    {
+      "name": "N3",
+      "reported_signature": "N3(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "O3",
+      "reported_signature": "O3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "P3",
+      "reported_signature": "P3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "R3",
+      "reported_signature": "R3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "S3",
+      "reported_signature": "S3(android.app.Activity): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/app/Activity;)Z"
+    },
+    {
+      "name": "T3",
+      "reported_signature": "T3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "U3",
+      "reported_signature": "U3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "V3",
+      "reported_signature": "V3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "W3",
+      "reported_signature": "W3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "Z3",
+      "reported_signature": "Z3(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "a4",
+      "reported_signature": "a4(): androidx.core.util.d<java.lang.Boolean, java.lang.Boolean>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Landroidx/core/util/d;"
+    },
+    {
+      "name": "c4",
+      "reported_signature": "c4(java.lang.String): androidx.core.util.d<java.lang.Boolean, java.lang.Boolean>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)Landroidx/core/util/d;"
+    },
+    {
+      "name": "d3",
+      "reported_signature": "d3(boolean, boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(ZZ)V"
+    },
+    {
+      "name": "d4",
+      "reported_signature": "d4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "e4",
+      "reported_signature": "e4(android.content.Intent): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/content/Intent;)V"
+    },
+    {
+      "name": "i2",
+      "reported_signature": "i2(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "i4",
+      "reported_signature": "i4(boolean, boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(ZZ)V"
+    },
+    {
+      "name": "j4",
+      "reported_signature": "j4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "k4",
+      "reported_signature": "k4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "m4",
+      "reported_signature": "m4(com.sankuai.waimai.machpro.base.MachMap): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/machpro/base/MachMap;)V"
+    },
+    {
+      "name": "n4",
+      "reported_signature": "n4(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "o4",
+      "reported_signature": "o4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onAccountInfoUpdate",
+      "reported_signature": "onAccountInfoUpdate(com.sankuai.waimai.foundation.core.service.user.b$b): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/foundation/core/service/user/b$b;)V"
+    },
+    {
+      "name": "onActivityCreated",
+      "reported_signature": "onActivityCreated(android.os.Bundle): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/os/Bundle;)V"
+    },
+    {
+      "name": "onActivityResult",
+      "reported_signature": "onActivityResult(int, int, android.content.Intent): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(IILandroid/content/Intent;)V"
+    },
+    {
+      "name": "onAttach",
+      "reported_signature": "onAttach(android.app.Activity): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/app/Activity;)V"
+    },
+    {
+      "name": "onChanged",
+      "reported_signature": "onChanged(com.sankuai.waimai.foundation.core.service.user.b$a): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/foundation/core/service/user/b$a;)V"
+    },
+    {
+      "name": "onConfigurationChanged",
+      "reported_signature": "onConfigurationChanged(android.content.res.Configuration): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/content/res/Configuration;)V"
+    },
+    {
+      "name": "onCreate",
+      "reported_signature": "onCreate(android.os.Bundle): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/os/Bundle;)V"
+    },
+    {
+      "name": "onCreateView",
+      "reported_signature": "onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle): android.view.View",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;"
+    },
+    {
+      "name": "onDestroy",
+      "reported_signature": "onDestroy(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onDestroyView",
+      "reported_signature": "onDestroyView(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onDetach",
+      "reported_signature": "onDetach(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onHiddenChanged",
+      "reported_signature": "onHiddenChanged(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "onPause",
+      "reported_signature": "onPause(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onResume",
+      "reported_signature": "onResume(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onSaveInstanceState",
+      "reported_signature": "onSaveInstanceState(android.os.Bundle): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/os/Bundle;)V"
+    },
+    {
+      "name": "onStart",
+      "reported_signature": "onStart(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onStop",
+      "reported_signature": "onStop(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onViewCreated",
+      "reported_signature": "onViewCreated(android.view.View, android.os.Bundle): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/view/View;Landroid/os/Bundle;)V"
+    },
+    {
+      "name": "p4",
+      "reported_signature": "p4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "q3",
+      "reported_signature": "q3(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "q4",
+      "reported_signature": "q4(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "r4",
+      "reported_signature": "r4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "s3",
+      "reported_signature": "s3(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "s4",
+      "reported_signature": "s4(com.sankuai.waimai.business.page.home.widget.secondfloor.model.a): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/business/page/home/widget/secondfloor/model/a;)V"
+    },
+    {
+      "name": "t",
+      "reported_signature": "t(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "t3",
+      "reported_signature": "t3(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "t4",
+      "reported_signature": "t4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "u4",
+      "reported_signature": "u4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "v4",
+      "reported_signature": "v4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "w4",
+      "reported_signature": "w4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "x3",
+      "reported_signature": "x3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "x4",
+      "reported_signature": "x4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "y4",
+      "reported_signature": "y4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "z3",
+      "reported_signature": "z3(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "z4",
+      "reported_signature": "z4(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    }
+  ],
+  "inner_classes": [
+    "com.sankuai.waimai.business.page.home.HomePageFragment.PoiTabIconStatus",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.RcmdCouponClickReceiver",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.a",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.a0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.b",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.b0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.c",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.c0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.d",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.d0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.e",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.e0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.f",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.f0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.g",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.g0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.h",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.h0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.i",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.i0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.j",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.j0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.k",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.k0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.l",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.l0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.m",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.m0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.n",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.n0",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.o",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.p",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.q",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.r",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.s",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.t",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.u",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.v",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.w",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.x",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.y",
+    "com.sankuai.waimai.business.page.home.HomePageFragment.z"
+  ]
+}

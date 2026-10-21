@@ -1,0 +1,130 @@
+{
+  "evidence_id": "ev_1dbf43e51054328202990f59c919bfc49db842e928dee0b1bc56572a1bb0941f",
+  "class_name": "com.sankuai.waimai.business.restaurant.base.shopcart.ShopCartPrice",
+  "field_count": 26,
+  "method_count": 2,
+  "inner_class_count": 0,
+  "fields": [
+    {
+      "name": "cacheTime",
+      "reported_type": "int"
+    },
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    },
+    {
+      "name": "crossTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "enablePreload",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "hasTipsOrderNumLimit",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "mOriginShippingFeeTxt",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mPriceType",
+      "reported_type": "int"
+    },
+    {
+      "name": "mShippingFeeTxt",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mThresholdPrice",
+      "reported_type": "double"
+    },
+    {
+      "name": "mTotalAndBoxPrice",
+      "reported_type": "double"
+    },
+    {
+      "name": "mTotalBoxPrice",
+      "reported_type": "double"
+    },
+    {
+      "name": "mTotalDiscountedAndBoxPrice",
+      "reported_type": "double"
+    },
+    {
+      "name": "mTotalDiscountedAndBoxPriceWithoutGoodCoupon",
+      "reported_type": "double"
+    },
+    {
+      "name": "mTotalDiscountedPrice",
+      "reported_type": "double"
+    },
+    {
+      "name": "mTotalPriceBeforeGrab",
+      "reported_type": "double"
+    },
+    {
+      "name": "maxCount",
+      "reported_type": "int"
+    },
+    {
+      "name": "orderPageSkeleton",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "orderStyleSkeleton",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "originalShippingFee",
+      "reported_type": "double"
+    },
+    {
+      "name": "previewSubTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "pricePrefix",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "requestPath",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "selfPickupExtParams",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "shippingFeeReduce",
+      "reported_type": "double"
+    },
+    {
+      "name": "shoppingCartUniqueId",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "totalBoxPrice",
+      "reported_type": "java.lang.String"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    }
+  ],
+  "inner_classes": []
+}

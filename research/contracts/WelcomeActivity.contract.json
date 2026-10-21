@@ -1,0 +1,67 @@
+{
+  "evidence_id": "ev_be9424d17619a560c72953d0410ba628dabee0ed5f483544b9a6ae99c62282b1",
+  "class_name": "com.sankuai.meituan.takeoutnew.ui.page.boot.WelcomeActivity",
+  "field_count": 5,
+  "method_count": 5,
+  "inner_class_count": 0,
+  "fields": [
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    },
+    {
+      "name": "l",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "m",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "n",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "o",
+      "reported_type": "long"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onCreate",
+      "reported_signature": "onCreate(android.os.Bundle): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/os/Bundle;)V"
+    },
+    {
+      "name": "onResume",
+      "reported_signature": "onResume(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onStop",
+      "reported_signature": "onStop(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    }
+  ],
+  "inner_classes": []
+}

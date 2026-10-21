@@ -1,0 +1,130 @@
+{
+  "root_artifact": {
+    "name": "meituan-waimai-latest.apk",
+    "package_name": "com.sankuai.meituan.takeoutnew",
+    "version_name": "8.84.2",
+    "version_code": 800840002,
+    "sha256": "0f50d0a4d65d7d047ad33d80e7de836352f980aabcad4e069b0bb9d70638cc82",
+    "manifest_id": "agm_8b3711f4dc7a2ff01d24db57bbee82a0ae4444b87930e98e08c86e10aa7f7db9",
+    "root_artifact_id": "art_36308ca9208cb5f0386f7733da515ff5cf4178f0789e859a6dd0886a82845a71",
+    "graph_sha256": "74305f73952acc99d6c34809988a5dee4f6a7e58a4787cf87545b740eba0a383"
+  },
+  "rea_evidence_bundle": {
+    "bundle_file": "rea-evidence-bundle.json",
+    "size_bytes": 75648968,
+    "sha256": "a82b612264623b073f37102993fa70f66b3f70746eb1e14fb6008377e241b11c",
+    "record_count": 83,
+    "unknowns": 0
+  },
+  "contracts_archived": {
+    "MainActivity": {
+      "evidence_id": "ev_d7c2e8ffe851e0687abcff59f208e5a1ee875169566a9c9eef69c83f0f84421d",
+      "class_name": "com.sankuai.waimai.business.page.homepage.MainActivity",
+      "field_count": 66,
+      "method_count": 66
+    },
+    "WelcomeActivity": {
+      "evidence_id": "ev_be9424d17619a560c72953d0410ba628dabee0ed5f483544b9a6ae99c62282b1",
+      "class_name": "com.sankuai.meituan.takeoutnew.ui.page.boot.WelcomeActivity",
+      "field_count": 5,
+      "method_count": 5
+    },
+    "WMHomePageFragment": {
+      "evidence_id": "ev_8dcfd21d891796ab1480aebf2f73f545d4fb63723876e722a61fbe183e6f7c38",
+      "class_name": "com.sankuai.waimai.business.page.home.WMHomePageFragment",
+      "field_count": 1,
+      "method_count": 5
+    },
+    "HomePageFragment": {
+      "evidence_id": "ev_0bc703301317bab3292863b1eb72b6f3438b71f5b4004b994f2d2f3ab270e664",
+      "class_name": "com.sankuai.waimai.business.page.home.HomePageFragment",
+      "field_count": 90,
+      "method_count": 81
+    },
+    "ShopCartPrice": {
+      "evidence_id": "ev_1dbf43e51054328202990f59c919bfc49db842e928dee0b1bc56572a1bb0941f",
+      "class_name": "com.sankuai.waimai.business.restaurant.base.shopcart.ShopCartPrice",
+      "field_count": 26,
+      "method_count": 2
+    },
+    "ShopCartItem": {
+      "evidence_id": "ev_94a34d540d503cfb7f1ef28c32375589d599ea4635377cc1f9a5a86aac97b52a",
+      "class_name": "com.sankuai.waimai.business.restaurant.base.shopcart.ShopCartItem",
+      "field_count": 6,
+      "method_count": 15
+    },
+    "ShopCartApiService": {
+      "evidence_id": "ev_cfe917680e6f6acbf664a0aa6569adbd2b383b04ba37ed45b2a33b2313274af5",
+      "class_name": "com.sankuai.waimai.business.restaurant.base.shopcart.calculator.ShopCartApiService",
+      "field_count": 0,
+      "method_count": 1
+    },
+    "OrderListResponse": {
+      "evidence_id": "ev_9e91d3ba8e96cfe77c43d975075b96738649bec91c2b89346bb0828060a8a489",
+      "class_name": "com.sankuai.waimai.business.order.api.model.OrderListResponse",
+      "field_count": 19,
+      "method_count": 5
+    },
+    "MineMPFragment": {
+      "evidence_id": "ev_7e6b29c783a3a0e4f4569849b5ce76686196059501a404c6744d68edfcf6661e",
+      "class_name": "com.sankuai.waimai.business.page.mine.MineMPFragment",
+      "field_count": 6,
+      "method_count": 25
+    },
+    "Order": {
+      "evidence_id": "ev_4a9be17fa5daf89e6752599968f215f33f404b26dc7d77d3463a41cb8a9fea88",
+      "class_name": "com.sankuai.waimai.business.order.api.model.Order",
+      "field_count": 74,
+      "method_count": 112
+    },
+    "GoodsSpu": {
+      "evidence_id": "ev_dfec8e80b5dfb1a1a0ea6f595797ce868c8c35022b6523fb0551f0ab56150f0d",
+      "class_name": "com.sankuai.waimai.platform.domain.core.goods.GoodsSpu",
+      "field_count": 111,
+      "method_count": 103
+    },
+    "Poi": {
+      "evidence_id": "ev_9cddb4225370c92468d1c8ee37ad1fdba0e594dc88644c2e8cb8037ad8f89e4b",
+      "class_name": "com.sankuai.waimai.platform.domain.core.poi.Poi",
+      "field_count": 201,
+      "method_count": 111
+    }
+  },
+  "decompiled_methods_archived": {
+    "MainActivity_onCreate.java": {
+      "evidence_id": "ev_0063a0c6f104e543d38943d632c596951f7e026ba44437b8c64e936f02eda476",
+      "class_name": "com.sankuai.waimai.business.page.homepage.MainActivity",
+      "method": "onCreate(android.os.Bundle): void"
+    },
+    "MainActivity_v0_DynamicTabs.java": {
+      "evidence_id": "ev_05148e135ba41d4a9f18fb39d2c3ea5134ebf9a6b5480c2a354da5510b9c1617",
+      "class_name": "com.sankuai.waimai.business.page.homepage.MainActivity",
+      "method": "v0(com.sankuai.waimai.business.page.home.model.DynamicTabListInfoResponse): void"
+    },
+    "MainActivity_O4_Lifecycle.java": {
+      "evidence_id": "ev_4529da019a3a6438fd6d90b50b3906319ed532bdb6d6ab2fd3bcc7f21779b85c",
+      "class_name": "com.sankuai.waimai.business.page.homepage.MainActivity",
+      "method": "O4(int, java.lang.Class<T extends androidx.fragment.app.Fragment>): T extends androidx.fragment.app.Fragment"
+    },
+    "MineMPFragment_o3.java": {
+      "evidence_id": "ev_1efe4797dec6daa8e1939e1e190961e6817d0e07071ef8dc8291841947ed3d96",
+      "class_name": "com.sankuai.waimai.business.page.mine.MineMPFragment",
+      "method": "o3(): com.sankuai.waimai.machpro.base.MachMap"
+    },
+    "OrderListResponse_fromJson.java": {
+      "evidence_id": "ev_85cbd0da4f81234469001e25c484a966098bd41bafe88fa5e8d9f76304cb4668",
+      "class_name": "com.sankuai.waimai.business.order.api.model.OrderListResponse",
+      "method": "fromJson(org.json.JSONObject): com.sankuai.waimai.business.order.api.model.OrderListResponse"
+    },
+    "WMHomePageFragment_onCreateView.java": {
+      "evidence_id": "ev_13ebf920d821533bfc3f4637c1ec73fbe46200362d214e4bf97edd86544d6f87",
+      "class_name": "com.sankuai.waimai.business.page.home.WMHomePageFragment",
+      "method": "onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle): android.view.View"
+    },
+    "HomePageFragment_onCreateView.java": {
+      "evidence_id": "ev_b83d2da5bff9337004ff614bc26afffc1d30211ea6b8dabf80ba9423d46c2814",
+      "class_name": "com.sankuai.waimai.business.page.home.HomePageFragment",
+      "method": "onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle): android.view.View"
+    }
+  }
+}

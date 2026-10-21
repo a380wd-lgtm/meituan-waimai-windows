@@ -1,0 +1,211 @@
+{
+  "evidence_id": "ev_7e6b29c783a3a0e4f4569849b5ce76686196059501a404c6744d68edfcf6661e",
+  "class_name": "com.sankuai.waimai.business.page.mine.MineMPFragment",
+  "field_count": 6,
+  "method_count": 25,
+  "inner_class_count": 0,
+  "fields": [
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    },
+    {
+      "name": "m",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "n",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "o",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "p",
+      "reported_type": "long"
+    },
+    {
+      "name": "q",
+      "reported_type": "com.sankuai.waimai.business.page.mine.module.a"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "A3",
+      "reported_signature": "A3(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "B3",
+      "reported_signature": "B3(java.lang.String, com.sankuai.waimai.machpro.base.MachMap): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;Lcom/sankuai/waimai/machpro/base/MachMap;)V"
+    },
+    {
+      "name": "c1",
+      "reported_signature": "c1(com.sankuai.waimai.foundation.location.v2.WmAddress, boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/foundation/location/v2/WmAddress;Z)V"
+    },
+    {
+      "name": "h3",
+      "reported_signature": "h3(): android.view.View",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Landroid/view/View;"
+    },
+    {
+      "name": "i3",
+      "reported_signature": "i3(): android.view.View",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Landroid/view/View;"
+    },
+    {
+      "name": "o3",
+      "reported_signature": "o3(): com.sankuai.waimai.machpro.base.MachMap",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/machpro/base/MachMap;"
+    },
+    {
+      "name": "onAccountInfoUpdate",
+      "reported_signature": "onAccountInfoUpdate(com.sankuai.waimai.foundation.core.service.user.b$b): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/foundation/core/service/user/b$b;)V"
+    },
+    {
+      "name": "onAttach",
+      "reported_signature": "onAttach(android.content.Context): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/content/Context;)V"
+    },
+    {
+      "name": "onChanged",
+      "reported_signature": "onChanged(com.sankuai.waimai.foundation.core.service.user.b$a): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/foundation/core/service/user/b$a;)V"
+    },
+    {
+      "name": "onCreate",
+      "reported_signature": "onCreate(android.os.Bundle): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/os/Bundle;)V"
+    },
+    {
+      "name": "onCreateView",
+      "reported_signature": "onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle): android.view.View",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;"
+    },
+    {
+      "name": "onDestroy",
+      "reported_signature": "onDestroy(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onDetach",
+      "reported_signature": "onDetach(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onHiddenChanged",
+      "reported_signature": "onHiddenChanged(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "onResume",
+      "reported_signature": "onResume(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onStart",
+      "reported_signature": "onStart(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "onStop",
+      "reported_signature": "onStop(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "s3",
+      "reported_signature": "s3(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "setUserVisibleHint",
+      "reported_signature": "setUserVisibleHint(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "t3",
+      "reported_signature": "t3(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "updateUnReadCount",
+      "reported_signature": "updateUnReadCount(androidx.collection.e<java.lang.Integer>): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroidx/collection/e;)V"
+    },
+    {
+      "name": "x3",
+      "reported_signature": "x3(): com.sankuai.waimai.business.page.mine.MineMPFragment",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/business/page/mine/MineMPFragment;"
+    },
+    {
+      "name": "z3",
+      "reported_signature": "z3(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    }
+  ],
+  "inner_classes": []
+}

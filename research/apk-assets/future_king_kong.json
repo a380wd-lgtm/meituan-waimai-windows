@@ -1,0 +1,32 @@
+{
+    "code":"0",
+    "msg":"success",
+    "data":{
+        "layout_type":"list",
+        "render_mode":"native",
+        "view_type":"page",
+        "module_list":[
+            {
+                "view_type":"frame",
+                "module_id":"future_kingkong_rcmd",
+                "layout_type":"list",
+                "render_mode":"native",
+                "url":"mtmall/v1/home/market",
+                "is_Main_url":1,
+                "is_loading":1,
+                "params":""
+            },
+            {
+                "view_type":"frame",
+                "module_id":"future_kingkong_tabs",
+                "layout_type":"tab_list",
+                "render_mode":"native",
+                "url":"mtmall/v1/home/feed",
+                "is_Main_url":0,
+                "is_loading":1,
+                "params":""
+
+            }
+        ]
+    }
+}

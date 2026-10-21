@@ -1,0 +1,54 @@
+{
+  "evidence_id": "ev_8dcfd21d891796ab1480aebf2f73f545d4fb63723876e722a61fbe183e6f7c38",
+  "class_name": "com.sankuai.waimai.business.page.home.WMHomePageFragment",
+  "field_count": 1,
+  "method_count": 5,
+  "inner_class_count": 2,
+  "fields": [
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "e4",
+      "reported_signature": "e4(android.content.Intent): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/content/Intent;)V"
+    },
+    {
+      "name": "onCreate",
+      "reported_signature": "onCreate(android.os.Bundle): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/os/Bundle;)V"
+    },
+    {
+      "name": "onCreateView",
+      "reported_signature": "onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle): android.view.View",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;"
+    }
+  ],
+  "inner_classes": [
+    "com.sankuai.waimai.business.page.home.WMHomePageFragment.a",
+    "com.sankuai.waimai.business.page.home.WMHomePageFragment.b"
+  ]
+}

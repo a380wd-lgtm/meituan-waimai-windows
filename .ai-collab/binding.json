@@ -1,0 +1,20 @@
+{
+    "schema_version":  1,
+    "project_id":  "meituan-waimai-windows",
+    "project_root":  "C:\\Users\\a380w\\Documents\\Codex\\2026-10-15\\github\\work\\meituan-waimai-windows",
+    "created_at":  "2026-10-22T06:01:23.3292611+08:00",
+    "coordinator":  "antigravity-native",
+    "antigravity_session_id":  "88979bbf-2491-4dd5-ae47-6f04f8e82a88",
+    "antigravity_brain_dir":  "C:\\Users\\a380w\\.gemini\\antigravity\\brain\\88979bbf-2491-4dd5-ae47-6f04f8e82a88",
+    "codex_gui_thread_id":  null,
+    "codex_gui_log":  null,
+    "outbox_files":  {
+                         "codex":  "C:\\Users\\a380w\\Documents\\Codex\\2026-10-15\\github\\work\\meituan-waimai-windows\\AI_COLLAB_CODEX.md",
+                         "antigravity":  "C:\\Users\\a380w\\Documents\\Codex\\2026-10-15\\github\\work\\meituan-waimai-windows\\AI_COLLAB_ANTIGRAVITY.md",
+                         "sync_board":  "C:\\Users\\a380w\\Documents\\Codex\\2026-10-15\\github\\work\\meituan-waimai-windows\\AI_SYNC_BOARD.md"
+                     },
+    "worker_identity":  "codex-cli-exec",
+    "default_worker_sandbox":  "read-only",
+    "max_worker_concurrency":  1,
+    "default_timeout_seconds":  600
+}

@@ -1,0 +1,67 @@
+{
+  "supportRegions": {
+    "SA": {
+      "supportLocales": [
+        "en",
+        "ar"
+      ]
+    },
+    "HK": {
+      "supportLocales": [
+        "en",
+        "zh-HK"
+      ]
+    },
+    "INIT_REGION": {
+      "supportLocales": [
+        "en",
+        "zh-HK",
+        "ar"
+      ]
+    }
+  },
+  "supportLocales": [
+    {
+      "locale": "en",
+      "localizedDisplayName": "English"
+    },
+    {
+      "locale": "zh-HK",
+      "localizedDisplayName": "中文（繁體）"
+    },
+    {
+      "locale": "zh",
+      "localizedDisplayName": "中文（简体）"
+    },
+    {
+      "locale": "ar",
+      "localizedDisplayName": "عربي"
+    }
+  ],
+  "localeMappings": [
+    {
+      "locales": [
+        "zh-HK",
+        "zh-TW",
+        "zh-MO"
+      ]
+    },
+    {
+      "locales": [
+        "zh",
+        "zh-SG",
+        "zh-CN"
+      ]
+    },
+    {
+      "locales": [
+        "ar",
+        "ars",
+        "ars-SA",
+        "ars-KW",
+        "ars-IQ",
+        "ars-JO"
+      ]
+    }
+  ]
+}

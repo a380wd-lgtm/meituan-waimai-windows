@@ -1,0 +1,18 @@
+{
+  "evidence_id": "ev_cfe917680e6f6acbf664a0aa6569adbd2b383b04ba37ed45b2a33b2313274af5",
+  "class_name": "com.sankuai.waimai.business.restaurant.base.shopcart.calculator.ShopCartApiService",
+  "field_count": 0,
+  "method_count": 1,
+  "inner_class_count": 0,
+  "fields": [],
+  "methods": [
+    {
+      "name": "getNetPriceCalculatorResult",
+      "reported_signature": "getNetPriceCalculatorResult(java.lang.String, java.lang.String, java.lang.String): rx.Observable<com.sankuai.waimai.platform.capacity.network.retrofit.BaseResponse<com.sankuai.waimai.business.restaurant.base.shopcart.calculator.vo.f>>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lrx/Observable;"
+    }
+  ],
+  "inner_classes": []
+}

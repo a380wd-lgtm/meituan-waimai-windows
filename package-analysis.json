@@ -1,0 +1,42 @@
+{
+  "evidence_id": "ev_dfa491886da7142bfa8e2e6f09ec0c62cac8cb51f751061a79062e52881b6e91",
+  "complete_evidence_id": "ev_a7b3ea6c1c77ae38e76306d98031dbea6b724e20f686da1517ff7312dfd54880",
+  "subject": {
+    "name": "meituan-waimai-latest.apk",
+    "digest": {
+      "sha256": "0f50d0a4d65d7d047ad33d80e7de836352f980aabcad4e069b0bb9d70638cc82"
+    },
+    "local_path": "C:\\Users\\a380w\\Documents\\Codex\\2026-10-15\\github\\work\\meituan-waimai-windows\\package\\meituan-waimai-latest.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "rea-analysis-view",
+    "name": "REA analysis view projection",
+    "version": "1"
+  },
+  "apk_metrics": {
+    "package_name": "com.sankuai.meituan.takeoutnew",
+    "version_name": "8.84.2",
+    "version_code": 800840002,
+    "min_sdk": 21,
+    "target_sdk": 30,
+    "compile_sdk": 34,
+    "class_count": 42257,
+    "resource_count": 6231,
+    "manifest_text_code_units": 147301,
+    "artifact_graph_nodes": 6200,
+    "artifact_graph_occurrences": 6232,
+    "artifact_graph_edges": 6231,
+    "integrity_contradictions": 0
+  },
+  "security_guards_observed": {
+    "mtguard_appkey": "e68c4c18-35ec-4972-84e4-32a0836455a8",
+    "mtguard_pic": "ms_com.sankuai.meituan.takeoutnew",
+    "mtguard_sec": "ppd_com.sankuai.meituan.takeoutnew.xbt",
+    "robust_hotfix": "com.meituan.robust.ChangeQuickRedirect",
+    "meituan_map_sdk": "49058660-1de4-4c13-a401-a7f237e85065",
+    "kitefly_horn_token": "57060f364cd38b606e0522eb",
+    "build_number": "91293"
+  }
+}

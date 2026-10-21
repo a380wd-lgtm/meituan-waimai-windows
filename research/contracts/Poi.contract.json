@@ -1,0 +1,1624 @@
+{
+  "evidence_id": "ev_9cddb4225370c92468d1c8ee37ad1fdba0e594dc88644c2e8cb8037ad8f89e4b",
+  "class_name": "com.sankuai.waimai.platform.domain.core.poi.Poi",
+  "field_count": 201,
+  "method_count": 111,
+  "inner_class_count": 30,
+  "fields": [
+    {
+      "name": "BUZ_TYPE_BRAND_FOOD",
+      "reported_type": "int"
+    },
+    {
+      "name": "BUZ_TYPE_DINNER",
+      "reported_type": "int"
+    },
+    {
+      "name": "BUZ_TYPE_QUICK_MEAL",
+      "reported_type": "int"
+    },
+    {
+      "name": "BUZ_TYPE_SNACK",
+      "reported_type": "int"
+    },
+    {
+      "name": "POI_TEMPLATE_TYPE_BY_FRUIT_PAGE",
+      "reported_type": "int"
+    },
+    {
+      "name": "POI_TEMPLATE_TYPE_BY_PAGE",
+      "reported_type": "int"
+    },
+    {
+      "name": "POI_TEMPLATE_TYPE_BY_STORE_NEW_PAGE",
+      "reported_type": "int"
+    },
+    {
+      "name": "POI_TEMPLATE_TYPE_BY_STORE_PAGE",
+      "reported_type": "int"
+    },
+    {
+      "name": "POI_TEMPLATE_TYPE_NORMAL",
+      "reported_type": "int"
+    },
+    {
+      "name": "POI_TYPE_STORE",
+      "reported_type": "int"
+    },
+    {
+      "name": "POI_TYPE_WAIMAI",
+      "reported_type": "int"
+    },
+    {
+      "name": "RESERVATION_FOR_ONLY",
+      "reported_type": "int"
+    },
+    {
+      "name": "RESERVATION_OPEN",
+      "reported_type": "int"
+    },
+    {
+      "name": "STATE_BLOCK",
+      "reported_type": "int"
+    },
+    {
+      "name": "STATE_BUSY",
+      "reported_type": "int"
+    },
+    {
+      "name": "STATE_CLOSED",
+      "reported_type": "int"
+    },
+    {
+      "name": "STATE_NORMAL",
+      "reported_type": "int"
+    },
+    {
+      "name": "STATE_OFFLINE",
+      "reported_type": "int"
+    },
+    {
+      "name": "TYPE_DRUG",
+      "reported_type": "int"
+    },
+    {
+      "name": "acceptOrderTime",
+      "reported_type": "int"
+    },
+    {
+      "name": "acceptOrderTimeRank",
+      "reported_type": "int"
+    },
+    {
+      "name": "adActivityFlag",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "adMark",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "adType",
+      "reported_type": "int"
+    },
+    {
+      "name": "address",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "allowanceAllianceScenes",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "animateProducts",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.domain.core.poi.bean.AnimatorProductBean>"
+    },
+    {
+      "name": "appDeliveryTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "appModel",
+      "reported_type": "int"
+    },
+    {
+      "name": "averagePriceTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "avgShippingTimeRank",
+      "reported_type": "int"
+    },
+    {
+      "name": "backgroundUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "beginShippingTime",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "boldingList",
+      "reported_type": "java.util.ArrayList<java.lang.Integer>"
+    },
+    {
+      "name": "brandSlogan",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "brandSloganUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "brandTopPic",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "brandType",
+      "reported_type": "int"
+    },
+    {
+      "name": "bulletin",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "buySkuCountThreshold",
+      "reported_type": "int"
+    },
+    {
+      "name": "callPoiDesc",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "canUseCoupon",
+      "reported_type": "int"
+    },
+    {
+      "name": "cartIcon",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$CartIcon"
+    },
+    {
+      "name": "categoryCode",
+      "reported_type": "long"
+    },
+    {
+      "name": "categoryType",
+      "reported_type": "int"
+    },
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    },
+    {
+      "name": "chargeInfo",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "commentNumber",
+      "reported_type": "long"
+    },
+    {
+      "name": "containerTemplate",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.PoiContainerTemplate"
+    },
+    {
+      "name": "customerServiceInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.bean.CustomerServiceInfo"
+    },
+    {
+      "name": "deliveryElapsedTime",
+      "reported_type": "int"
+    },
+    {
+      "name": "deliveryType",
+      "reported_type": "int"
+    },
+    {
+      "name": "distance",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "distanceAndTime",
+      "reported_type": "android.text.SpannableStringBuilder"
+    },
+    {
+      "name": "distanceDisplayControl",
+      "reported_type": "int"
+    },
+    {
+      "name": "exposePoiState",
+      "reported_type": "int"
+    },
+    {
+      "name": "firstLineTags",
+      "reported_type": "java.util.List<java.lang.String>"
+    },
+    {
+      "name": "formatPoiID",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "formattedPoiScore",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "hasCheckCoupon",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "hasCoupon",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "headPicUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "id",
+      "reported_type": "long"
+    },
+    {
+      "name": "imgStyle",
+      "reported_type": "int"
+    },
+    {
+      "name": "imgType",
+      "reported_type": "int"
+    },
+    {
+      "name": "inShippingTime",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "insuranceIcon",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "insuranceType",
+      "reported_type": "int"
+    },
+    {
+      "name": "invoiceSupport",
+      "reported_type": "int"
+    },
+    {
+      "name": "isDislikeReasonShow",
+      "reported_type": "int"
+    },
+    {
+      "name": "isHasCoupon",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "isInDeliveryRange",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "isNewPage",
+      "reported_type": "int"
+    },
+    {
+      "name": "isNewUser",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "isOnlySelfDelivery",
+      "reported_type": "int"
+    },
+    {
+      "name": "isSelfDelivery",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "isShippingFeeDiscount",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "isShowServiceInfo",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "isShowingLayer",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "latitude",
+      "reported_type": "int"
+    },
+    {
+      "name": "locationTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "logfield",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$LogField"
+    },
+    {
+      "name": "longitude",
+      "reported_type": "int"
+    },
+    {
+      "name": "mActivityInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$ActivityInfo"
+    },
+    {
+      "name": "mActivityInfoList",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$ActivityInfo>"
+    },
+    {
+      "name": "mAdAttr",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mBuzType",
+      "reported_type": "int"
+    },
+    {
+      "name": "mCloseTips",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mCouponTagUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mDefaultSearchWord",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mDineInRestaurantLabel",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mFreeGoInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$FreeGoInfo"
+    },
+    {
+      "name": "mIsFavorite",
+      "reported_type": "int"
+    },
+    {
+      "name": "mLabelInfoList",
+      "reported_type": "java.util.ArrayList<com.sankuai.waimai.platform.domain.core.poi.Poi$LabelInfoListItem>"
+    },
+    {
+      "name": "mNewFunctionTips",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mNewRecommendList",
+      "reported_type": "java.util.ArrayList<com.sankuai.waimai.platform.domain.core.poi.Poi$RecommendListItem>"
+    },
+    {
+      "name": "mPoiCouponEntity",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$PoiCouponEntity"
+    },
+    {
+      "name": "mPoiDecorationType",
+      "reported_type": "int"
+    },
+    {
+      "name": "mPoiImpress",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$PoiImpress"
+    },
+    {
+      "name": "mPoiLabel",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$PoiLabel"
+    },
+    {
+      "name": "mPoiLabelNew",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$PoiLabel"
+    },
+    {
+      "name": "mPoiMediaInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.PoiMediaInfo"
+    },
+    {
+      "name": "mPoiPrepareTime",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mPoiServiceLabel",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$PoiServiceLabel"
+    },
+    {
+      "name": "mPoiServices",
+      "reported_type": "java.util.ArrayList<com.sankuai.waimai.platform.domain.core.poi.Poi$PoiService>"
+    },
+    {
+      "name": "mPoiShoppingCart",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart"
+    },
+    {
+      "name": "mPromotionHeadPicUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mPromptText",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mRemindCount",
+      "reported_type": "int"
+    },
+    {
+      "name": "mRemindTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mReportContent",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mReportShow",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "mReportUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mSelfDeliveryTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mShippingFeeCartTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mShopcartBgColor",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mThirdCategory",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "minPriceTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "min_price",
+      "reported_type": "double"
+    },
+    {
+      "name": "monthSales",
+      "reported_type": "android.text.SpannableStringBuilder"
+    },
+    {
+      "name": "monthSalesAndPriceAndShipping",
+      "reported_type": "android.text.SpannableStringBuilder"
+    },
+    {
+      "name": "monthSalesTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "mtDeliveryTime",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "name",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "navigateCode",
+      "reported_type": "long"
+    },
+    {
+      "name": "newPromotion",
+      "reported_type": "int"
+    },
+    {
+      "name": "newUserDiscountRestrict",
+      "reported_type": "int"
+    },
+    {
+      "name": "newUserDiscountRestrictToast",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "numDiscountRestrict",
+      "reported_type": "int"
+    },
+    {
+      "name": "numPlusDiscountRestrict",
+      "reported_type": "int"
+    },
+    {
+      "name": "offline",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "originShippingFee",
+      "reported_type": "double"
+    },
+    {
+      "name": "originShippingFeeTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "origin_brand_id",
+      "reported_type": "long"
+    },
+    {
+      "name": "phone",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "phoneCallPrefix",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "phoneList",
+      "reported_type": "java.util.ArrayList<java.lang.String>"
+    },
+    {
+      "name": "picUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiActivityTags",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.widget.tag.api.d>"
+    },
+    {
+      "name": "poiActivityType",
+      "reported_type": "int"
+    },
+    {
+      "name": "poiAdDynamicInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$PoiAdDynamicInfo"
+    },
+    {
+      "name": "poiBaseLabels",
+      "reported_type": "java.lang.String[]"
+    },
+    {
+      "name": "poiCouponInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.PoiCouponInfo"
+    },
+    {
+      "name": "poiDetailStoryInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.PoiDetailStoryInfo"
+    },
+    {
+      "name": "poiExtendInfoEntrances",
+      "reported_type": "java.util.ArrayList<com.sankuai.waimai.platform.domain.core.poi.PoiExtendInfo>"
+    },
+    {
+      "name": "poiIDStr",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiIndex",
+      "reported_type": "int"
+    },
+    {
+      "name": "poiNormalTags",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.widget.tag.api.d>"
+    },
+    {
+      "name": "poiPromotionPic",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiRecommendPicUrl",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiRecommendTags",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.widget.tag.api.d>"
+    },
+    {
+      "name": "poiRedPackageTags",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.widget.tag.api.d>"
+    },
+    {
+      "name": "poiScore",
+      "reported_type": "double"
+    },
+    {
+      "name": "poiScoreGradeDescInfo",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "poiSellStatus",
+      "reported_type": "int"
+    },
+    {
+      "name": "poiServeTags",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.widget.tag.api.d>"
+    },
+    {
+      "name": "poiStyle",
+      "reported_type": "int"
+    },
+    {
+      "name": "poiTags",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.widget.tag.api.d>"
+    },
+    {
+      "name": "poiType",
+      "reported_type": "int"
+    },
+    {
+      "name": "poiTypeIcon",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "priceAndShipping",
+      "reported_type": "android.text.SpannableStringBuilder"
+    },
+    {
+      "name": "promotionInfoA",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$PromotionInfoA"
+    },
+    {
+      "name": "promotionInfoS",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.Poi$PromotionInfoS"
+    },
+    {
+      "name": "publicityContent",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "rankLabelInfo",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "rankTraceId",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "recommendLevelType",
+      "reported_type": "int"
+    },
+    {
+      "name": "recommendTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "remindInfos",
+      "reported_type": "java.util.List<com.sankuai.waimai.platform.domain.core.poi.Remind>"
+    },
+    {
+      "name": "restaurantScheme",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "salePhone",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "saleTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "score",
+      "reported_type": "double"
+    },
+    {
+      "name": "selfDeliveryIcon",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "shareTip",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.Share.ShareTip"
+    },
+    {
+      "name": "shippingFee",
+      "reported_type": "double"
+    },
+    {
+      "name": "shippingFeeTip",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "shippingTime",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "shippingTimeInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.ShippingTimeInfo"
+    },
+    {
+      "name": "shopType",
+      "reported_type": "int"
+    },
+    {
+      "name": "shoppingCartPoiImInfo",
+      "reported_type": "com.sankuai.waimai.platform.domain.core.poi.a"
+    },
+    {
+      "name": "showNewPoiCoupon",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "shownRecommendTagList",
+      "reported_type": "java.util.List<java.lang.Integer>"
+    },
+    {
+      "name": "shownTagList",
+      "reported_type": "java.util.List<java.lang.Integer>"
+    },
+    {
+      "name": "singleBuyThreshold",
+      "reported_type": "int"
+    },
+    {
+      "name": "sortReasonTag",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "sortReasonType",
+      "reported_type": "int"
+    },
+    {
+      "name": "state",
+      "reported_type": "int"
+    },
+    {
+      "name": "statusDesc",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "storyIcon",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "supportOnlinePay",
+      "reported_type": "int"
+    },
+    {
+      "name": "timelySendPercent",
+      "reported_type": "int"
+    },
+    {
+      "name": "timelySendPercentRank",
+      "reported_type": "int"
+    },
+    {
+      "name": "toastDiscountRestrict",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "toastPlusDiscountRestrict",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "tradeArea",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "ugcRecommendInfo",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "ugcRecommendInfoPrefix",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "usePoiNormalTagsField",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "usePoiTagsField",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "warnTips",
+      "reported_type": "java.lang.String"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "deepCopy",
+      "reported_signature": "deepCopy(): com.sankuai.waimai.platform.domain.core.poi.Poi",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/poi/Poi;"
+    },
+    {
+      "name": "getActivityInfo",
+      "reported_signature": "getActivityInfo(): com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$ActivityInfo",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/poi/PoiShoppingCart$ActivityInfo;"
+    },
+    {
+      "name": "getActivityInfoList",
+      "reported_signature": "getActivityInfoList(): java.util.List<com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$ActivityInfo>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/util/List;"
+    },
+    {
+      "name": "getAdActivityFlag",
+      "reported_signature": "getAdActivityFlag(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getAdAttr",
+      "reported_signature": "getAdAttr(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getAdAttrJsonObj",
+      "reported_signature": "getAdAttrJsonObj(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getAddress",
+      "reported_signature": "getAddress(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getAllowanceAllianceScenes",
+      "reported_signature": "getAllowanceAllianceScenes(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getAppModel",
+      "reported_signature": "getAppModel(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getAveragePriceTip",
+      "reported_signature": "getAveragePriceTip(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getBuzType",
+      "reported_signature": "getBuzType(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getCartIcon",
+      "reported_signature": "getCartIcon(): com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$CartIcon",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/poi/PoiShoppingCart$CartIcon;"
+    },
+    {
+      "name": "getCommentNumber",
+      "reported_signature": "getCommentNumber(): long",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()J"
+    },
+    {
+      "name": "getDataType",
+      "reported_signature": "getDataType(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getDeDuplicateId",
+      "reported_signature": "getDeDuplicateId(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getDefaultSearchWord",
+      "reported_signature": "getDefaultSearchWord(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getFormatPoiID",
+      "reported_signature": "getFormatPoiID(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getId",
+      "reported_signature": "getId(): long",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()J"
+    },
+    {
+      "name": "getInsuranceIcon",
+      "reported_signature": "getInsuranceIcon(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getLabelInfoList",
+      "reported_signature": "getLabelInfoList(): java.util.ArrayList<com.sankuai.waimai.platform.domain.core.poi.Poi$LabelInfoListItem>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/util/ArrayList;"
+    },
+    {
+      "name": "getMinPrice",
+      "reported_signature": "getMinPrice(): double",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()D"
+    },
+    {
+      "name": "getName",
+      "reported_signature": "getName(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getNewFunctionTips",
+      "reported_signature": "getNewFunctionTips(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getNewPoiLabels",
+      "reported_signature": "getNewPoiLabels(): com.sankuai.waimai.platform.domain.core.poi.Poi$PoiLabel",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/poi/Poi$PoiLabel;"
+    },
+    {
+      "name": "getNewRecommendList",
+      "reported_signature": "getNewRecommendList(): java.util.ArrayList<com.sankuai.waimai.platform.domain.core.poi.Poi$RecommendListItem>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/util/ArrayList;"
+    },
+    {
+      "name": "getNewUserDiscountRestrict",
+      "reported_signature": "getNewUserDiscountRestrict(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getNumDiscountRestrict",
+      "reported_signature": "getNumDiscountRestrict(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getNumPlusDiscountRestrict",
+      "reported_signature": "getNumPlusDiscountRestrict(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getOriginBrandId",
+      "reported_signature": "getOriginBrandId(): long",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()J"
+    },
+    {
+      "name": "getOriginShippingFee",
+      "reported_signature": "getOriginShippingFee(): double",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()D"
+    },
+    {
+      "name": "getPicture",
+      "reported_signature": "getPicture(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPoiCoupon",
+      "reported_signature": "getPoiCoupon(): com.sankuai.waimai.platform.domain.core.poi.Poi$PoiCouponEntity",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/poi/Poi$PoiCouponEntity;"
+    },
+    {
+      "name": "getPoiIDStr",
+      "reported_signature": "getPoiIDStr(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPoiIndex",
+      "reported_signature": "getPoiIndex(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getPoiSellStatus",
+      "reported_signature": "getPoiSellStatus(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getPoiServices",
+      "reported_signature": "getPoiServices(): java.util.ArrayList<com.sankuai.waimai.platform.domain.core.poi.Poi$PoiService>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/util/ArrayList;"
+    },
+    {
+      "name": "getPoiShoppingCart",
+      "reported_signature": "getPoiShoppingCart(): com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/platform/domain/core/poi/PoiShoppingCart;"
+    },
+    {
+      "name": "getPoiStoryUrl",
+      "reported_signature": "getPoiStoryUrl(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPoiTabStoryIcon",
+      "reported_signature": "getPoiTabStoryIcon(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPoiTags",
+      "reported_signature": "getPoiTags(): java.util.List<com.sankuai.waimai.platform.widget.tag.api.d>",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/util/List;"
+    },
+    {
+      "name": "getPromotionHeadPicUrl",
+      "reported_signature": "getPromotionHeadPicUrl(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getPromptText",
+      "reported_signature": "getPromptText(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getRankLabelInfo",
+      "reported_signature": "getRankLabelInfo(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getRecommendLevelType",
+      "reported_signature": "getRecommendLevelType(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getRecommendTip",
+      "reported_signature": "getRecommendTip(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getReportContent",
+      "reported_signature": "getReportContent(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getReportUrl",
+      "reported_signature": "getReportUrl(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getSelfDeliveryTip",
+      "reported_signature": "getSelfDeliveryTip(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getShippingFeeCartTip",
+      "reported_signature": "getShippingFeeCartTip(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getShopType",
+      "reported_signature": "getShopType(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getShopcartBgColor",
+      "reported_signature": "getShopcartBgColor(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getState",
+      "reported_signature": "getState(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getStoryEntranceUrl",
+      "reported_signature": "getStoryEntranceUrl(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getStoryTitle",
+      "reported_signature": "getStoryTitle(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getTemplateType",
+      "reported_signature": "getTemplateType(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "getToastDiscountRestrict",
+      "reported_signature": "getToastDiscountRestrict(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getTopPic",
+      "reported_signature": "getTopPic(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "getVideoIcon",
+      "reported_signature": "getVideoIcon(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    {
+      "name": "hashCode",
+      "reported_signature": "hashCode(): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()I"
+    },
+    {
+      "name": "isBlock",
+      "reported_signature": "isBlock(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isFavorite",
+      "reported_signature": "isFavorite(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isInsurance",
+      "reported_signature": "isInsurance(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isNewUser",
+      "reported_signature": "isNewUser(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isReportShow",
+      "reported_signature": "isReportShow(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isRest",
+      "reported_signature": "isRest(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "isTextBold",
+      "reported_signature": "isTextBold(int): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)Z"
+    },
+    {
+      "name": "makeTimeStag",
+      "reported_signature": "makeTimeStag(long): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J)Ljava/lang/String;"
+    },
+    {
+      "name": "needShowPoiStory",
+      "reported_signature": "needShowPoiStory(): boolean",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Z"
+    },
+    {
+      "name": "parseCustomServiceInfo",
+      "reported_signature": "parseCustomServiceInfo(org.json.JSONObject): com.sankuai.waimai.platform.domain.core.poi.bean.CustomerServiceInfo",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONObject;)Lcom/sankuai/waimai/platform/domain/core/poi/bean/CustomerServiceInfo;"
+    },
+    {
+      "name": "parseJsonToPoi",
+      "reported_signature": "parseJsonToPoi(org.json.JSONObject): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONObject;)V"
+    },
+    {
+      "name": "parsePoiCommonModel",
+      "reported_signature": "parsePoiCommonModel(org.json.JSONObject): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONObject;)V"
+    },
+    {
+      "name": "parsePoiCommonModelInPoi",
+      "reported_signature": "parsePoiCommonModelInPoi(org.json.JSONObject): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONObject;)V"
+    },
+    {
+      "name": "parsePoiList",
+      "reported_signature": "parsePoiList(org.json.JSONObject): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONObject;)V"
+    },
+    {
+      "name": "parseShareTip",
+      "reported_signature": "parseShareTip(org.json.JSONObject): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONObject;)V"
+    },
+    {
+      "name": "setActivityInfo",
+      "reported_signature": "setActivityInfo(com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$ActivityInfo): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/platform/domain/core/poi/PoiShoppingCart$ActivityInfo;)V"
+    },
+    {
+      "name": "setActivityInfoList",
+      "reported_signature": "setActivityInfoList(java.util.List<com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$ActivityInfo>): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/util/List;)V"
+    },
+    {
+      "name": "setAdActivityFlag",
+      "reported_signature": "setAdActivityFlag(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setAdAttr",
+      "reported_signature": "setAdAttr(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setAddress",
+      "reported_signature": "setAddress(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setAllowanceAllianceScenes",
+      "reported_signature": "setAllowanceAllianceScenes(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setAppModel",
+      "reported_signature": "setAppModel(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setCartIcon",
+      "reported_signature": "setCartIcon(com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart$CartIcon): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/platform/domain/core/poi/PoiShoppingCart$CartIcon;)V"
+    },
+    {
+      "name": "setCommentNumber",
+      "reported_signature": "setCommentNumber(long): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J)V"
+    },
+    {
+      "name": "setDefaultSearchWord",
+      "reported_signature": "setDefaultSearchWord(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setFavorite",
+      "reported_signature": "setFavorite(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "setId",
+      "reported_signature": "setId(long): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J)V"
+    },
+    {
+      "name": "setIsNewUser",
+      "reported_signature": "setIsNewUser(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "setIsSelfDelivery",
+      "reported_signature": "setIsSelfDelivery(boolean): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Z)V"
+    },
+    {
+      "name": "setMinPrice",
+      "reported_signature": "setMinPrice(double): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(D)V"
+    },
+    {
+      "name": "setName",
+      "reported_signature": "setName(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setNewFunctionTips",
+      "reported_signature": "setNewFunctionTips(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setNewUserDiscountRestrict",
+      "reported_signature": "setNewUserDiscountRestrict(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setNumDiscountRestrict",
+      "reported_signature": "setNumDiscountRestrict(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setNumPlusDiscountRestrict",
+      "reported_signature": "setNumPlusDiscountRestrict(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setOriginBrandId",
+      "reported_signature": "setOriginBrandId(long): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J)V"
+    },
+    {
+      "name": "setOriginShippingFee",
+      "reported_signature": "setOriginShippingFee(double): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(D)V"
+    },
+    {
+      "name": "setOriginShippingFeeTip",
+      "reported_signature": "setOriginShippingFeeTip(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setPicture",
+      "reported_signature": "setPicture(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setPoiIDStr",
+      "reported_signature": "setPoiIDStr(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setPoiSellStatus",
+      "reported_signature": "setPoiSellStatus(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setPoiShoppingCart",
+      "reported_signature": "setPoiShoppingCart(com.sankuai.waimai.platform.domain.core.poi.PoiShoppingCart): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lcom/sankuai/waimai/platform/domain/core/poi/PoiShoppingCart;)V"
+    },
+    {
+      "name": "setPoiTabStoryIcon",
+      "reported_signature": "setPoiTabStoryIcon(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setPromptText",
+      "reported_signature": "setPromptText(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setSelfDeliveryTip",
+      "reported_signature": "setSelfDeliveryTip(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setShippingFeeCartTip",
+      "reported_signature": "setShippingFeeCartTip(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setShopCartBgColor",
+      "reported_signature": "setShopCartBgColor(java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Ljava/lang/String;)V"
+    },
+    {
+      "name": "setShopType",
+      "reported_signature": "setShopType(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setState",
+      "reported_signature": "setState(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    },
+    {
+      "name": "setTemplateType",
+      "reported_signature": "setTemplateType(int): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(I)V"
+    }
+  ],
+  "inner_classes": [
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.ActivityPromotionTip",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.ActivityTraceInfo",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.CouponSummary",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.ExtendsInfo",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.FreeGoInfo",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.LabelInfoListItem",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.LogField",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiAdDynamicInfo",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiCouponEntity",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiCouponItem",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiDeserializer",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiImpress",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiImpressLabel",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiLabel",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiService",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PoiServiceLabel",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PromotionInfoA",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.PromotionInfoS",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.RecommendListItem",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.a",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.b",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.c",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.d",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.e",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.f",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.g",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.h",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.i",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.j",
+    "com.sankuai.waimai.platform.domain.core.poi.Poi.k"
+  ]
+}

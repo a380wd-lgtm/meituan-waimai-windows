@@ -1,0 +1,131 @@
+{
+  "evidence_id": "ev_9e91d3ba8e96cfe77c43d975075b96738649bec91c2b89346bb0828060a8a489",
+  "class_name": "com.sankuai.waimai.business.order.api.model.OrderListResponse",
+  "field_count": 19,
+  "method_count": 5,
+  "inner_class_count": 7,
+  "fields": [
+    {
+      "name": "bottomTips",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "changeQuickRedirect",
+      "reported_type": "com.meituan.robust.ChangeQuickRedirect"
+    },
+    {
+      "name": "cursor",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "hasMore",
+      "reported_type": "int"
+    },
+    {
+      "name": "hasReadUnCommentOrder",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "hasReadUnRefundOrder",
+      "reported_type": "boolean"
+    },
+    {
+      "name": "mDialogInfo",
+      "reported_type": "com.sankuai.waimai.business.order.api.detail.network.response.ActivityDialogInfo"
+    },
+    {
+      "name": "mPopupsInfo",
+      "reported_type": "com.sankuai.waimai.business.order.api.detail.network.response.a"
+    },
+    {
+      "name": "mShareTip",
+      "reported_type": "com.sankuai.waimai.business.order.api.detail.network.response.EnvelopeShareTip"
+    },
+    {
+      "name": "multiCursor",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "orderList",
+      "reported_type": "java.util.List<com.sankuai.waimai.business.order.api.model.Order>"
+    },
+    {
+      "name": "refundCount",
+      "reported_type": "int"
+    },
+    {
+      "name": "searchDefaultTips",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "shareType",
+      "reported_type": "int"
+    },
+    {
+      "name": "trackingInfo",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "type",
+      "reported_type": "java.lang.String"
+    },
+    {
+      "name": "typeList",
+      "reported_type": "java.util.List<com.sankuai.waimai.business.order.api.model.OrderListResponse$a>"
+    },
+    {
+      "name": "unCommentCount",
+      "reported_type": "int"
+    },
+    {
+      "name": "unreadUncommentTips",
+      "reported_type": "java.lang.String"
+    }
+  ],
+  "methods": [
+    {
+      "name": "<clinit>",
+      "reported_signature": "<clinit>(): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "<init>",
+      "reported_signature": "<init>(): void",
+      "overload_index": 0,
+      "is_constructor": true,
+      "dex_descriptor": "()V"
+    },
+    {
+      "name": "fromJson",
+      "reported_signature": "fromJson(org.json.JSONObject): com.sankuai.waimai.business.order.api.model.OrderListResponse",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONObject;)Lcom/sankuai/waimai/business/order/api/model/OrderListResponse;"
+    },
+    {
+      "name": "parseTrackingInfoStrategy",
+      "reported_signature": "parseTrackingInfoStrategy(): com.sankuai.waimai.business.order.api.model.OrderListResponse$TrackingInfoOrderStrategy",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Lcom/sankuai/waimai/business/order/api/model/OrderListResponse$TrackingInfoOrderStrategy;"
+    },
+    {
+      "name": "parseTypeList",
+      "reported_signature": "parseTypeList(org.json.JSONArray): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(Lorg/json/JSONArray;)V"
+    }
+  ],
+  "inner_classes": [
+    "com.sankuai.waimai.business.order.api.model.OrderListResponse.Deserializer",
+    "com.sankuai.waimai.business.order.api.model.OrderListResponse.RecentEat",
+    "com.sankuai.waimai.business.order.api.model.OrderListResponse.RecentEatPoi",
+    "com.sankuai.waimai.business.order.api.model.OrderListResponse.TrackingInfo",
+    "com.sankuai.waimai.business.order.api.model.OrderListResponse.TrackingInfoOrderStrategy",
+    "com.sankuai.waimai.business.order.api.model.OrderListResponse.TrackingInfoStrategy",
+    "com.sankuai.waimai.business.order.api.model.OrderListResponse.a"
+  ]
+}
