@@ -1,0 +1,1832 @@
+<Window x:Class="MeituanWaimaiClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="美团外卖 Windows 桌面端 v8.84.2 (Build 91293 · 1:1 逆向重构版)"
+        Width="1380"
+        Height="880"
+        MinWidth="980"
+        MinHeight="680"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F7"
+        FontFamily="Microsoft YaHei UI, Microsoft YaHei, SimSun"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="ClearType"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <!-- 美团外卖官方视觉色板 (v8.84.2) -->
+        <SolidColorBrush x:Key="MtYellowPrimaryBrush" Color="#FFD100" />
+        <SolidColorBrush x:Key="MtYellowDeepBrush" Color="#FFC300" />
+        <SolidColorBrush x:Key="MtSoftYellowBgBrush" Color="#FFF9E6" />
+        <SolidColorBrush x:Key="MtCharcoalBrush" Color="#222426" />
+        <SolidColorBrush x:Key="MtSubtleTextBrush" Color="#66686C" />
+        <SolidColorBrush x:Key="MtMutedTextBrush" Color="#999B9F" />
+        <SolidColorBrush x:Key="MtPromoRedBrush" Color="#FF4A26" />
+        <SolidColorBrush x:Key="MtPromoSoftBgBrush" Color="#FFF0EC" />
+        <SolidColorBrush x:Key="MtGreenSpeedBrush" Color="#00B578" />
+        <SolidColorBrush x:Key="MtCardBorderBrush" Color="#EAECEF" />
+
+        <LinearGradientBrush x:Key="MtHeaderGradientBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#FFD100" Offset="0.0" />
+            <GradientStop Color="#FFC300" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="MtShenQuanBannerBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#2B241E" Offset="0.0" />
+            <GradientStop Color="#433222" Offset="0.6" />
+            <GradientStop Color="#5E4020" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <!-- 通用圆角按钮样式 -->
+        <Style x:Key="MtPillButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FFD100" />
+            <Setter Property="Foreground" Value="#222426" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="16"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Opacity" Value="0.90" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Opacity" Value="0.78" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 轻量化次级按钮样式 -->
+        <Style x:Key="MtOutlineButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="Foreground" Value="#222426" />
+            <Setter Property="BorderBrush" Value="#E0E2E6" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="14"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#FFF9E6" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#FFC300" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="RootViewportGrid">
+        <Grid.RowDefinitions>
+            <!-- 顶部美团黄沉浸式导航头 -->
+            <RowDefinition Height="66" />
+            <!-- 主工作区 (5 大 Tab 切换 + EasyGo 平行视界) -->
+            <RowDefinition Height="*" />
+            <!-- 底部 5 Tab 导航栏 -->
+            <RowDefinition Height="64" />
+            <!-- 底部逆向遥测状态条 -->
+            <RowDefinition Height="28" />
+        </Grid.RowDefinitions>
+
+        <!-- ==================== 1. 顶部美团黄品牌与地址搜索导航栏 ==================== -->
+        <Border Grid.Row="0" Background="{StaticResource MtHeaderGradientBrush}" BorderBrush="#E5B800" BorderThickness="0,0,0,1" Padding="18,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- 品牌 Logo 与 APK 版本号 -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,18,0">
+                    <Border Width="42" Height="42" CornerRadius="10" Background="#FFFFFF" Padding="3" Margin="0,0,10,0">
+                        <Grid>
+                            <TextBlock Text="袋鼠" FontSize="12" FontWeight="Bold" Foreground="#222426" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Image Source="{Binding LauncherIcon}" Stretch="Uniform" Visibility="{Binding HasLauncherIcon, Converter={StaticResource BoolToVis}}" />
+                        </Grid>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="美团外卖" FontSize="19" FontWeight="ExtraBold" Foreground="#222426" />
+                            <Border Background="#222426" CornerRadius="6" Padding="6,1" Margin="8,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding AppVersionBadge}" FontSize="10.5" FontWeight="Bold" Foreground="#FFD100" />
+                            </Border>
+                        </StackPanel>
+                        <TextBlock Text="com.sankuai.meituan.takeoutnew · Windows 1:1 重构客户端" FontSize="11" Foreground="#4A3D10" Margin="0,2,0,0" />
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- 实时配送地址定位芯片 (点击循环切换地址) -->
+                <Button Grid.Column="1"
+                        Command="{Binding CycleAddressCommand}"
+                        Style="{StaticResource MtOutlineButtonStyle}"
+                        Background="#FFF8D6"
+                        BorderBrush="#E6B400"
+                        Padding="12,6"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📍" FontSize="13" Margin="0,0,6,0" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding CurrentAddressDisplayText}" FontSize="12.5" FontWeight="Bold" Foreground="#222426" MaxWidth="250" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                        <TextBlock Text=" 切换 ▾" FontSize="11" Foreground="#7A5C00" Margin="4,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <!-- 胶囊搜索栏 (支持实时过滤商家与菜品) -->
+                <Border Grid.Column="2" Background="#FFFFFF" CornerRadius="20" Height="40" Padding="14,0,6,0" VerticalAlignment="Center" MaxWidth="520" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="🔍" FontSize="14" Foreground="#888888" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <TextBox Grid.Column="1"
+                                 Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="13"
+                                 Foreground="#222426"
+                                 ToolTip="输入商家名或菜品名（如：老乡鸡、烤鱼、伯牙绝弦、中国汉堡）实时过滤" />
+                        <Button Grid.Column="2"
+                                Command="{Binding ResetFilterCommand}"
+                                Style="{StaticResource MtPillButtonStyle}"
+                                Padding="14,5"
+                                Content="搜全城"
+                                FontSize="12" />
+                    </Grid>
+                </Border>
+
+                <!-- 右侧功能按钮区：小美DeepEat AI / EasyGo双栏切换 / 官方H5桥接 -->
+                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="14,0,0,0">
+                    <Button Command="{Binding ToggleDeepEatDrawerCommand}"
+                            Style="{StaticResource MtOutlineButtonStyle}"
+                            Background="#222426"
+                            Foreground="#FFD100"
+                            BorderThickness="0"
+                            Padding="12,7"
+                            Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="✨ 小美DeepEat AI" FontSize="12" FontWeight="Bold" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button Command="{Binding ToggleLayoutModeCommand}"
+                            Style="{StaticResource MtOutlineButtonStyle}"
+                            Background="#FFFDF5"
+                            BorderBrush="#B38B00"
+                            Padding="12,7"
+                            Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="⊞ " FontSize="12" FontWeight="Bold" />
+                            <TextBlock Text="{Binding LayoutModeButtonText}" FontSize="12" FontWeight="Bold" Foreground="#222426" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button Command="{Binding LaunchOfficialH5Command}"
+                            Style="{StaticResource MtOutlineButtonStyle}"
+                            Background="#FFFFFF"
+                            Padding="10,7"
+                            ToolTip="唤起官方 H5 外卖站 (https://h5.waimai.meituan.com/waimai/mindex/home)">
+                        <TextBlock Text="🌐 官方H5站" FontSize="12" FontWeight="SemiBold" Foreground="#222426" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ==================== 2. 主工作区 (5 大 Tab 容器) ==================== -->
+        <Grid Grid.Row="1">
+
+            <!-- ******************** TAB 1: 外卖首页 + 门店详情 (EasyGo 双栏 / 手机 1:1 单栏) ******************** -->
+            <Grid Visibility="{Binding IsHomeTabActive, Converter={StaticResource BoolToVis}}" Margin="14,10,14,10">
+                <Grid.ColumnDefinitions>
+                    <!-- 左栏：首页金刚区 + 商家瀑布流 -->
+                    <ColumnDefinition Width="520" />
+                    <ColumnDefinition Width="14" />
+                    <!-- 右栏：门店沉浸式点餐详情 + 多口袋购物车 (EasyGo Associate View) -->
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- 左栏（或单栏模式下的主栏）：外卖首页信息流 -->
+                <Border x:Name="HomeFeedPane"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="1"
+                        Visibility="{Binding IsHomeLeftFeedVisible, Converter={StaticResource BoolToVis}}"
+                        Background="#FFFFFF"
+                        CornerRadius="14"
+                        BorderBrush="{StaticResource MtCardBorderBrush}"
+                        BorderThickness="1"
+                        Padding="12">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <!-- 神券膨胀横幅 -->
+                            <RowDefinition Height="Auto" />
+                            <!-- 金刚区 15 宫格 -->
+                            <RowDefinition Height="Auto" />
+                            <!-- 小美 DeepEat 场景推荐条 -->
+                            <RowDefinition Height="Auto" />
+                            <!-- 商家排序工具栏 -->
+                            <RowDefinition Height="Auto" />
+                            <!-- 附近商家虚拟化列表 -->
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!-- 1) 神券膨胀黑金横幅 -->
+                        <Border Grid.Row="0" Background="{StaticResource MtShenQuanBannerBrush}" CornerRadius="12" Padding="14,10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="44" Height="44" CornerRadius="22" Background="#FFF3C4" Margin="0,0,12,0" Padding="4">
+                                    <Grid>
+                                        <TextBlock Text="🧧" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        <Image Source="{Binding MascotIcon}" Stretch="Uniform" Visibility="{Binding HasMascotIcon, Converter={StaticResource BoolToVis}}" />
+                                    </Grid>
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="#FF4A26" CornerRadius="4" Padding="5,1" Margin="0,0,6,0">
+                                            <TextBlock Text="天天神券" FontSize="10.5" FontWeight="Bold" Foreground="#FFFFFF" />
+                                        </Border>
+                                        <TextBlock Text="{Binding SelectedCouponSummary}" FontSize="13.5" FontWeight="Bold" Foreground="#FFE89E" TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                    <TextBlock Text="对齐 ShopCartPrice 满减叠加引擎 · 膨胀后最高立减 ¥12" FontSize="11" Foreground="#D7C3A5" Margin="0,3,0,0" />
+                                </StackPanel>
+                                <Button Grid.Column="2"
+                                        Command="{Binding InflateCouponCommand}"
+                                        Style="{StaticResource MtPillButtonStyle}"
+                                        Background="#FF4A26"
+                                        Foreground="#FFFFFF"
+                                        Padding="12,6"
+                                        VerticalAlignment="Center"
+                                        Content="免费膨胀 🔥"
+                                        FontSize="12" />
+                            </Grid>
+                        </Border>
+
+                        <!-- 2) 金刚区 10 宫格 (future_king_kong.json 契约) -->
+                        <Border Grid.Row="1" Background="#FAFAFC" CornerRadius="10" Padding="6,6,6,4" Margin="0,0,0,8">
+                            <ItemsControl ItemsSource="{Binding KingKongItems}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="5" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.SelectKingKongCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                CommandParameter="{Binding}"
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                Cursor="Hand"
+                                                Margin="2,2"
+                                                Padding="2">
+                                            <Grid>
+                                                <StackPanel HorizontalAlignment="Center">
+                                                    <Border Width="38" Height="38" CornerRadius="14" Background="{Binding IconBgHex}" HorizontalAlignment="Center" Padding="5">
+                                                        <Grid>
+                                                            <TextBlock Text="{Binding IconGlyph}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            <Image Source="{Binding IconSource}"
+                                                                   Stretch="Uniform"
+                                                                   Width="26"
+                                                                   Height="26"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center"
+                                                                   Visibility="{Binding HasBitmapIcon, Converter={StaticResource BoolToVis}}" />
+                                                        </Grid>
+                                                    </Border>
+                                                    <TextBlock Text="{Binding Title}" FontSize="11.5" FontWeight="SemiBold" Foreground="#222426" HorizontalAlignment="Center" Margin="0,3,0,0" />
+                                                </StackPanel>
+                                                <Border Background="#FF4A26"
+                                                        CornerRadius="5"
+                                                        Padding="3,0.5"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Top"
+                                                        Visibility="{Binding HasBadge, Converter={StaticResource BoolToVis}}">
+                                                    <TextBlock Text="{Binding BadgeText}" FontSize="9" FontWeight="Bold" Foreground="#FFFFFF" />
+                                                </Border>
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+
+                        <!-- 3) 小美 DeepEat AI 助餐灵感横向条 -->
+                        <Border Grid.Row="2" Background="#FFFDF5" BorderBrush="#F5E4A4" BorderThickness="1" CornerRadius="8" Padding="8,6" Margin="0,0,0,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="#FFD100" CornerRadius="6" Padding="6,3" Margin="0,0,8,0" VerticalAlignment="Center">
+                                    <TextBlock Text="🤖 AI助餐" FontSize="11" FontWeight="Bold" Foreground="#222426" />
+                                </Border>
+                                <ItemsControl Grid.Column="1" ItemsSource="{Binding DeepEatRecommendations}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="2" Rows="2" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding DataContext.ApplyDeepEatCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource MtOutlineButtonStyle}"
+                                                    Padding="8,4"
+                                                    Margin="3,1"
+                                                    HorizontalContentAlignment="Left">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding SceneTitle}" FontSize="11.5" FontWeight="Bold" Foreground="#222426" TextTrimming="CharacterEllipsis" />
+                                                    <TextBlock Text="{Binding HighlightTag}" FontSize="10" Foreground="#FF4A26" TextTrimming="CharacterEllipsis" />
+                                                </StackPanel>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </Border>
+
+                        <!-- 4) 商家排序与筛选栏 -->
+                        <Grid Grid.Row="3" Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <Button Command="{Binding ChangeSortModeCommand}" CommandParameter="综合排序" Style="{StaticResource MtOutlineButtonStyle}" Padding="9,4" Margin="0,0,6,0" Content="综合排序" FontSize="11.5" />
+                                <Button Command="{Binding ChangeSortModeCommand}" CommandParameter="销量最高" Style="{StaticResource MtOutlineButtonStyle}" Padding="9,4" Margin="0,0,6,0" Content="销量最高" FontSize="11.5" />
+                                <Button Command="{Binding ChangeSortModeCommand}" CommandParameter="速度最快" Style="{StaticResource MtOutlineButtonStyle}" Padding="9,4" Margin="0,0,6,0" Content="速度最快" FontSize="11.5" />
+                                <Button Command="{Binding ChangeSortModeCommand}" CommandParameter="评分最高" Style="{StaticResource MtOutlineButtonStyle}" Padding="9,4" Content="评分最高" FontSize="11.5" />
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Command="{Binding ResetFilterCommand}"
+                                    Visibility="{Binding HasActiveCategoryFilter, Converter={StaticResource BoolToVis}}"
+                                    Style="{StaticResource MtOutlineButtonStyle}"
+                                    Background="#FFF0EC"
+                                    BorderBrush="#FF4A26"
+                                    Foreground="#FF4A26"
+                                    Padding="8,4"
+                                    Content="清除筛选 ✕"
+                                    FontSize="11" />
+                        </Grid>
+
+                        <!-- 5) 附近品质商家虚拟化列表 (严格遵循 wpf-dotnet-performance VirtualizingStackPanel 规范) -->
+                        <ListBox Grid.Row="4"
+                                 ItemsSource="{Binding FilteredPois}"
+                                 SelectedItem="{Binding SelectedPoi, Mode=TwoWay}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 HorizontalContentAlignment="Stretch"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 ScrollViewer.CanContentScroll="True"
+                                 VirtualizingStackPanel.IsVirtualizing="True"
+                                 VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                 VirtualizingStackPanel.ScrollUnit="Pixel">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Margin" Value="0,0,0,8" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border x:Name="PoiCardBorder"
+                                                        Background="#FFFFFF"
+                                                        BorderBrush="#ECEEF2"
+                                                        BorderThickness="1.5"
+                                                        CornerRadius="12"
+                                                        Padding="10"
+                                                        Cursor="Hand">
+                                                    <ContentPresenter />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="PoiCardBorder" Property="Background" Value="#FFFDF4" />
+                                                        <Setter TargetName="PoiCardBorder" Property="BorderBrush" Value="#FFB800" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="PoiCardBorder" Property="BorderBrush" Value="#FFD100" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="68" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- 商家品牌头图块 -->
+                                        <Border Grid.Column="0" Width="62" Height="62" CornerRadius="12" Background="{Binding BannerAccentHex}" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                            <Grid>
+                                                <TextBlock Text="{Binding LogoEmoji}" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                <Border Background="#222426" CornerRadius="4" Padding="4,1" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsBrandGold, Converter={StaticResource BoolToVis}}">
+                                                    <TextBlock Text="品牌" FontSize="9" FontWeight="Bold" Foreground="#FFD100" />
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- 商家核心指标与活动行 -->
+                                        <StackPanel Grid.Column="1" Margin="6,0,0,0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding Name}" FontSize="14.5" FontWeight="Bold" Foreground="#222426" TextTrimming="CharacterEllipsis" />
+                                                <Border Grid.Column="1" Background="#FFD100" CornerRadius="4" Padding="5,1" Margin="6,0,0,0">
+                                                    <TextBlock Text="{Binding DeliveryTypeText}" FontSize="10" FontWeight="Bold" Foreground="#222426" />
+                                                </Border>
+                                            </Grid>
+
+                                            <Grid Margin="0,4,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                    <TextBlock Text="★ " FontSize="12" FontWeight="Bold" Foreground="#FF6600" />
+                                                    <TextBlock Text="{Binding FormattedPoiScore}" FontSize="12.5" FontWeight="ExtraBold" Foreground="#FF6600" Margin="0,0,8,0" />
+                                                    <TextBlock Text="{Binding MonthSalesTip}" FontSize="11.5" Foreground="#66686C" Margin="0,0,8,0" />
+                                                    <TextBlock Text="{Binding AveragePriceTip}" FontSize="11.5" Foreground="#66686C" />
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding MtDeliveryTime}" FontSize="11.5" FontWeight="SemiBold" Foreground="#00B578" Margin="0,0,6,0" />
+                                                    <TextBlock Text="{Binding Distance}" FontSize="11.5" Foreground="#888A8E" />
+                                                </StackPanel>
+                                            </Grid>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                                <TextBlock Text="{Binding MinPriceTip}" FontSize="11" Foreground="#66686C" Margin="0,0,10,0" />
+                                                <Border Background="#FFF4E5" CornerRadius="4" Padding="5,1">
+                                                    <TextBlock Text="{Binding RankLabelInfo}" FontSize="10.5" FontWeight="SemiBold" Foreground="#C86400" />
+                                                </Border>
+                                            </StackPanel>
+
+                                            <!-- 满减与神券活动标签流 -->
+                                            <ItemsControl ItemsSource="{Binding ActivityTags}" Margin="0,5,0,0">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Background="{Binding BgHex}"
+                                                                BorderBrush="{Binding BorderHex}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="4"
+                                                                Padding="5,1"
+                                                                Margin="0,0,5,3">
+                                                            <TextBlock Text="{Binding TagText}" FontSize="10" Foreground="{Binding TextHex}" FontWeight="SemiBold" />
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </Border>
+
+                <!-- 右栏：门店沉浸式点餐详情 + 多口袋购物车引擎 (EasyGo 平行视界关联页) -->
+                <Border x:Name="RestaurantDetailPane"
+                        Grid.Column="2"
+                        Visibility="{Binding IsHomeRightDetailVisible, Converter={StaticResource BoolToVis}}"
+                        Background="#FFFFFF"
+                        CornerRadius="14"
+                        BorderBrush="{StaticResource MtCardBorderBrush}"
+                        BorderThickness="1"
+                        ClipToBounds="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <!-- 门店头部横幅 -->
+                            <RowDefinition Height="Auto" />
+                            <!-- 点菜 / 评价 / 商家 子Tab 与多口袋切换栏 -->
+                            <RowDefinition Height="44" />
+                            <!-- 菜品主体区 (左侧分类锚点 + 右侧菜品流) -->
+                            <RowDefinition Height="*" />
+                            <!-- 底部悬浮黑金购物车结算条 -->
+                            <RowDefinition Height="68" />
+                        </Grid.RowDefinitions>
+
+                        <!-- 1) 门店详情头部 -->
+                        <Border Grid.Row="0" Background="#28231E" Padding="18,14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button Command="{Binding BackToMobileFeedCommand}"
+                                            Visibility="{Binding IsMobileBackVisible, Converter={StaticResource BoolToVis}}"
+                                            Style="{StaticResource MtPillButtonStyle}"
+                                            Padding="10,5"
+                                            Margin="0,0,12,0"
+                                            Content="← 返回列表" />
+                                    <Border Width="58" Height="58" CornerRadius="14" Background="{Binding SelectedPoi.BannerAccentHex}" Margin="0,0,14,0">
+                                        <TextBlock Text="{Binding SelectedPoi.LogoEmoji}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="#FFD100" CornerRadius="4" Padding="6,1" Margin="0,0,8,0" VerticalAlignment="Center">
+                                            <TextBlock Text="美团神券商家" FontSize="10.5" FontWeight="Bold" Foreground="#222426" />
+                                        </Border>
+                                        <TextBlock Text="{Binding SelectedPoi.Name}" FontSize="18" FontWeight="ExtraBold" Foreground="#FFFFFF" TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                        <TextBlock Text="★ " FontSize="12" Foreground="#FFD100" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding SelectedPoi.FormattedPoiScore}" FontSize="12.5" Foreground="#FFD100" FontWeight="Bold" Margin="0,0,12,0" />
+                                        <TextBlock Text="{Binding SelectedPoi.MonthSalesTip}" FontSize="12" Foreground="#D0C8BE" Margin="0,0,12,0" />
+                                        <TextBlock Text="{Binding SelectedPoi.DeliveryTypeText}" FontSize="12" Foreground="#7FE3B9" FontWeight="SemiBold" Margin="0,0,8,0" />
+                                        <TextBlock Text="{Binding SelectedPoi.MtDeliveryTime}" FontSize="12" Foreground="#7FE3B9" />
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding SelectedPoi.Bulletin}" FontSize="11.5" Foreground="#B5ACA0" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+
+                                <!-- 门店专属神券卡片 -->
+                                <Border Grid.Column="2" Background="#FF4A26" CornerRadius="10" Padding="12,8" VerticalAlignment="Center" Margin="10,0,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="店铺神券已就绪" FontSize="11" FontWeight="Bold" Foreground="#FFF3C4" HorizontalAlignment="Center" />
+                                        <TextBlock Text="下单自动抵扣满减" FontSize="10" Foreground="#FFFFFF" HorizontalAlignment="Center" Margin="0,2,0,0" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- 2) 门店子 Tab (点菜 / 评价 / 商家) 与 1号/2号口袋分装切换器 -->
+                        <Border Grid.Row="1" Background="#FAFAFC" BorderBrush="#EAECEF" BorderThickness="0,0,0,1" Padding="16,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button Command="{Binding SelectPoiSubTabCommand}" CommandParameter="点菜" Style="{StaticResource MtOutlineButtonStyle}" Margin="0,0,8,0" Padding="14,5" Content="🍱 点菜 (热销メニュー)" FontWeight="Bold" />
+                                    <Button Command="{Binding SelectPoiSubTabCommand}" CommandParameter="评价" Style="{StaticResource MtOutlineButtonStyle}" Margin="0,0,8,0" Padding="14,5" Content="💬 评价 (4.9分 高赞)" />
+                                    <Button Command="{Binding SelectPoiSubTabCommand}" CommandParameter="商家" Style="{StaticResource MtOutlineButtonStyle}" Padding="14,5" Content="🛡️ 商家档案与逆向契约" />
+                                </StackPanel>
+
+                                <!-- 多口袋分装切换器 (ShopCartItem PocketId 契约) -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="当前加购分装：" FontSize="11.5" Foreground="#66686C" VerticalAlignment="Center" Margin="0,0,6,0" />
+                                    <Button Command="{Binding SwitchPocketCommand}" CommandParameter="1" Style="{StaticResource MtOutlineButtonStyle}" Padding="10,4" Margin="0,0,6,0" Content="● 1号口袋" FontSize="11.5" FontWeight="SemiBold" />
+                                    <Button Command="{Binding SwitchPocketCommand}" CommandParameter="2" Style="{StaticResource MtOutlineButtonStyle}" Padding="10,4" Content="● 2号口袋 (拼单)" FontSize="11.5" FontWeight="SemiBold" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- 3) 门店主体内容区 -->
+                        <Grid Grid.Row="2">
+                            <!-- 3A: 点菜视图 (左侧分类锚点 + 右侧虚拟化菜品流) -->
+                            <Grid Visibility="{Binding IsPoiMenuSubTab, Converter={StaticResource BoolToVis}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- 左侧菜单分类栏 -->
+                                <Border Grid.Column="0" Background="#F7F8FA" BorderBrush="#EAECEF" BorderThickness="0,0,1,0">
+                                    <ListBox ItemsSource="{Binding CurrentMenuCategories}"
+                                             SelectedItem="{Binding SelectedMenuCategory, Mode=TwoWay}"
+                                             Background="Transparent"
+                                             BorderThickness="0"
+                                             Padding="6,8"
+                                             ScrollViewer.CanContentScroll="True"
+                                             VirtualizingStackPanel.IsVirtualizing="True"
+                                             VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                             VirtualizingStackPanel.ScrollUnit="Pixel">
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="Padding" Value="10,11" />
+                                                <Setter Property="Margin" Value="0,0,0,4" />
+                                                <Setter Property="Cursor" Value="Hand" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                            <Border x:Name="CatBd" Background="Transparent" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                                                <TextBlock x:Name="CatTxt" Text="{Binding}" FontSize="12.5" Foreground="#55575B" TextTrimming="CharacterEllipsis" />
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsSelected" Value="True">
+                                                                    <Setter TargetName="CatBd" Property="Background" Value="#FFFFFF" />
+                                                                    <Setter TargetName="CatTxt" Property="FontWeight" Value="Bold" />
+                                                                    <Setter TargetName="CatTxt" Property="Foreground" Value="#222426" />
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                    </ListBox>
+                                </Border>
+
+                                <!-- 右侧菜品虚拟化瀑布流 (对齐 GoodsSpuContract) -->
+                                <ListBox Grid.Column="1"
+                                         ItemsSource="{Binding FilteredFoods}"
+                                         BorderThickness="0"
+                                         Background="#FFFFFF"
+                                         Padding="14,10"
+                                         HorizontalContentAlignment="Stretch"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                         ScrollViewer.CanContentScroll="True"
+                                         VirtualizingStackPanel.IsVirtualizing="True"
+                                         VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                         VirtualizingStackPanel.ScrollUnit="Pixel">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Padding" Value="0" />
+                                            <Setter Property="Margin" Value="0,0,0,10" />
+                                            <Setter Property="Focusable" Value="False" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border Background="#FFFFFF" BorderBrush="#F0F1F4" BorderThickness="1" CornerRadius="12" Padding="12">
+                                                            <ContentPresenter />
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="78" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- 菜品缩略图块 -->
+                                                <Border Grid.Column="0" Width="70" Height="70" CornerRadius="12" Background="{Binding ThumbAccentHex}" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                                    <Grid>
+                                                        <TextBlock Text="{Binding EmojiIcon}" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        <Border Background="#FF4A26" CornerRadius="4" Padding="4,1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                            <TextBlock Text="{Binding CategoryTag}" FontSize="9" FontWeight="Bold" Foreground="#FFFFFF" />
+                                                        </Border>
+                                                    </Grid>
+                                                </Border>
+
+                                                <!-- 菜品名称、原料描述、月售与价格 -->
+                                                <StackPanel Grid.Column="1" Margin="8,0,12,0" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding Name}" FontSize="14.5" FontWeight="Bold" Foreground="#222426" TextTrimming="CharacterEllipsis" />
+                                                    <TextBlock Text="{Binding Description}" FontSize="11.5" Foreground="#7A7C80" Margin="0,3,0,0" TextTrimming="CharacterEllipsis" />
+                                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                                        <TextBlock Text="{Binding MonthSaledContent}" FontSize="11" Foreground="#888A8E" Margin="0,0,10,0" />
+                                                        <TextBlock Text="{Binding PraiseContent}" FontSize="11" Foreground="#FF6600" Margin="0,0,10,0" />
+                                                        <Border Background="#FFF0EC" CornerRadius="4" Padding="5,1">
+                                                            <Border.Style>
+                                                                <Style TargetType="Border">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding ActivityTag}" Value="">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding ActivityTag}" Value="{x:Null}">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                            <TextBlock Text="{Binding ActivityTag}" FontSize="10" FontWeight="Bold" Foreground="#FF4A26" />
+                                                        </Border>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" VerticalAlignment="Bottom">
+                                                        <TextBlock Text="¥" FontSize="12" FontWeight="Bold" Foreground="#FF4A26" VerticalAlignment="Bottom" Margin="0,0,1,1" />
+                                                        <TextBlock Text="{Binding MinPrice, StringFormat={}{0:0.00}}" FontSize="17" FontWeight="ExtraBold" Foreground="#FF4A26" />
+                                                        <TextBlock Text="{Binding OriginPrice, StringFormat=原价¥{0:0.00}}" FontSize="11" Foreground="#999B9F" TextDecorations="Strikethrough" VerticalAlignment="Bottom" Margin="8,0,0,2" />
+                                                        <TextBlock Text="{Binding BoxFee, StringFormat=打包费¥{0:0.0}}" FontSize="10.5" Foreground="#888A8E" VerticalAlignment="Bottom" Margin="10,0,0,2" />
+                                                    </StackPanel>
+                                                </StackPanel>
+
+                                                <!-- 选规格 + 加减购操作区 -->
+                                                <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                                    <Button Command="{Binding DataContext.OpenSpecModalCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource MtOutlineButtonStyle}"
+                                                            Background="#FFF9E6"
+                                                            BorderBrush="#FFC300"
+                                                            Padding="10,4"
+                                                            Margin="0,0,0,6"
+                                                            Content="选规格"
+                                                            FontSize="11.5"
+                                                            FontWeight="Bold" />
+
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                        <Button Command="{Binding DataContext.RemoveFoodCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                                CommandParameter="{Binding}"
+                                                                Visibility="{Binding HasSelectedCount, Converter={StaticResource BoolToVis}}"
+                                                                Style="{StaticResource MtOutlineButtonStyle}"
+                                                                Width="26"
+                                                                Height="26"
+                                                                Padding="0"
+                                                                Content="－"
+                                                                FontWeight="Bold" />
+                                                        <TextBlock Text="{Binding SelectedCount}"
+                                                                   Visibility="{Binding HasSelectedCount, Converter={StaticResource BoolToVis}}"
+                                                                   FontSize="13"
+                                                                   FontWeight="Bold"
+                                                                   Foreground="#222426"
+                                                                   VerticalAlignment="Center"
+                                                                   Margin="8,0" />
+                                                        <Button Command="{Binding DataContext.AddFoodCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                                CommandParameter="{Binding}"
+                                                                Style="{StaticResource MtPillButtonStyle}"
+                                                                Width="28"
+                                                                Height="28"
+                                                                Padding="0"
+                                                                Content="＋"
+                                                                FontSize="14"
+                                                                FontWeight="ExtraBold" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+
+                            <!-- 3B: 门店评价子视图 -->
+                            <ScrollViewer Visibility="{Binding IsPoiReviewSubTab, Converter={StaticResource BoolToVis}}" Padding="20">
+                                <StackPanel>
+                                    <Border Background="#FFFDF5" BorderBrush="#F2DF9B" BorderThickness="1" CornerRadius="12" Padding="18" Margin="0,0,0,14">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0" Margin="0,0,24,0">
+                                                <TextBlock Text="{Binding SelectedPoi.FormattedPoiScore}" FontSize="34" FontWeight="ExtraBold" Foreground="#FF6600" />
+                                                <TextBlock Text="高于附近 94.6% 商家" FontSize="11.5" Foreground="#66686C" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                <TextBlock Text="口味满意度：★★★★★ 4.9   |   包装密封度：★★★★★ 4.9   |   美团专送好评：99.2%" FontSize="13" FontWeight="SemiBold" Foreground="#222426" />
+                                                <TextBlock Text="热评关键词：#分量十足(528)  #出餐神速(419)  #保温袋密封完好(362)  #回头客必点(295)" FontSize="12" Foreground="#FF6600" Margin="0,6,0,0" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+
+                                    <Border Background="#FAFAFC" BorderBrush="#EAECEF" BorderThickness="1" CornerRadius="10" Padding="14" Margin="0,0,0,10">
+                                        <StackPanel>
+                                            <TextBlock Text="匿名美团黑金会员 ★★★★★  ·  25分钟送达" FontSize="12.5" FontWeight="Bold" Foreground="#222426" />
+                                            <TextBlock Text="在 Windows 桌面端用平行视界双栏点餐太爽了！左边对比满减，右边直接选规格加进1号口袋，神券膨胀后省了快15块钱，骑手送来还是烫的！" FontSize="12.5" Foreground="#44464A" Margin="0,6,0,0" TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Background="#FAFAFC" BorderBrush="#EAECEF" BorderThickness="1" CornerRadius="10" Padding="14">
+                                        <StackPanel>
+                                            <TextBlock Text="望京加班程序员 ★★★★★  ·  22分钟送达" FontSize="12.5" FontWeight="Bold" Foreground="#222426" />
+                                            <TextBlock Text="小美 DeepEat AI 推荐的套餐非常准，打包盒独立分装没有洒漏，准时宝体验满分。" FontSize="12.5" Foreground="#44464A" Margin="0,6,0,0" TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </ScrollViewer>
+
+                            <!-- 3C: 商家食品安全档案与逆向字节码契约视图 -->
+                            <ScrollViewer Visibility="{Binding IsPoiMerchantSubTab, Converter={StaticResource BoolToVis}}" Padding="20">
+                                <StackPanel>
+                                    <Border Background="#F7F9FC" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="12" Padding="16" Margin="0,0,0,12">
+                                        <StackPanel>
+                                            <TextBlock Text="🛡️ 商家信息与明厨亮灶档案" FontSize="15" FontWeight="Bold" Foreground="#222426" />
+                                            <TextBlock Text="{Binding SelectedPoi.Name, StringFormat=门店名称：{0}}" FontSize="12.5" Foreground="#44464A" Margin="0,8,0,0" />
+                                            <TextBlock Text="{Binding SelectedPoi.PoiIdStr, StringFormat=官方加密 PoiIdStr：{0}}" FontSize="12.5" Foreground="#44464A" Margin="0,4,0,0" />
+                                            <TextBlock Text="{Binding SelectedPoi.BrandSlogan, StringFormat=品牌理念：{0}}" FontSize="12.5" Foreground="#44464A" Margin="0,4,0,0" />
+                                            <TextBlock Text="食品安全等级：A级示范餐饮单位（已投保美团外卖放心吃食品安全险）" FontSize="12.5" Foreground="#00B578" FontWeight="SemiBold" Margin="0,4,0,0" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Background="#222426" CornerRadius="12" Padding="16">
+                                        <StackPanel>
+                                            <TextBlock Text="🔬 REA 逆向工程底层类映射契约 (DEX Evidence)" FontSize="14" FontWeight="Bold" Foreground="#FFD100" />
+                                            <TextBlock Text="• 门店域模型：com.sankuai.waimai.platform.domain.core.poi.Poi (ev_9cddb422...)" FontSize="12" Foreground="#EAECEF" Margin="0,8,0,0" />
+                                            <TextBlock Text="• 菜品域模型：com.sankuai.waimai.platform.domain.core.goods.GoodsSpu (ev_dfec8e80...)" FontSize="12" Foreground="#EAECEF" Margin="0,4,0,0" />
+                                            <TextBlock Text="• 购物车算价：com.sankuai.waimai.business.restaurant.base.shopcart.ShopCartPrice (ev_1dbf43e5...)" FontSize="12" Foreground="#EAECEF" Margin="0,4,0,0" />
+                                            <TextBlock Text="• 平行视界配置：assets/easygo.json -> magicwindow (MainActivity -> KingKongActivity)" FontSize="12" Foreground="#7FE3B9" Margin="0,4,0,0" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+
+                        <!-- 4) 底部黑金悬浮购物车结算栏 (对齐 ShopCartPriceContract) -->
+                        <Border Grid.Row="3" Background="#1E2023" Padding="16,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- 购物车袋鼠图标与总件数角标 -->
+                                <Button Grid.Column="0"
+                                        Command="{Binding ToggleCartDrawerCommand}"
+                                        Style="{StaticResource MtPillButtonStyle}"
+                                        Background="#FFD100"
+                                        Padding="12,8"
+                                        Margin="0,0,14,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="🛒 口袋明细 (" FontSize="13" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding CartPrice.TotalItemCount}" FontSize="13.5" FontWeight="ExtraBold" Foreground="#FF4A26" />
+                                        <TextBlock Text="件)" FontSize="13" FontWeight="Bold" />
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- 实时算价明细与凑单提示 -->
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="到手预估 " FontSize="12" Foreground="#C8CACF" VerticalAlignment="Bottom" Margin="0,0,4,2" />
+                                        <TextBlock Text="¥" FontSize="13" FontWeight="Bold" Foreground="#FFD100" VerticalAlignment="Bottom" Margin="0,0,1,2" />
+                                        <TextBlock Text="{Binding CartPrice.TotalDiscountedAndBoxPrice, StringFormat={}{0:0.00}}" FontSize="21" FontWeight="ExtraBold" Foreground="#FFD100" />
+                                        <TextBlock Text="{Binding CartPrice.TotalAndBoxPrice, StringFormat=原总价¥{0:0.00}}" FontSize="11.5" Foreground="#888A8E" TextDecorations="Strikethrough" VerticalAlignment="Bottom" Margin="8,0,0,3" />
+                                        <Border Background="#FF4A26" CornerRadius="4" Padding="6,1" Margin="10,0,0,2" VerticalAlignment="Bottom">
+                                            <TextBlock Text="{Binding CartPrice.TotalSavedAmount, StringFormat=已省¥{0:0.00}}" FontSize="10.5" FontWeight="Bold" Foreground="#FFFFFF" />
+                                        </Border>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding CartPrice.PreviewSubTip}" FontSize="11" Foreground="#98E6C4" Margin="0,2,0,0" TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+
+                                <!-- 清空按钮 -->
+                                <Button Grid.Column="2"
+                                        Command="{Binding ClearCartCommand}"
+                                        Visibility="{Binding HasCartItems, Converter={StaticResource BoolToVis}}"
+                                        Style="{StaticResource MtOutlineButtonStyle}"
+                                        Background="#2E3136"
+                                        Foreground="#D0D2D6"
+                                        BorderThickness="0"
+                                        Padding="10,7"
+                                        Margin="0,0,10,0"
+                                        Content="清空"
+                                        FontSize="12" />
+
+                                <!-- 去结算按钮 -->
+                                <Button Grid.Column="3"
+                                        Command="{Binding CheckoutOrderCommand}"
+                                        Style="{StaticResource MtPillButtonStyle}"
+                                        Background="#FFD100"
+                                        Foreground="#222426"
+                                        Padding="22,10"
+                                        Content="{Binding CartPrice.CheckoutButtonText}"
+                                        FontSize="14"
+                                        FontWeight="ExtraBold" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- ******************** TAB 9: 神券会员 · 天天膨胀专区 ******************** -->
+            <Border Visibility="{Binding IsShenQuanTabActive, Converter={StaticResource BoolToVis}}"
+                    Margin="16,12"
+                    Background="#FFFFFF"
+                    CornerRadius="14"
+                    BorderBrush="{StaticResource MtCardBorderBrush}"
+                    BorderThickness="1"
+                    Padding="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="{StaticResource MtShenQuanBannerBrush}" CornerRadius="14" Padding="22,16" Margin="0,0,0,16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="🧧 美团神券省钱卡 · 尊享天天免费膨胀" FontSize="20" FontWeight="ExtraBold" Foreground="#FFE89E" />
+                                <TextBlock Text="逆向对齐 ShopCartPrice.totalDiscountedAndBoxPriceWithoutGoodCoupon 与神券抵扣契约，支持与店铺满减同享！" FontSize="12.5" Foreground="#D8C3A5" Margin="0,6,0,0" />
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Command="{Binding InflateCouponCommand}"
+                                    Style="{StaticResource MtPillButtonStyle}"
+                                    Background="#FF4A26"
+                                    Foreground="#FFFFFF"
+                                    Padding="18,10"
+                                    Content="一键膨胀当前神券 🔥"
+                                    FontSize="13.5" />
+                        </Grid>
+                    </Border>
+
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding Coupons}"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             HorizontalContentAlignment="Stretch"
+                             ScrollViewer.CanContentScroll="True"
+                             VirtualizingStackPanel.IsVirtualizing="True"
+                             VirtualizingStackPanel.VirtualizationMode="Recycling"
+                             VirtualizingStackPanel.ScrollUnit="Pixel">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0,0,0,12" />
+                                <Setter Property="Focusable" Value="False" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#FFFDF7" BorderBrush="#F2D492" BorderThickness="1.5" CornerRadius="12" Padding="18,14">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Text="¥" FontSize="16" FontWeight="Bold" Foreground="#FF4A26" VerticalAlignment="Bottom" Margin="0,0,2,4" />
+                                                <TextBlock Text="{Binding Amount, StringFormat={}{0:0.#}}" FontSize="34" FontWeight="ExtraBold" Foreground="#FF4A26" />
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Threshold, StringFormat=满 ¥{0:0} 可用}" FontSize="11.5" Foreground="#7A5C00" HorizontalAlignment="Center" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Background="#FF4A26" CornerRadius="4" Padding="6,1" Margin="0,0,8,0">
+                                                    <TextBlock Text="{Binding TagText}" FontSize="10.5" FontWeight="Bold" Foreground="#FFFFFF" />
+                                                </Border>
+                                                <TextBlock Text="{Binding Title}" FontSize="15.5" FontWeight="Bold" Foreground="#222426" />
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Subtitle}" FontSize="12" Foreground="#66686C" Margin="0,5,0,0" />
+                                            <TextBlock Text="{Binding ExpireTimeText}" FontSize="11" Foreground="#999B9F" Margin="0,4,0,0" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Button Command="{Binding DataContext.InflateCouponCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource MtOutlineButtonStyle}"
+                                                    BorderBrush="#FF4A26"
+                                                    Foreground="#FF4A26"
+                                                    Padding="14,8"
+                                                    Margin="0,0,10,0"
+                                                    Content="立即膨胀"
+                                                    FontWeight="Bold" />
+                                            <Button Command="{Binding DataContext.ApplyCouponCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource MtPillButtonStyle}"
+                                                    Padding="16,8"
+                                                    Content="去点餐使用" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+
+            <!-- ******************** TAB 10: 神抢手 · 限时大促爆品 ******************** -->
+            <Border Visibility="{Binding IsFlashSaleTabActive, Converter={StaticResource BoolToVis}}"
+                    Margin="16,12"
+                    Background="#FFFFFF"
+                    CornerRadius="14"
+                    BorderBrush="{StaticResource MtCardBorderBrush}"
+                    BorderThickness="1"
+                    Padding="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#FF4A26" CornerRadius="14" Padding="20,14" Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="⚡ 美团神抢手 · 大牌招牌菜限时 4 折起" FontSize="20" FontWeight="ExtraBold" Foreground="#FFFFFF" />
+                            <TextBlock Text="对齐底部凸起大促 Tab (BusinessId = 10) · 点击「立即抢购」自动直达门店并加购至购物车口袋" FontSize="12.5" Foreground="#FFE5DF" Margin="0,4,0,0" />
+                        </StackPanel>
+                    </Border>
+
+                    <ItemsControl Grid.Row="1" ItemsSource="{Binding FlashDeals}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#FFFDFB" BorderBrush="#FFD8CE" BorderThickness="1.5" CornerRadius="12" Padding="16" Margin="6">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <StackPanel Grid.Row="0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Background="#FF4A26" CornerRadius="4" Padding="6,2" Margin="0,0,8,0">
+                                                    <TextBlock Text="{Binding DiscountBadge}" FontSize="10.5" FontWeight="Bold" Foreground="#FFFFFF" />
+                                                </Border>
+                                                <TextBlock Text="{Binding PoiName}" FontSize="12" FontWeight="SemiBold" Foreground="#66686C" VerticalAlignment="Center" />
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Title}" FontSize="15.5" FontWeight="ExtraBold" Foreground="#222426" Margin="0,8,0,0" TextWrapping="Wrap" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="0,12">
+                                            <TextBlock Text="{Binding StockTip}" FontSize="11.5" Foreground="#FF6600" FontWeight="SemiBold" />
+                                            <ProgressBar Value="{Binding SoldPercent}" Maximum="100" Height="8" Foreground="#FF4A26" Background="#FFE6E0" Margin="0,6,0,0" />
+                                        </StackPanel>
+
+                                        <Grid Grid.Row="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                                <TextBlock Text="¥" FontSize="13" FontWeight="Bold" Foreground="#FF4A26" VerticalAlignment="Bottom" Margin="0,0,1,2" />
+                                                <TextBlock Text="{Binding FlashPrice, StringFormat={}{0:0.0}}" FontSize="22" FontWeight="ExtraBold" Foreground="#FF4A26" />
+                                                <TextBlock Text="{Binding OriginPrice, StringFormat=¥{0:0.0}}" FontSize="11.5" Foreground="#999B9F" TextDecorations="Strikethrough" VerticalAlignment="Bottom" Margin="6,0,0,3" />
+                                            </StackPanel>
+                                            <Button Grid.Column="1"
+                                                    Command="{Binding DataContext.ApplyFlashDealCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource MtPillButtonStyle}"
+                                                    Background="#FF4A26"
+                                                    Foreground="#FFFFFF"
+                                                    Padding="14,7"
+                                                    Content="立即抢购 ⚡" />
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Border>
+
+            <!-- ******************** TAB 2: 订单中心 · 骑手实时地图轨迹 + 骑手/商家三方 IM 群聊 ******************** -->
+            <Grid Visibility="{Binding IsOrderTabActive, Converter={StaticResource BoolToVis}}" Margin="16,12">
+                <Grid.ColumnDefinitions>
+                    <!-- 左栏：全部订单列表 (OrderListResponse.digestlist) -->
+                    <ColumnDefinition Width="420" />
+                    <ColumnDefinition Width="14" />
+                    <!-- 右栏：骑手实时地图轨迹 + 骑手/商家三方 IM 群聊 -->
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- 左栏：订单列表 -->
+                <Border Grid.Column="0" Background="#FFFFFF" CornerRadius="14" BorderBrush="{StaticResource MtCardBorderBrush}" BorderThickness="1" Padding="14">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+                            <TextBlock Text="📋 全部订单 (OrderListResponse)" FontSize="16" FontWeight="ExtraBold" Foreground="#222426" />
+                            <TextBlock Text="对齐 OrderListResponse.fromJson (digestlist / uncomment_count / refund_count)" FontSize="11" Foreground="#66686C" Margin="0,2,0,0" />
+                        </StackPanel>
+
+                        <ListBox Grid.Row="1"
+                                 ItemsSource="{Binding Orders}"
+                                 SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 HorizontalContentAlignment="Stretch"
+                                 ScrollViewer.CanContentScroll="True"
+                                 VirtualizingStackPanel.IsVirtualizing="True"
+                                 VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                 VirtualizingStackPanel.ScrollUnit="Pixel">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Margin" Value="0,0,0,10" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border x:Name="OrdBd" Background="#FAFAFC" BorderBrush="#E6E8EC" BorderThickness="1.5" CornerRadius="12" Padding="12" Cursor="Hand">
+                                                    <ContentPresenter />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="OrdBd" Property="Background" Value="#FFFDF4" />
+                                                        <Setter TargetName="OrdBd" Property="BorderBrush" Value="#FFB800" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding PoiName}" FontSize="14.5" FontWeight="Bold" Foreground="#222426" TextTrimming="CharacterEllipsis" />
+                                            <Border Grid.Column="1" Background="#FFF4E5" CornerRadius="4" Padding="6,2">
+                                                <TextBlock Text="{Binding StatusDescription}" FontSize="11" FontWeight="Bold" Foreground="#D46B08" />
+                                            </Border>
+                                        </Grid>
+                                        <TextBlock Text="{Binding FoodNames}" FontSize="12" Foreground="#55575B" Margin="0,6,0,0" TextTrimming="CharacterEllipsis" />
+                                        <Grid Margin="0,8,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding FormatOrderTime}" FontSize="11" Foreground="#888A8E" VerticalAlignment="Center" />
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                <TextBlock Text="实付 " FontSize="11.5" Foreground="#66686C" VerticalAlignment="Bottom" />
+                                                <TextBlock Text="{Binding Total, StringFormat=¥{0:0.00}}" FontSize="15" FontWeight="ExtraBold" Foreground="#222426" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </Border>
+
+                <!-- 右栏：骑手实时地图轨迹 + 骑手/商家三方 IM 群聊 -->
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <!-- 上半部分：骑手 GPS 实时轨迹雷达面板 -->
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="12" />
+                        <!-- 下半部分：订单详情与骑手/商家三方 IM 群聊 -->
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- 骑手实时地图轨迹卡片 -->
+                    <Border Grid.Row="0" Background="#FFFFFF" CornerRadius="14" BorderBrush="{StaticResource MtCardBorderBrush}" BorderThickness="1" Padding="16">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!-- 顶部状态与推进模拟按钮 -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="#FFD100" CornerRadius="5" Padding="6,2" Margin="0,0,8,0">
+                                            <TextBlock Text="🛵 美团专送实时轨迹" FontSize="11" FontWeight="Bold" Foreground="#222426" />
+                                        </Border>
+                                        <TextBlock Text="{Binding SelectedOrder.StatusDescription}" FontSize="16" FontWeight="ExtraBold" Foreground="#222426" />
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding SelectedOrder.ArrivalTimeText}" FontSize="12" Foreground="#00B578" FontWeight="SemiBold" Margin="0,4,0,0" />
+                                </StackPanel>
+                                <Button Grid.Column="1"
+                                        Command="{Binding AdvanceRiderStepCommand}"
+                                        Style="{StaticResource MtOutlineButtonStyle}"
+                                        Background="#FFF9E6"
+                                        BorderBrush="#FFC300"
+                                        Padding="12,6"
+                                        Content="⚡ 模拟推进骑手位置"
+                                        FontSize="12"
+                                        FontWeight="Bold" />
+                            </Grid>
+
+                            <!-- 可视化地图路径条 -->
+                            <Border Grid.Row="1" Background="#EEF4F8" BorderBrush="#D5E3EC" BorderThickness="1" CornerRadius="10" Padding="16,12" Margin="0,10">
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding SelectedOrder.PoiName, StringFormat=🏪 商家：{0}}" FontSize="12" FontWeight="Bold" Foreground="#222426" />
+                                        <TextBlock Grid.Column="1" Text="{Binding SelectedOrderCoordinatesText}" FontSize="11.5" FontWeight="SemiBold" Foreground="#0066CC" HorizontalAlignment="Center" />
+                                        <TextBlock Grid.Column="2" Text="{Binding SelectedOrder.RecipientAddress, StringFormat=🏠 送至：{0}}" FontSize="12" FontWeight="Bold" Foreground="#222426" />
+                                    </Grid>
+                                    <ProgressBar Value="{Binding SelectedOrderProgressPercent, Mode=OneWay}" Maximum="100" Height="10" Foreground="#FFD100" Background="#D8E2EB" Margin="0,8,0,4" />
+                                    <TextBlock Text="{Binding SelectedOrder.RiderName, StringFormat=当前接单骑手：{0}（保温箱温度 62.5℃ · 已开启准时宝延误必赔）}" FontSize="11" Foreground="#55575B" />
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 5 步配送节点时间轴 -->
+                            <ItemsControl Grid.Row="2" ItemsSource="{Binding SelectedOrder.TrackingSteps}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Rows="1" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#FAFAFC" BorderBrush="#EAECEF" BorderThickness="1" CornerRadius="8" Padding="8,6" Margin="3,0">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding TimeText}" FontSize="10.5" Foreground="#00B578" FontWeight="Bold" />
+                                                <TextBlock Text="{Binding Title}" FontSize="11.5" FontWeight="Bold" Foreground="#222426" Margin="0,2,0,0" TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding Subtitle}" FontSize="10" Foreground="#7A7C80" Margin="0,2,0,0" TextTrimming="CharacterEllipsis" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+
+                    <!-- 下半部分：餐品账单明细 + 骑手/商家三方群聊 IM -->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="320" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 订单餐品与账单明细 -->
+                        <Border Grid.Column="0" Background="#FFFFFF" CornerRadius="14" BorderBrush="{StaticResource MtCardBorderBrush}" BorderThickness="1" Padding="14">
+                            <StackPanel>
+                                <TextBlock Text="🧾 订单餐品与费用明细" FontSize="14.5" FontWeight="Bold" Foreground="#222426" />
+                                <TextBlock Text="{Binding SelectedOrder.HashId, StringFormat=订单编号：{0}}" FontSize="11" Foreground="#888A8E" Margin="0,3,0,8" />
+                                <ItemsControl ItemsSource="{Binding SelectedOrder.FoodItems}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0">
+                                                    <TextBlock Text="{Binding FoodName}" FontSize="12.5" FontWeight="SemiBold" Foreground="#222426" TextTrimming="CharacterEllipsis" />
+                                                    <TextBlock Text="{Binding SpecText}" FontSize="10.5" Foreground="#888A8E" />
+                                                </StackPanel>
+                                                <TextBlock Grid.Column="1" Text="{Binding Count, StringFormat=x{0}}" FontSize="12" Foreground="#66686C" Margin="8,0" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="2" Text="{Binding Price, StringFormat=¥{0:0.00}}" FontSize="12.5" FontWeight="Bold" Foreground="#222426" VerticalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Border Height="1" Background="#EAECEF" Margin="0,8" />
+                                <TextBlock Text="{Binding SelectedOrder.BoxFeeTotal, StringFormat=打包费合计：¥{0:0.00}}" FontSize="11.5" Foreground="#66686C" />
+                                <TextBlock Text="{Binding SelectedOrder.ShippingFee, StringFormat=配送费：¥{0:0.00}}" FontSize="11.5" Foreground="#66686C" Margin="0,3,0,0" />
+                                <TextBlock Text="{Binding SelectedOrder.DiscountTotal, StringFormat=神券与满减共省：-¥{0:0.00}}" FontSize="11.5" Foreground="#FF4A26" FontWeight="Bold" Margin="0,3,0,0" />
+                                <TextBlock Text="{Binding SelectedOrder.Total, StringFormat=实付合计：¥{0:0.00}}" FontSize="15" FontWeight="ExtraBold" Foreground="#222426" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </Border>
+
+                        <!-- 骑手/商家/顾客 三方实时群聊 IM 面板 -->
+                        <Border Grid.Column="2" Background="#FFFFFF" CornerRadius="14" BorderBrush="{StaticResource MtCardBorderBrush}" BorderThickness="1" Padding="14">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                                    <TextBlock Text="💬 骑手 · 商家 · 顾客 三方实时沟通群 (美团大象 IM 契约)" FontSize="14" FontWeight="Bold" Foreground="#222426" />
+                                </StackPanel>
+
+                                <ListBox Grid.Row="1"
+                                         ItemsSource="{Binding SelectedOrder.ImMessages}"
+                                         BorderThickness="1"
+                                         BorderBrush="#F0F1F4"
+                                         Background="#F8F9FB"
+                                         Padding="10"
+                                         HorizontalContentAlignment="Stretch"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                         ScrollViewer.CanContentScroll="True"
+                                         VirtualizingStackPanel.IsVirtualizing="True"
+                                         VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                         VirtualizingStackPanel.ScrollUnit="Pixel">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Padding" Value="0" />
+                                            <Setter Property="Margin" Value="0,0,0,8" />
+                                            <Setter Property="Focusable" Value="False" />
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#FFFFFF" BorderBrush="#E4E7ED" BorderThickness="1" CornerRadius="10" Padding="10,7">
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Background="#FFD100" CornerRadius="4" Padding="5,1" Margin="0,0,6,0">
+                                                            <TextBlock Text="{Binding SenderRole}" FontSize="10" FontWeight="Bold" Foreground="#222426" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding SenderName}" FontSize="11.5" FontWeight="Bold" Foreground="#222426" Margin="0,0,8,0" />
+                                                        <TextBlock Text="{Binding TimeText}" FontSize="10.5" Foreground="#999B9F" />
+                                                    </StackPanel>
+                                                    <TextBlock Text="{Binding Content}" FontSize="12.5" Foreground="#333538" Margin="0,4,0,0" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+
+                                <!-- 智能快捷回复芯片 -->
+                                <ItemsControl Grid.Row="2" ItemsSource="{Binding SelectedOrder.SmartReplySuggestions}" Margin="0,8,0,6">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding DataContext.SendSmartReplyCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource MtOutlineButtonStyle}"
+                                                    Padding="8,3"
+                                                    Margin="0,0,6,4"
+                                                    Content="{Binding}"
+                                                    FontSize="11" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <!-- 消息发送栏 -->
+                                <Grid Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding ImDraftText, UpdateSourceTrigger=PropertyChanged}"
+                                             Height="34"
+                                             VerticalContentAlignment="Center"
+                                             Padding="10,0"
+                                             FontSize="12.5"
+                                             BorderBrush="#DCDFE6"
+                                             Margin="0,0,8,0" />
+                                    <Button Grid.Column="1"
+                                            Command="{Binding SendImMessageCommand}"
+                                            Style="{StaticResource MtPillButtonStyle}"
+                                            Padding="18,6"
+                                            Content="发送消息"
+                                            FontSize="12.5" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- ******************** TAB 3: 我的美团 · 个人中心 + 地址簿 + REA 逆向契约自检台 ******************** -->
+            <Grid Visibility="{Binding IsMineTabActive, Converter={StaticResource BoolToVis}}" Margin="16,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="460" />
+                    <ColumnDefinition Width="14" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- 左栏：个人信息资产卡片 (MineMPFragment) + 收货地址簿 -->
+                <StackPanel Grid.Column="0">
+                    <Border Background="#FFFFFF" CornerRadius="14" BorderBrush="{StaticResource MtCardBorderBrush}" BorderThickness="1" Padding="18" Margin="0,0,0,12">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="54" Height="54" CornerRadius="27" Background="#FFD100" Margin="0,0,14,0">
+                                    <TextBlock Text="🤠" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding MineProfile.Nickname}" FontSize="17" FontWeight="ExtraBold" Foreground="#222426" />
+                                        <Border Background="#222426" CornerRadius="5" Padding="6,2" Margin="8,0,0,0">
+                                            <TextBlock Text="{Binding MineProfile.VipLevelText}" FontSize="10.5" FontWeight="Bold" Foreground="#FFD100" />
+                                        </Border>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding MineProfile.PhoneMasked, StringFormat=绑定手机：{0} · MineMPFragment (Mach Pro)}" FontSize="11.5" Foreground="#66686C" Margin="0,4,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <UniformGrid Columns="3" Margin="0,16,0,0">
+                                <Border Background="#FFFDF5" CornerRadius="10" Padding="10" Margin="0,0,6,0">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Coupons.Count}" FontSize="20" FontWeight="ExtraBold" Foreground="#FF4A26" HorizontalAlignment="Center" />
+                                        <TextBlock Text="可用神券(张)" FontSize="11" Foreground="#66686C" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#FFFDF5" CornerRadius="10" Padding="10" Margin="3,0">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding MineProfile.RedPacketBalance, StringFormat=¥{0:0.00}}" FontSize="20" FontWeight="ExtraBold" Foreground="#FF4A26" HorizontalAlignment="Center" />
+                                        <TextBlock Text="红包津贴" FontSize="11" Foreground="#66686C" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#FFFDF5" CornerRadius="10" Padding="10" Margin="6,0,0,0">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding MineProfile.MonthlySavedAmount, StringFormat=¥{0:0.0}}" FontSize="20" FontWeight="ExtraBold" Foreground="#00B578" HorizontalAlignment="Center" />
+                                        <TextBlock Text="本月累计已省" FontSize="11" Foreground="#66686C" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </UniformGrid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 收货地址管理 -->
+                    <Border Background="#FFFFFF" CornerRadius="14" BorderBrush="{StaticResource MtCardBorderBrush}" BorderThickness="1" Padding="18">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="📍 我的收货地址簿 (WmAddress)" FontSize="15" FontWeight="Bold" Foreground="#222426" />
+                                <Button Grid.Column="1" Command="{Binding CycleAddressCommand}" Style="{StaticResource MtOutlineButtonStyle}" Padding="10,4" Content="切换默认地址" FontSize="11.5" />
+                            </Grid>
+
+                            <ItemsControl ItemsSource="{Binding Addresses}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#FAFAFC" BorderBrush="#E6E8EC" BorderThickness="1" CornerRadius="10" Padding="12,9" Margin="0,0,0,8">
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Border Background="#FFD100" CornerRadius="4" Padding="5,1" Margin="0,0,6,0">
+                                                        <TextBlock Text="{Binding TagLabel}" FontSize="10" FontWeight="Bold" Foreground="#222426" />
+                                                    </Border>
+                                                    <TextBlock Text="{Binding AddressDetail}" FontSize="13" FontWeight="Bold" Foreground="#222426" />
+                                                    <TextBlock Text="{Binding HouseNumber}" FontSize="12.5" Foreground="#55575B" Margin="6,0,0,0" />
+                                                </StackPanel>
+                                                <TextBlock FontSize="11.5" Foreground="#66686C" Margin="0,4,0,0">
+                                                    <Run Text="{Binding ContactName}" />
+                                                    <Run Text=" (" />
+                                                    <Run Text="{Binding GenderText}" />
+                                                    <Run Text=")  " />
+                                                    <Run Text="{Binding Phone}" />
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- 右栏：REA 逆向工程证据链与双 AI 15+ 项契约自检报告 -->
+                <Border Grid.Column="2" Background="#FFFFFF" CornerRadius="14" BorderBrush="{StaticResource MtCardBorderBrush}" BorderThickness="1" Padding="18">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="🔬 REA 逆向工程证据链 &amp; 自动化契约自检中心" FontSize="16.5" FontWeight="ExtraBold" Foreground="#222426" />
+                                <TextBlock Text="{Binding PackageIdentityText}" FontSize="11.5" Foreground="#66686C" Margin="0,3,0,0" />
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Command="{Binding RunSelfTestCommand}"
+                                    Style="{StaticResource MtPillButtonStyle}"
+                                    Padding="16,7"
+                                    Content="🔄 重新执行全量契约自检"
+                                    FontSize="12" />
+                        </Grid>
+
+                        <Border Grid.Row="1" Background="#F0FAF5" BorderBrush="#9EE2C0" BorderThickness="1" CornerRadius="10" Padding="12,8" Margin="0,10">
+                            <TextBlock Text="{Binding SelfTestSummaryText}" FontSize="13" FontWeight="Bold" Foreground="#00875A" />
+                        </Border>
+
+                        <ListBox Grid.Row="2"
+                                 ItemsSource="{Binding SelfTestItems}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 HorizontalContentAlignment="Stretch"
+                                 ScrollViewer.CanContentScroll="True"
+                                 VirtualizingStackPanel.IsVirtualizing="True"
+                                 VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                 VirtualizingStackPanel.ScrollUnit="Pixel">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Margin" Value="0,0,0,6" />
+                                    <Setter Property="Focusable" Value="False" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#FAFAFC" BorderBrush="#E6E8EC" BorderThickness="1" CornerRadius="8" Padding="12,8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="78" />
+                                                <ColumnDefinition Width="120" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" Background="#00B578" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Id}" FontSize="10.5" FontWeight="Bold" Foreground="#FFFFFF" />
+                                            </Border>
+                                            <TextBlock Grid.Column="1" Text="{Binding Category}" FontSize="11.5" FontWeight="Bold" Foreground="#222426" VerticalAlignment="Center" />
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="{Binding Name}" FontSize="12.5" FontWeight="Bold" Foreground="#222426" />
+                                                <TextBlock Text="{Binding EvidenceDetail}" FontSize="11" Foreground="#66686C" Margin="0,2,0,0" TextTrimming="CharacterEllipsis" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- ==================== 模态弹窗 1: 多规格 SKU 与属性选择器 ==================== -->
+            <Border Visibility="{Binding IsSpecModalOpen, Converter={StaticResource BoolToVis}}"
+                    Background="#77000000">
+                <Border Width="480"
+                        Background="#FFFFFF"
+                        CornerRadius="16"
+                        Padding="22"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding SpecModalFood.Name}" FontSize="18" FontWeight="ExtraBold" Foreground="#222426" />
+                            <Button Grid.Column="1" Command="{Binding CloseSpecModalCommand}" Style="{StaticResource MtOutlineButtonStyle}" Padding="8,2" Content="✕" />
+                        </Grid>
+                        <TextBlock Text="选择规格 (GoodsSku)：" FontSize="12.5" FontWeight="Bold" Foreground="#66686C" Margin="0,14,0,6" />
+                        <ItemsControl ItemsSource="{Binding SpecModalFood.Skus}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding DataContext.SelectSpecSkuCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource MtOutlineButtonStyle}"
+                                            Padding="12,6"
+                                            Margin="0,0,8,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding SpecName}" FontSize="12.5" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding Price, StringFormat= (¥{0:0.0})}" FontSize="12" Foreground="#FF4A26" FontWeight="Bold" />
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBlock Text="口味属性偏好 (点击切换选项)：" FontSize="12.5" FontWeight="Bold" Foreground="#66686C" Margin="0,8,0,6" />
+                        <ItemsControl ItemsSource="{Binding SpecModalFood.AttrGroups}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding GroupName}" FontSize="12.5" Foreground="#55575B" VerticalAlignment="Center" />
+                                        <Button Grid.Column="1"
+                                                Command="{Binding DataContext.CycleAttrOptionCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                CommandParameter="{Binding}"
+                                                Style="{StaticResource MtOutlineButtonStyle}"
+                                                Background="#FFF9E6"
+                                                BorderBrush="#FFC300"
+                                                HorizontalAlignment="Left"
+                                                Padding="14,5">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding SelectedOption}" FontSize="12.5" FontWeight="Bold" Foreground="#222426" />
+                                                <TextBlock Text=" (点击切换 ↻)" FontSize="11" Foreground="#888A8E" />
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <Border Background="#FFFDF5" BorderBrush="#F2DF9B" BorderThickness="1" CornerRadius="10" Padding="12,8" Margin="0,10,0,14">
+                            <TextBlock Text="{Binding SpecModalPreviewText}" FontSize="12.5" FontWeight="Bold" Foreground="#222426" />
+                        </Border>
+
+                        <Button Command="{Binding ConfirmSpecModalCommand}"
+                                Style="{StaticResource MtPillButtonStyle}"
+                                Padding="0,10"
+                                HorizontalAlignment="Stretch"
+                                Content="＋ 确认加入购物车口袋"
+                                FontSize="14" />
+                    </StackPanel>
+                </Border>
+            </Border>
+
+            <!-- ==================== 模态弹窗 2: 购物车多口袋抽屉明细 ==================== -->
+            <Border Visibility="{Binding IsCartDrawerOpen, Converter={StaticResource BoolToVis}}"
+                    Background="#66000000">
+                <Border Width="540"
+                        MaxHeight="520"
+                        Background="#FFFFFF"
+                        CornerRadius="16"
+                        Padding="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="🛍️ 多口袋购物车明细 (ShopCartItem)" FontSize="16.5" FontWeight="ExtraBold" Foreground="#222426" />
+                            <Button Grid.Column="1" Command="{Binding ClearCartCommand}" Style="{StaticResource MtOutlineButtonStyle}" Padding="10,4" Margin="0,0,8,0" Content="清空口袋" FontSize="11.5" />
+                            <Button Grid.Column="2" Command="{Binding ToggleCartDrawerCommand}" Style="{StaticResource MtOutlineButtonStyle}" Padding="8,4" Content="✕" />
+                        </Grid>
+
+                        <ListBox Grid.Row="1"
+                                 ItemsSource="{Binding ActiveCartItems}"
+                                 BorderThickness="1"
+                                 BorderBrush="#EAECEF"
+                                 Background="#FAFAFC"
+                                 Padding="10"
+                                 HorizontalContentAlignment="Stretch"
+                                 ScrollViewer.CanContentScroll="True"
+                                 VirtualizingStackPanel.IsVirtualizing="True"
+                                 VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                 VirtualizingStackPanel.ScrollUnit="Pixel">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Background="#FFD100" CornerRadius="4" Padding="6,2" Margin="0,0,8,0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding PocketId, StringFormat={}{0}号口袋}" FontSize="10.5" FontWeight="Bold" Foreground="#222426" />
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding FoodName}" FontSize="13" FontWeight="Bold" Foreground="#222426" />
+                                            <TextBlock Text="{Binding SpecSummary}" FontSize="11" Foreground="#7A7C80" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" Text="{Binding Count, StringFormat=x{0}}" FontSize="13" FontWeight="Bold" Foreground="#222426" VerticalAlignment="Center" Margin="12,0" />
+                                        <TextBlock Grid.Column="3" Text="{Binding LineTotal, StringFormat=¥{0:0.00}}" FontSize="14" FontWeight="ExtraBold" Foreground="#FF4A26" VerticalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Grid Grid.Row="2" Margin="0,14,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding CartPrice.PreviewSubTip}" FontSize="12" Foreground="#00875A" FontWeight="Bold" VerticalAlignment="Center" />
+                            <Button Grid.Column="1" Command="{Binding CheckoutOrderCommand}" Style="{StaticResource MtPillButtonStyle}" Padding="20,8" Content="立即去结算" FontSize="13.5" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Border>
+
+            <!-- ==================== 模态弹窗 3: 小美 DeepEat AI 智能助餐对话面板 ==================== -->
+            <Border Visibility="{Binding IsDeepEatDrawerOpen, Converter={StaticResource BoolToVis}}"
+                    Background="#66000000">
+                <Border Width="560"
+                        Background="#FFFFFF"
+                        CornerRadius="16"
+                        Padding="22"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="✨ 小美 DeepEat AI 智能点餐助手 (v8.84.2 新特性)" FontSize="17" FontWeight="ExtraBold" Foreground="#222426" />
+                            <Button Grid.Column="1" Command="{Binding ToggleDeepEatDrawerCommand}" Style="{StaticResource MtOutlineButtonStyle}" Padding="8,2" Content="✕" />
+                        </Grid>
+                        <TextBlock Text="输入您的用餐场景、口味或预算，小美 AI 将结合附近门店评分、神券膨胀与满减为您定制最优套餐：" FontSize="12" Foreground="#66686C" Margin="0,6,0,10" />
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0"
+                                     Text="{Binding DeepEatQueryText, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="36"
+                                     VerticalContentAlignment="Center"
+                                     Padding="10,0"
+                                     FontSize="12.5"
+                                     Margin="0,0,8,0" />
+                            <Button Grid.Column="1" Command="{Binding AskDeepEatAiCommand}" Style="{StaticResource MtPillButtonStyle}" Padding="16,6" Content="AI 定制推荐" />
+                        </Grid>
+                        <Border Background="#FFFDF5" BorderBrush="#F2DF9B" BorderThickness="1.5" CornerRadius="10" Padding="14">
+                            <TextBlock Text="{Binding DeepEatResponseText}" FontSize="12.5" Foreground="#222426" TextWrapping="Wrap" LineHeight="20" />
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Border>
+        </Grid>
+
+        <!-- ==================== 3. 底部 5 大动态导航栏 (MainActivity Dynamic Bottom Bar) ==================== -->
+        <Border Grid.Row="2" Background="#FFFFFF" BorderBrush="#E5E7EB" BorderThickness="0,1,0,0" Padding="24,0">
+            <ItemsControl ItemsSource="{Binding BottomTabs}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1" Columns="5" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.SwitchTabCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding BusinessId}"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand">
+                            <Grid>
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding IconGlyph}" FontSize="15" FontWeight="Bold" Foreground="#FF6600" Margin="0,0,5,0" VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding Title}" FontSize="13.5" FontWeight="ExtraBold" Foreground="#222426" VerticalAlignment="Center" />
+                                        <Border Background="#FF4A26" CornerRadius="6" Padding="5,1" Margin="6,0,0,0" VerticalAlignment="Center">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding BubbleTagText}" Value="">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding BubbleTagText}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock Text="{Binding BubbleTagText}" FontSize="9.5" FontWeight="Bold" Foreground="#FFFFFF" />
+                                        </Border>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Subtitle}" FontSize="10.5" Foreground="#7A7C80" HorizontalAlignment="Center" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <!-- ==================== 4. 底部逆向契约遥测状态条 ==================== -->
+        <Border Grid.Row="3" Background="#222426" Padding="18,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding StatusBannerText}" FontSize="11.5" Foreground="#FFD100" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Column="1" Text="{Binding SelfTestSummaryText}" FontSize="11" Foreground="#7FE3B9" FontWeight="SemiBold" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,9 @@
+READINESS_CHECKLIST_VERSION: 1.0
+[PASS] 1. Official Latest APK Acquired & Verified (v8.84.2, SHA256=0f50d0a4d65d7d047ad33d80e7de836352f980aabcad4e069b0bb9d70638cc82)
+[PASS] 2. REA MCP Reverse Engineering Evidence Exported (83 records, 0 unknowns, rea-evidence-bundle.json)
+[PASS] 3. Rebuild Feasibility Matrix & Technical Spec Completed (deliverables/rebuild-feasibility-matrix.md, SPEC.md)
+[PASS] 4. Dual-AI Mode 2 Worktree Parallel Implementation Completed (Codex: Core/WaimaiContractsAndEngine.cs, Antigravity: WPF Client)
+[PASS] 5. MSBuild Release Compilation Zero Errors (MeituanWaimaiClient.exe)
+[PASS] 6. Headless Self-Test Suite 44/44 Passed (deliverables/selftest-report.json)
+[PASS] 7. High-DPI Multi-View Screenshots Rendered & Visually Audited (deliverables/screenshots/01..05.png)
+[PASS] 8. Exhaustive Code Audit (ECA-01..ECA-07) Zero Violations

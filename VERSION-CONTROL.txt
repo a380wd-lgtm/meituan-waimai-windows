@@ -1,0 +1,10 @@
+PROJECT: meituan-waimai-windows
+TARGET_PACKAGE: com.sankuai.meituan.takeoutnew
+TARGET_VERSION: 8.84.2 (versionCode=800840002, build_number=91293)
+APK_SHA256: 0f50d0a4d65d7d047ad33d80e7de836352f980aabcad4e069b0bb9d70638cc82
+REA_EVIDENCE_BUNDLE: rea-evidence-bundle.json (83 records, 0 unknowns)
+DUAL_AI_MODE: Mode 2 (Isolated Git Worktree Parallel Development + Red-Team Mutual Review)
+CODEX_MODEL: gpt-6-astra (ultra)
+WINDOWS_CLIENT_BINARY: windows-client/waimai-client/bin/Release/MeituanWaimaiClient.exe
+SELFTEST_STATUS: 44/44 PASSED (0 FAILED)
+GITHUB_REMOTE: https://github.com/a380wd-lgtm/meituan-waimai-windows.git
