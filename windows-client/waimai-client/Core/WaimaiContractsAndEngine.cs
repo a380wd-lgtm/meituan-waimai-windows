@@ -468,6 +468,7 @@ namespace MeituanWaimai.Core
         public double RiderProgressRatio { get; set; }
         public bool IsComment { get; set; }
         public bool CanRefund { get; set; }
+        public string UsedCouponId { get; set; }
         public List<OrderFoodItemContract> FoodItems { get; set; }
         public List<RiderTrackingStepContract> TrackingSteps { get; set; }
         public List<ImChatMessageContract> ImMessages { get; set; }

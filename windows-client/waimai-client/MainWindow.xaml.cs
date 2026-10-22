@@ -114,6 +114,7 @@ namespace MeituanWaimaiClient
             await CaptureCurrentViewToPngAsync(Path.Combine(outputDirectory, "02-home-mobile-feed.png"));
             await CaptureCurrentViewToPngAsync(Path.Combine(outputDirectory, "01-home-easygo-dualpane.png"));
             // 恢复登录态以继续后续下单测试
+            _viewModel.SendSmsCodeCommand.Execute(null);
             _viewModel.SubmitLoginCommand.Execute(null);
 
             // 3. 门店详情全屏页 (点菜子页 + 多规格 SKU 弹窗 + 底部黑金购物车条)
@@ -175,7 +176,7 @@ namespace MeituanWaimaiClient
         {
             FrameworkElement targetElement = RootViewportGrid as FrameworkElement ?? this;
             int width = 420;
-            int height = 880;
+            int height = 910;
 
             Size renderSize = new Size(width, height);
             targetElement.Measure(renderSize);

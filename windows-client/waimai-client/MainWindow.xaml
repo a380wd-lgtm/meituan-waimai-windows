@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="美团外卖 - 1:1 原生手机版 (v8.84.2 Build 91293)"
         Width="420"
-        Height="900"
-        MinWidth="390"
-        MaxWidth="460"
-        MinHeight="760"
+        Height="910"
+        MinWidth="420"
+        MaxWidth="420"
+        MinHeight="910"
+        MaxHeight="910"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Background="#F4F5F7"
         FontFamily="Microsoft YaHei UI"
@@ -1632,12 +1634,21 @@
                                                         FontSize="10.5"
                                                         Margin="0,0,0,4"
                                                         Content="使用该地址" />
-                                                <Button Command="{Binding DataContext.DeleteAddressCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                        CommandParameter="{Binding}"
-                                                        Style="{StaticResource GhostPillBtnStyle}"
-                                                        Padding="8,2"
-                                                        FontSize="10"
-                                                        Content="删除" />
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <Button Command="{Binding DataContext.StartEditAddressCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource GhostPillBtnStyle}"
+                                                            Padding="7,2"
+                                                            FontSize="10"
+                                                            Margin="0,0,4,0"
+                                                            Content="编辑" />
+                                                    <Button Command="{Binding DataContext.DeleteAddressCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource GhostPillBtnStyle}"
+                                                            Padding="7,2"
+                                                            FontSize="10"
+                                                            Content="删除" />
+                                                </StackPanel>
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -1645,10 +1656,10 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
 
-                        <!-- 新增收货地址表单 (ModifyAddressActivityDelegate) -->
+                        <!-- 新增/编辑收货地址表单 (ModifyAddressActivityDelegate) -->
                         <Border Style="{StaticResource CardBorderStyle}" Padding="12,10">
                             <StackPanel>
-                                <TextBlock Text="➕ 新增收货地址" FontSize="13.5" FontWeight="Bold" Foreground="#222426" Margin="0,0,0,8" />
+                                <TextBlock Text="{Binding AddressFormTitleText}" FontSize="13.5" FontWeight="Bold" Foreground="#222426" Margin="0,0,0,8" />
 
                                 <TextBlock Text="收货人姓名与称呼" FontSize="11" Foreground="#66686B" />
                                 <Grid Margin="0,3,0,6">
@@ -1694,7 +1705,7 @@
                                         Style="{StaticResource FlatActionBtnStyle}"
                                         Padding="14,8"
                                         FontSize="13"
-                                        Content="保存并使用该收货地址" />
+                                        Content="{Binding AddressFormSubmitText}" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -1897,7 +1908,7 @@
                             <Button Command="{Binding CloseCashierModalCommand}" Style="{StaticResource GhostPillBtnStyle}" HorizontalAlignment="Right" Content="✕" />
                         </Grid>
                         <StackPanel HorizontalAlignment="Center" Margin="0,10,0,10">
-                            <TextBlock Text="支付剩余时间 14:58" FontSize="11" Foreground="#66686B" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding CashierCountdownText}" FontSize="11" Foreground="#66686B" HorizontalAlignment="Center" />
                             <TextBlock Text="{Binding CashierFinalPayable, StringFormat='¥{0:0.00}'}" FontSize="28" FontWeight="Bold" Foreground="#222426" HorizontalAlignment="Center" Margin="0,2,0,0" />
                             <TextBlock Text="{Binding SelectedPoi.Name}" FontSize="11" Foreground="#999B9E" HorizontalAlignment="Center" />
                         </StackPanel>
@@ -2140,11 +2151,22 @@
                                 <Border Width="116" Height="116" Background="#222426" CornerRadius="12" HorizontalAlignment="Center">
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <TextBlock Text="🔳 📷 🔳" FontSize="22" Foreground="#FFD100" HorizontalAlignment="Center" />
-                                        <TextBlock Text="美团安全码" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" Margin="0,4" />
+                                        <TextBlock Text="{Binding QrCodeTokenText}" FontSize="9.5" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" Margin="0,4" />
                                         <TextBlock Text="🔳 🦘 🔳" FontSize="22" Foreground="#FFD100" HorizontalAlignment="Center" />
                                     </StackPanel>
                                 </Border>
-                                <TextBlock Text="请使用手机【美团 / 美团外卖 APP】扫码授权" FontSize="11.5" Foreground="#66686B" Margin="0,8,0,0" HorizontalAlignment="Center" />
+                                <TextBlock Text="{Binding QrCodeStatusText}" FontSize="11.5" Foreground="#66686B" Margin="0,8,0,8" HorizontalAlignment="Center" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Command="{Binding RefreshQrCodeCommand}"
+                                            Style="{StaticResource GhostPillBtnStyle}"
+                                            Margin="0,0,6,0"
+                                            Content="🔄 刷新二维码" />
+                                    <Button Command="{Binding SimulateQrScanConfirmCommand}"
+                                            Style="{StaticResource FlatActionBtnStyle}"
+                                            Padding="10,4"
+                                            FontSize="11"
+                                            Content="📲 模拟手机扫码确认" />
+                                </StackPanel>
                             </StackPanel>
                         </Border>
 

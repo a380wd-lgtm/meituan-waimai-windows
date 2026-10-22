@@ -222,6 +222,8 @@ namespace MeituanWaimaiClient.ViewModels
         private bool _hasSimulatedSmsBanner;
         private int _smsCountdownSeconds;
         private string _loginPasswordInput;
+        private string _qrCodeTokenText;
+        private string _qrCodeStatusText;
         private bool _isPrivacyAccepted;
         private bool _isPrivacyConfirmDialogOpen;
         private bool _pendingCheckoutAfterLogin;
@@ -250,6 +252,7 @@ namespace MeituanWaimaiClient.ViewModels
         private string _selectedTablewareOption;
         private bool _isPrivacyPhoneProtected;
         private bool _isCashierModalOpen;
+        private int _cashierRemainingSeconds;
         private CashierPaymentMethodContract _selectedPaymentMethod;
 
         // 神券兑换状态 (OBL-23)
@@ -264,8 +267,9 @@ namespace MeituanWaimaiClient.ViewModels
         private int _reviewRatingStars;
         private string _reviewCommentInput;
 
-        // 地址管理与新增表单状态 (OBL-32)
+        // 地址管理与新增/编辑表单状态 (OBL-32)
         private WmAddressContract _currentAddress;
+        private string _editingAddressId;
         private string _editAddressContactName;
         private string _editAddressGender;
         private string _editAddressPhone;
@@ -327,6 +331,8 @@ namespace MeituanWaimaiClient.ViewModels
             _hasSimulatedSmsBanner = false;
             _smsCountdownSeconds = 0;
             _loginPasswordInput = "mt884291";
+            _qrCodeTokenText = "MT-QR-91293-8842";
+            _qrCodeStatusText = "请使用手机【美团 / 美团外卖 APP】扫码授权";
             _isPrivacyAccepted = true;
             _isPrivacyConfirmDialogOpen = false;
             _pendingCheckoutAfterLogin = false;
@@ -346,6 +352,7 @@ namespace MeituanWaimaiClient.ViewModels
             _selectedTablewareOption = "无需餐具 (得16g绿色能量)";
             _isPrivacyPhoneProtected = true;
             _isCashierModalOpen = false;
+            _cashierRemainingSeconds = 900;
 
             _couponRedeemCodeInput = "MT888";
             _selectedOrderFilter = "全部";
@@ -354,6 +361,7 @@ namespace MeituanWaimaiClient.ViewModels
             _reviewRatingStars = 5;
             _reviewCommentInput = "味道超赞，分量很足，骑手送达也很准时！";
 
+            _editingAddressId = string.Empty;
             _editAddressContactName = "王先生";
             _editAddressGender = "先生";
             _editAddressPhone = "13688886666";
@@ -710,6 +718,34 @@ namespace MeituanWaimaiClient.ViewModels
                 {
                     _loginPasswordInput = next;
                     RaisePropertyChanged("LoginPasswordInput");
+                }
+            }
+        }
+
+        public string QrCodeTokenText
+        {
+            get { return _qrCodeTokenText; }
+            set
+            {
+                string next = value ?? string.Empty;
+                if (!string.Equals(_qrCodeTokenText, next, StringComparison.Ordinal))
+                {
+                    _qrCodeTokenText = next;
+                    RaisePropertyChanged("QrCodeTokenText");
+                }
+            }
+        }
+
+        public string QrCodeStatusText
+        {
+            get { return _qrCodeStatusText; }
+            set
+            {
+                string next = value ?? string.Empty;
+                if (!string.Equals(_qrCodeStatusText, next, StringComparison.Ordinal))
+                {
+                    _qrCodeStatusText = next;
+                    RaisePropertyChanged("QrCodeStatusText");
                 }
             }
         }
@@ -1319,10 +1355,36 @@ namespace MeituanWaimaiClient.ViewModels
                 if (_isCashierModalOpen != value)
                 {
                     _isCashierModalOpen = value;
+                    if (value)
+                    {
+                        _cashierRemainingSeconds = 900;
+                        RaisePropertyChanged("CashierCountdownText");
+                    }
                     RaisePropertyChanged("IsCashierModalOpen");
                     RaisePropertyChanged("CashierFinalPayable");
                 }
             }
+        }
+
+        public string CashierCountdownText
+        {
+            get
+            {
+                int sec = Math.Max(0, _cashierRemainingSeconds);
+                int mins = sec / 60;
+                int rem = sec % 60;
+                return string.Format("支付剩余时间 {0:00}:{1:00}", mins, rem);
+            }
+        }
+
+        public void AdvanceCashierCountdown(int deltaSeconds)
+        {
+            if (deltaSeconds <= 0)
+            {
+                return;
+            }
+            _cashierRemainingSeconds = Math.Max(0, _cashierRemainingSeconds - deltaSeconds);
+            RaisePropertyChanged("CashierCountdownText");
         }
 
         public CashierPaymentMethodContract SelectedPaymentMethod
@@ -1544,6 +1606,38 @@ namespace MeituanWaimaiClient.ViewModels
             set { _editAddressTag = value ?? "家"; RaisePropertyChanged("EditAddressTag"); }
         }
 
+        public string EditingAddressId
+        {
+            get { return _editingAddressId; }
+            set
+            {
+                string next = value ?? string.Empty;
+                if (!string.Equals(_editingAddressId, next, StringComparison.Ordinal))
+                {
+                    _editingAddressId = next;
+                    RaisePropertyChanged("EditingAddressId");
+                    RaisePropertyChanged("IsEditingExistingAddress");
+                    RaisePropertyChanged("AddressFormTitleText");
+                    RaisePropertyChanged("AddressFormSubmitText");
+                }
+            }
+        }
+
+        public bool IsEditingExistingAddress
+        {
+            get { return !string.IsNullOrEmpty(_editingAddressId); }
+        }
+
+        public string AddressFormTitleText
+        {
+            get { return IsEditingExistingAddress ? "✏️ 编辑收货地址" : "➕ 新增收货地址"; }
+        }
+
+        public string AddressFormSubmitText
+        {
+            get { return IsEditingExistingAddress ? "保存修改的收货地址" : "保存并使用该收货地址"; }
+        }
+
         public int UnreadNotificationCount
         {
             get
@@ -1652,6 +1746,8 @@ namespace MeituanWaimaiClient.ViewModels
         public ICommand SwitchLoginModeCommand { get; private set; }
         public ICommand SendSmsCodeCommand { get; private set; }
         public ICommand FillSimulatedSmsCodeCommand { get; private set; }
+        public ICommand RefreshQrCodeCommand { get; private set; }
+        public ICommand SimulateQrScanConfirmCommand { get; private set; }
         public ICommand TogglePrivacyAcceptedCommand { get; private set; }
         public ICommand SubmitLoginCommand { get; private set; }
         public ICommand ConfirmPrivacyAndLoginCommand { get; private set; }
@@ -1716,6 +1812,7 @@ namespace MeituanWaimaiClient.ViewModels
         // 地址管理、收藏夹、消息中心与系统命令 (OBL-31 ~ OBL-35)
         public ICommand CycleAddressCommand { get; private set; }
         public ICommand SelectAddressCommand { get; private set; }
+        public ICommand StartEditAddressCommand { get; private set; }
         public ICommand DeleteAddressCommand { get; private set; }
         public ICommand SetEditAddressGenderCommand { get; private set; }
         public ICommand SetEditAddressTagCommand { get; private set; }
@@ -1811,6 +1908,20 @@ namespace MeituanWaimaiClient.ViewModels
             {
                 LoginSmsCodeInput = _generatedSmsCode;
                 HasSimulatedSmsBanner = false;
+            });
+
+            RefreshQrCodeCommand = new RelayCommand(delegate
+            {
+                string suffix = Guid.NewGuid().ToString("N").Substring(0, 6).ToUpperInvariant();
+                QrCodeTokenText = "MT-QR-91293-" + suffix;
+                QrCodeStatusText = "安全二维码已刷新 (" + suffix + ")，请使用美团 APP 扫码";
+                StatusBannerText = "已刷新美团通行证扫码安全令牌：" + QrCodeTokenText;
+            });
+
+            SimulateQrScanConfirmCommand = new RelayCommand(delegate
+            {
+                QrCodeStatusText = "✅ 手机端已扫码并确认授权登录";
+                AttemptPassportLogin();
             });
 
             TogglePrivacyAcceptedCommand = new RelayCommand(delegate
@@ -2299,17 +2410,39 @@ namespace MeituanWaimaiClient.ViewModels
                     {
                         SelectedPoi = targetPoi;
                         ClearCurrentPoiCart();
-                        if (targetPoi.Foods != null && targetPoi.Foods.Count > 0)
+                        int addedCount = 0;
+                        if (order.FoodItems != null && order.FoodItems.Count > 0 && targetPoi.Foods != null)
+                        {
+                            for (int i = 0; i < order.FoodItems.Count; i++)
+                            {
+                                OrderFoodItemContract item = order.FoodItems[i];
+                                if (item == null)
+                                {
+                                    continue;
+                                }
+                                GoodsSpuContract matchedFood = targetPoi.Foods.FirstOrDefault(delegate(GoodsSpuContract f)
+                                {
+                                    return string.Equals(f.Name, item.FoodName, StringComparison.Ordinal);
+                                }) ?? targetPoi.Foods.FirstOrDefault();
+
+                                if (matchedFood != null)
+                                {
+                                    int copies = Math.Max(1, item.Count);
+                                    for (int c = 0; c < copies; c++)
+                                    {
+                                        AddFoodToCartInternal(matchedFood, null, null);
+                                        addedCount++;
+                                    }
+                                }
+                            }
+                        }
+                        if (addedCount == 0 && targetPoi.Foods != null && targetPoi.Foods.Count > 0)
                         {
                             AddFoodToCartInternal(targetPoi.Foods[0], null, null);
-                            if (targetPoi.Foods.Count > 1)
-                            {
-                                AddFoodToCartInternal(targetPoi.Foods[1], null, null);
-                            }
                         }
                         ActiveFullScreenPage = "PoiDetail";
                         SelectedPoiSubTab = "点菜";
-                        StatusBannerText = string.Format("已为您将「{0}」历史常点餐品重新加入购物车！", targetPoi.Name);
+                        StatusBannerText = string.Format("已为您将订单「{0}」中的原选餐品 ({1}件) 重新加入购物车！", targetPoi.Name, _cartPrice != null ? _cartPrice.TotalItemCount : addedCount);
                     }
                 }
             });
@@ -2323,20 +2456,39 @@ namespace MeituanWaimaiClient.ViewModels
                     order.StatusDescription = "已取消 (退款已原路退回)";
                     order.ArrivalTimeText = "退款 ¥" + order.Total.ToString("0.00") + " 已原路退回至原支付账户";
                     order.CanRefund = false;
+
+                    // 若该订单核销了神券，退款时原路退回神券包
+                    if (!string.IsNullOrEmpty(order.UsedCouponId))
+                    {
+                        ShenQuanCouponContract usedCoupon = _coupons.FirstOrDefault(delegate(ShenQuanCouponContract c)
+                        {
+                            return string.Equals(c.CouponId, order.UsedCouponId, StringComparison.Ordinal);
+                        });
+                        if (usedCoupon != null)
+                        {
+                            usedCoupon.IsUsed = false;
+                            SelectedCoupon = usedCoupon;
+                            RaisePropertyChanged("Coupons");
+                            RaisePropertyChanged("SelectedCouponSummary");
+                            SyncMineProfileWithCurrentUser();
+                            RecalculateCartPrice();
+                        }
+                    }
+
                     if (order.TrackingSteps != null)
                     {
                         order.TrackingSteps.Add(new RiderTrackingStepContract
                         {
                             TimeText = DateTime.Now.ToString("HH:mm"),
                             Title = "订单已取消 · 极速退款成功",
-                            Subtitle = "实付金额已原路退回",
+                            Subtitle = "实付金额与已用神券已原路退回",
                             IsCompleted = true,
                             IsCurrent = true
                         });
                     }
                     RefreshFilteredOrders();
                     RaisePropertyChanged("SelectedOrder");
-                    StatusBannerText = string.Format("订单「{0}」已取消，实付 ¥{1:0.00} 已极速原路退回", order.PoiName, order.Total);
+                    StatusBannerText = string.Format("订单「{0}」已取消，实付 ¥{1:0.00} 及优惠券已原路退回", order.PoiName, order.Total);
                     SaveStateSnapshotFireAndForget();
                 }
             });
@@ -2411,12 +2563,32 @@ namespace MeituanWaimaiClient.ViewModels
                 }
             });
 
+            StartEditAddressCommand = new RelayCommand(delegate(object param)
+            {
+                WmAddressContract addr = (param as WmAddressContract) ?? _currentAddress;
+                if (addr != null)
+                {
+                    EditingAddressId = addr.AddressId;
+                    EditAddressContactName = addr.ContactName;
+                    EditAddressGender = addr.GenderText ?? "先生";
+                    EditAddressPhone = addr.Phone;
+                    EditAddressDetail = addr.AddressDetail;
+                    EditAddressHouseNumber = addr.HouseNumber;
+                    EditAddressTag = addr.TagLabel ?? "家";
+                    StatusBannerText = "正在编辑收货地址：" + addr.AddressDetail;
+                }
+            });
+
             DeleteAddressCommand = new RelayCommand(delegate(object param)
             {
                 WmAddressContract addr = param as WmAddressContract;
                 if (addr != null && _addresses.Count > 1)
                 {
                     _addresses.Remove(addr);
+                    if (string.Equals(_editingAddressId, addr.AddressId, StringComparison.Ordinal))
+                    {
+                        EditingAddressId = string.Empty;
+                    }
                     if (ReferenceEquals(_currentAddress, addr))
                     {
                         CurrentAddress = _addresses[0];
@@ -2459,6 +2631,43 @@ namespace MeituanWaimaiClient.ViewModels
                 {
                     phone = "138****8888";
                 }
+
+                if (!string.IsNullOrEmpty(_editingAddressId))
+                {
+                    int existingIdx = -1;
+                    for (int i = 0; i < _addresses.Count; i++)
+                    {
+                        if (string.Equals(_addresses[i].AddressId, _editingAddressId, StringComparison.Ordinal))
+                        {
+                            existingIdx = i;
+                            break;
+                        }
+                    }
+
+                    if (existingIdx >= 0)
+                    {
+                        WmAddressContract updated = new WmAddressContract
+                        {
+                            AddressId = _addresses[existingIdx].AddressId,
+                            ContactName = name,
+                            GenderText = _editAddressGender ?? "先生",
+                            Phone = PassportUserContract.MaskMobile(phone),
+                            AddressDetail = detail,
+                            HouseNumber = string.IsNullOrEmpty(house) ? "1单元101室" : house,
+                            TagLabel = _editAddressTag ?? "家",
+                            IsDefault = true,
+                            Latitude = _addresses[existingIdx].Latitude,
+                            Longitude = _addresses[existingIdx].Longitude
+                        };
+                        _addresses[existingIdx] = updated;
+                        CurrentAddress = updated;
+                        EditingAddressId = string.Empty;
+                        StatusBannerText = string.Format("已保存修改后的收货地址：{0} {1} ({2})", updated.AddressDetail, updated.HouseNumber, updated.ContactName);
+                        SaveStateSnapshotFireAndForget();
+                        return;
+                    }
+                }
+
                 WmAddressContract newAddr = new WmAddressContract
                 {
                     AddressId = "addr-" + Guid.NewGuid().ToString("N").Substring(0, 8),
@@ -2474,6 +2683,7 @@ namespace MeituanWaimaiClient.ViewModels
                 };
                 _addresses.Insert(0, newAddr);
                 CurrentAddress = newAddr;
+                EditingAddressId = string.Empty;
                 StatusBannerText = string.Format("已新增并启用收货地址：{0} {1} ({2})", newAddr.AddressDetail, newAddr.HouseNumber, newAddr.ContactName);
                 SaveStateSnapshotFireAndForget();
             });
@@ -2663,10 +2873,37 @@ namespace MeituanWaimaiClient.ViewModels
                 LoginPhoneInput = rawPhone;
             }
 
-            if (IsSmsLoginMode && string.IsNullOrWhiteSpace(_loginSmsCodeInput))
+            if (IsSmsLoginMode)
             {
-                // 若用户尚未点获取验证码直接点登录，自动发送并填入验证码完成丝滑登录
-                SendSmsCodeCommand.Execute(null);
+                string smsInput = (_loginSmsCodeInput ?? string.Empty).Trim();
+                if (string.IsNullOrEmpty(smsInput))
+                {
+                    StatusBannerText = "❌ 请先点击『获取验证码』并输入 6 位短信验证码";
+                    return;
+                }
+                if (!string.Equals(smsInput, _generatedSmsCode, StringComparison.Ordinal))
+                {
+                    StatusBannerText = "❌ 短信验证码不匹配，请核对美团短信通知中的 6 位数字 (" + _generatedSmsCode + ")";
+                    return;
+                }
+            }
+            else if (IsPasswordLoginMode)
+            {
+                string pwdInput = (_loginPasswordInput ?? string.Empty).Trim();
+                if (pwdInput.Length < 6 ||
+                    (!string.Equals(pwdInput, "mt884291", StringComparison.Ordinal) &&
+                     !string.Equals(pwdInput, "123456", StringComparison.Ordinal)))
+                {
+                    StatusBannerText = "❌ 账号或密码错误，请重新输入（默认密码：mt884291）";
+                    return;
+                }
+            }
+            else if (IsQrCodeLoginMode)
+            {
+                if (string.IsNullOrEmpty(_qrCodeTokenText))
+                {
+                    RefreshQrCodeCommand.Execute(null);
+                }
             }
 
             PassportUserContract matchedPreset = _presetUsers.FirstOrDefault(delegate(PassportUserContract u)
@@ -3352,6 +3589,13 @@ namespace MeituanWaimaiClient.ViewModels
             string payMethodTitle = _selectedPaymentMethod != null ? _selectedPaymentMethod.Title : "美团月付";
             double payable = CashierFinalPayable;
 
+            string consumedCouponId = null;
+            if (_cartPrice.AppliedCouponAmount > 0 && _selectedCoupon != null && !_selectedCoupon.IsUsed)
+            {
+                consumedCouponId = _selectedCoupon.CouponId;
+                _selectedCoupon.IsUsed = true;
+            }
+
             OrderContract newOrder = new OrderContract
             {
                 OrderId = newOrderId,
@@ -3388,6 +3632,7 @@ namespace MeituanWaimaiClient.ViewModels
                 ProductCount = totalProducts,
                 IsComment = false,
                 CanRefund = true,
+                UsedCouponId = consumedCouponId,
                 FoodItems = orderFoods,
                 TrackingSteps = new List<RiderTrackingStepContract>
                 {
@@ -3427,6 +3672,14 @@ namespace MeituanWaimaiClient.ViewModels
 
             IsCashierModalOpen = false;
             IsCartDrawerOpen = false;
+            if (!string.IsNullOrEmpty(consumedCouponId))
+            {
+                ShenQuanCouponContract nextUsable = _coupons.FirstOrDefault(delegate(ShenQuanCouponContract c) { return !c.IsUsed; });
+                SelectedCoupon = nextUsable;
+                RaisePropertyChanged("Coupons");
+                RaisePropertyChanged("SelectedCouponSummary");
+                SyncMineProfileWithCurrentUser();
+            }
             SyncFoodSelectedCounts();
             RecalculateCartPrice();
 
@@ -3661,6 +3914,11 @@ namespace MeituanWaimaiClient.ViewModels
             {
                 _smsCountdownSeconds = Math.Max(0, _smsCountdownSeconds - 2);
                 RaisePropertyChanged("SmsSendButtonText");
+            }
+
+            if (_isCashierModalOpen && _cashierRemainingSeconds > 0)
+            {
+                AdvanceCashierCountdown(2);
             }
 
             if (_selectedOrder == null || (_selectedOrder.Status != 4 && _selectedOrder.Status != 30))
