@@ -27,20 +27,157 @@ namespace MeituanWaimai.Core
         public const string GoodsSpuEvidenceId = "ev_dfec8e80b5dfb1a1a0ea6f595797ce868c8c35022b6523fb0551f0ab56150f0d";
         public const string ShopCartPriceEvidenceId = "ev_1dbf43e51054328202990f59c919bfc49db842e928dee0b1bc56572a1bb0941f";
         public const string OrderListResponseEvidenceId = "ev_85cbd0da4f81234469001e25c484a966098bd41bafe88fa5e8d9f76304cb4668";
+        public const string PassportEvidenceId = "ev_6fff21e9e8dea7fc1040a9162dc0b7d60c0b13e76a014e29055c25c5c3c154a5";
+        public const string PassportUserEvidenceId = "ev_38d81080c56670500535543d828fcedd65aeaf8ffb0bd75e812230aa5146d6de";
+        public const string OrderConfirmEvidenceId = "ev_b65f6857888d614189f0348b8d6684aab37fc38a6174353441ad599ce4ade47a";
+        public const string CashierEvidenceId = "ev_c1a89ccc72a297a053b3cabb246a645659e3fcaa19db579354494bad11246ff4";
+        public const string AddressBeanEvidenceId = "ev_f943daf0fc1323f890c709cc157286df40aa7f945814090371dc18b00e3b6c60";
     }
 
-    public class DynamicTabContract
+    public class PassportUserContract
     {
+        public long Id { get; set; }
+        public string Username { get; set; }
+        public string Nickname { get; set; }
+        public string Mobile { get; set; }
+        public string MobileMasked { get; set; }
+        public string Token { get; set; }
+        public string Ticket { get; set; }
+        public string LoginAuthTicket { get; set; }
+        public string Avatarurl { get; set; }
+        public string AvatarEmoji { get; set; }
+        public string VipBadgeText { get; set; }
+        public int Growthlevel { get; set; }
+        public int Growthvalue { get; set; }
+        public int Pointvalue { get; set; }
+        public double SaveAmount { get; set; }
+        public double RedPacketBalance { get; set; }
+        public int Haspassword { get; set; }
+        public bool IsLoggedIn { get; set; }
+
+        public static string MaskMobile(string rawMobile)
+        {
+            string digits = (rawMobile ?? string.Empty).Trim();
+            if (digits.Length >= 11)
+            {
+                return digits.Substring(0, 3) + "****" + digits.Substring(digits.Length - 4);
+            }
+            if (digits.Length >= 7)
+            {
+                return digits.Substring(0, 3) + "****" + digits.Substring(digits.Length - 2);
+            }
+            return "138****0001";
+        }
+    }
+
+    public class PoiReviewItemContract
+    {
+        public string ReviewId { get; set; }
+        public long PoiId { get; set; }
+        public string UserName { get; set; }
+        public string AvatarEmoji { get; set; }
+        public string VipLevelText { get; set; }
+        public string TimeText { get; set; }
+        public double Score { get; set; }
+        public string StarText { get; set; }
+        public string DeliveryTimeTip { get; set; }
+        public string OrderedDishesText { get; set; }
+        public string Content { get; set; }
+        public string MerchantReply { get; set; }
+        public bool HasPictures { get; set; }
+        public string PictureBadgeText { get; set; }
+    }
+
+    public class PoiMerchantArchiveContract
+    {
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string BusinessHours { get; set; }
+        public string DeliveryServiceText { get; set; }
+        public string LicenseNumber { get; set; }
+        public string FoodSafetyGrade { get; set; }
+        public string KitchenInspectionText { get; set; }
+        public List<string> ServiceGuarantees { get; set; }
+
+        public PoiMerchantArchiveContract()
+        {
+            ServiceGuarantees = new List<string>();
+        }
+    }
+
+    public class CashierPaymentMethodContract
+    {
+        public string MethodId { get; set; }
+        public string Title { get; set; }
+        public string Subtitle { get; set; }
+        public string RecommendTag { get; set; }
+        public string IconEmoji { get; set; }
+        public string AccentHex { get; set; }
+        public double InstantDiscount { get; set; }
+        public bool IsSelected { get; set; }
+    }
+
+    public class NotificationMessageContract
+    {
+        public string MessageId { get; set; }
+        public string Category { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string TimeText { get; set; }
+        public string IconEmoji { get; set; }
+        public bool IsUnread { get; set; }
+    }
+
+    public class DynamicTabContract : INotifyPropertyChanged
+    {
+        private int unreadBadgeCount;
+        private bool isSelected;
+
         public int TabIndex { get; set; }
         public int BusinessId { get; set; }
-        public int UnreadBadgeCount { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
         public string FragmentClassName { get; set; }
         public string IconGlyph { get; set; }
         public string BubbleTagText { get; set; }
-        public bool IsSelected { get; set; }
         public bool IsProminentArcTab { get; set; }
+
+        public int UnreadBadgeCount
+        {
+            get { return unreadBadgeCount; }
+            set
+            {
+                if (unreadBadgeCount != value)
+                {
+                    unreadBadgeCount = value;
+                    RaisePropertyChanged("UnreadBadgeCount");
+                }
+            }
+        }
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                if (isSelected != value)
+                {
+                    isSelected = value;
+                    RaisePropertyChanged("IsSelected");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 
     public class KingKongChannelContract
@@ -185,6 +322,9 @@ namespace MeituanWaimai.Core
         public int State { get; set; }
         public bool IsBrandGold { get; set; }
         public bool SupportsShenQuan { get; set; }
+        public bool IsFavorite { get; set; }
+        public PoiMerchantArchiveContract MerchantArchive { get; set; }
+        public List<PoiReviewItemContract> Reviews { get; set; }
         public List<PoiActivityTagContract> ActivityTags { get; set; }
         public List<PoiCouponContract> Coupons { get; set; }
         public List<FullReductionTier> FullReductionRules { get; set; }
@@ -193,6 +333,8 @@ namespace MeituanWaimai.Core
 
         public PoiContract()
         {
+            MerchantArchive = new PoiMerchantArchiveContract();
+            Reviews = new List<PoiReviewItemContract>();
             ActivityTags = new List<PoiActivityTagContract>();
             Coupons = new List<PoiCouponContract>();
             FullReductionRules = new List<FullReductionTier>();
@@ -397,6 +539,9 @@ namespace MeituanWaimai.Core
         public string SavedAtUtc { get; set; }
         public string CurrentAddressId { get; set; }
         public bool IsEasyGoDualPane { get; set; }
+        public PassportUserContract CurrentUser { get; set; }
+        public List<long> FavoritePoiIds { get; set; }
+        public List<NotificationMessageContract> Notifications { get; set; }
         public List<ShopCartItemContract> CartItems { get; set; }
         public List<OrderContract> Orders { get; set; }
         public List<ShenQuanCouponContract> Coupons { get; set; }
@@ -404,6 +549,8 @@ namespace MeituanWaimai.Core
 
         public WaimaiPersistedSnapshot()
         {
+            FavoritePoiIds = new List<long>();
+            Notifications = new List<NotificationMessageContract>();
             CartItems = new List<ShopCartItemContract>();
             Orders = new List<OrderContract>();
             Coupons = new List<ShenQuanCouponContract>();
@@ -1248,6 +1395,189 @@ namespace MeituanWaimai.Core
             };
         }
 
+        public static PassportUserContract CreateDefaultPassportUser()
+        {
+            return new PassportUserContract
+            {
+                Id = 884201001L,
+                Username = "mt_waimai_8842",
+                Nickname = "认真吃饭的林同学",
+                Mobile = "13800130001",
+                MobileMasked = "138****0001",
+                Token = "MT_PASSPORT_TK_8842_91293_AUTH",
+                Ticket = "ST-91293-MEITUAN-PASSPORT",
+                LoginAuthTicket = "LAT-8842-V8",
+                AvatarEmoji = "🦘",
+                VipBadgeText = "黑金神券会员 · Lv.5",
+                Growthlevel = 5,
+                Growthvalue = 3680,
+                Pointvalue = 1280,
+                SaveAmount = 86.5,
+                RedPacketBalance = 18.8,
+                Haspassword = 1,
+                IsLoggedIn = true
+            };
+        }
+
+        public static List<PassportUserContract> CreatePresetPassportUsers()
+        {
+            return new List<PassportUserContract>
+            {
+                CreateDefaultPassportUser(),
+                new PassportUserContract
+                {
+                    Id = 884201002L,
+                    Username = "mt_vip_chen",
+                    Nickname = "南山干饭王·陈女士",
+                    Mobile = "13900130002",
+                    MobileMasked = "139****0002",
+                    Token = "MT_PASSPORT_TK_8842_91293_VIP2",
+                    Ticket = "ST-91293-MEITUAN-VIP2",
+                    LoginAuthTicket = "LAT-8842-VIP2",
+                    AvatarEmoji = "🧋",
+                    VipBadgeText = "尊享神券卡 · Lv.6",
+                    Growthlevel = 6,
+                    Growthvalue = 6420,
+                    Pointvalue = 2890,
+                    SaveAmount = 216.0,
+                    RedPacketBalance = 36.5,
+                    Haspassword = 1,
+                    IsLoggedIn = true
+                },
+                new PassportUserContract
+                {
+                    Id = 884201003L,
+                    Username = "mt_newbie_zhang",
+                    Nickname = "科兴夜宵达人·小张",
+                    Mobile = "18600180003",
+                    MobileMasked = "186****0003",
+                    Token = "MT_PASSPORT_TK_8842_91293_NEW3",
+                    Ticket = "ST-91293-MEITUAN-NEW3",
+                    LoginAuthTicket = "LAT-8842-NEW3",
+                    AvatarEmoji = "🍔",
+                    VipBadgeText = "新晋吃货 · Lv.2",
+                    Growthlevel = 2,
+                    Growthvalue = 480,
+                    Pointvalue = 320,
+                    SaveAmount = 29.0,
+                    RedPacketBalance = 12.0,
+                    Haspassword = 1,
+                    IsLoggedIn = true
+                }
+            };
+        }
+
+        public static List<CashierPaymentMethodContract> CreateDefaultPaymentMethods()
+        {
+            return new List<CashierPaymentMethodContract>
+            {
+                new CashierPaymentMethodContract
+                {
+                    MethodId = "mt_month_pay",
+                    Title = "美团月付",
+                    Subtitle = "先享后付 · 本单专享随机立减 ¥2.00",
+                    RecommendTag = "推荐 · 立减¥2",
+                    IconEmoji = "💛",
+                    AccentHex = "#FF6B00",
+                    InstantDiscount = 2.0,
+                    IsSelected = true
+                },
+                new CashierPaymentMethodContract
+                {
+                    MethodId = "wechat_pay",
+                    Title = "微信支付",
+                    Subtitle = "推荐已安装微信客户端的用户使用",
+                    RecommendTag = "常用",
+                    IconEmoji = "💚",
+                    AccentHex = "#07C160",
+                    InstantDiscount = 0.0,
+                    IsSelected = false
+                },
+                new CashierPaymentMethodContract
+                {
+                    MethodId = "alipay",
+                    Title = "支付宝",
+                    Subtitle = "支持花呗分期与余额宝极速支付",
+                    RecommendTag = "",
+                    IconEmoji = "💙",
+                    AccentHex = "#1677FF",
+                    InstantDiscount = 0.0,
+                    IsSelected = false
+                },
+                new CashierPaymentMethodContract
+                {
+                    MethodId = "mt_bank_card",
+                    Title = "美团联名储蓄卡 (尾号8842)",
+                    Subtitle = "美团极速付 · 笔笔返团币",
+                    RecommendTag = "返团币",
+                    IconEmoji = "💳",
+                    AccentHex = "#8A5A2B",
+                    InstantDiscount = 0.0,
+                    IsSelected = false
+                }
+            };
+        }
+
+        public static List<NotificationMessageContract> CreateDefaultNotifications()
+        {
+            return new List<NotificationMessageContract>
+            {
+                new NotificationMessageContract
+                {
+                    MessageId = "msg-001",
+                    Category = "订单动态",
+                    Title = "骑手小周正在为您火速配送中",
+                    Content = "您在「巷口小馆·家常菜（科技园店）」购买的招牌黄焖鸡米饭距您仅剩 450m，请留意电话。",
+                    TimeText = "刚刚",
+                    IconEmoji = "🛵",
+                    IsUnread = true
+                },
+                new NotificationMessageContract
+                {
+                    MessageId = "msg-002",
+                    Category = "神券福利",
+                    Title = "恭喜！您的会员通用神券已膨胀至 ¥10",
+                    Content = "今日神券膨胀特权已生效，下单满 ¥25 即可直接立减 ¥10，有效期至今日 23:59。",
+                    TimeText = "10分钟前",
+                    IconEmoji = "🧧",
+                    IsUnread = true
+                },
+                new NotificationMessageContract
+                {
+                    MessageId = "msg-003",
+                    Category = "商家互动",
+                    Title = "「茶间里·手作果茶」回复了您的五星好评",
+                    Content = "商家回复：感谢林同学的喜爱！我们的香水柠檬每天清晨鲜切手打，欢迎常来品尝~",
+                    TimeText = "昨天 19:15",
+                    IconEmoji = "💬",
+                    IsUnread = false
+                },
+                new NotificationMessageContract
+                {
+                    MessageId = "msg-004",
+                    Category = "会员中心",
+                    Title = "10月美团外卖省钱月报已生成",
+                    Content = "本月您已通过神券省钱卡累计节省 ¥86.50，击败了南山区 92% 的干饭人！",
+                    TimeText = "10-20",
+                    IconEmoji = "👑",
+                    IsUnread = false
+                }
+            };
+        }
+
+        public static List<string> CreateHotSearchKeywords()
+        {
+            return new List<string>
+            {
+                "黄焖鸡",
+                "牛肉粿条",
+                "果茶",
+                "冒菜",
+                "轻食沙拉",
+                "现烤汉堡"
+            };
+        }
+
         public static List<OrderContract> CreateDefaultOrders()
         {
             List<PoiContract> pois = CreateDefaultPois();
@@ -1320,6 +1650,92 @@ namespace MeituanWaimai.Core
             poi.ActivityTags.Add(new PoiActivityTagContract { TagText = "神券可膨胀", BorderHex = "#F2D58C", TextHex = "#A87020", BgHex = "#FFF8DE" });
             poi.Coupons.Add(new PoiCouponContract { CouponId = "demo-poi-" + id + "-5", Title = "收藏店铺满35减5", Amount = 5, Threshold = 35, IsClaimed = false });
             poi.Coupons.Add(new PoiCouponContract { CouponId = "demo-poi-" + id + "-8", Title = "老友回购满60减8", Amount = 8, Threshold = 60, IsClaimed = true });
+            poi.IsFavorite = (id == 1001 || id == 1005);
+            poi.MerchantArchive = new PoiMerchantArchiveContract
+            {
+                Address = "深圳市南山区粤海街道科技园南区高新南四道 " + (id - 980) + " 号一层铺",
+                Phone = "0755-86" + (id * 7 % 1000000).ToString("000000"),
+                BusinessHours = "周一至周日 09:30 - 23:30 (支持夜宵)",
+                DeliveryServiceText = "由 美团专送 提供高品质准时配送服务 · 准时宝保障",
+                LicenseNumber = "JY24403050" + id + "8821",
+                FoodSafetyGrade = "A级 · 餐饮服务食品安全笑脸公示",
+                KitchenInspectionText = "已接入「美团明厨亮灶」后厨实时阳光公示 · 食安险承保中",
+                ServiceGuarantees = new List<string>
+                {
+                    "食安封签 · 外卖专享双层防拆封条",
+                    "放心吃 · 品质问题极速理赔",
+                    "准时宝 · 超时10分钟起自动赔付",
+                    "支持开发票 · 满50元可开具电子发票"
+                }
+            };
+            poi.Reviews.Add(new PoiReviewItemContract
+            {
+                ReviewId = "rev-" + id + "-01",
+                PoiId = id,
+                UserName = "干饭人小林",
+                AvatarEmoji = "🦘",
+                VipLevelText = "黑金会员 Lv.5",
+                TimeText = "今天 12:42",
+                Score = 5.0,
+                StarText = "★★★★★ 5.0 超赞",
+                DeliveryTimeTip = minutes + "分钟送达",
+                OrderedDishesText = "招牌必点套餐 · 标准份",
+                Content = "在「" + name + "」点过好几次了，食材特别新鲜，分量很足，打包盒严实完全没有撒漏，美团专送骑手态度超好！",
+                MerchantReply = "商家回复：感谢老顾客的五星认可！我们会继续坚持现点现做，祝您用餐愉快，天天开心~",
+                HasPictures = true,
+                PictureBadgeText = "📸 晒图×3 · 菜品实拍"
+            });
+            poi.Reviews.Add(new PoiReviewItemContract
+            {
+                ReviewId = "rev-" + id + "-02",
+                PoiId = id,
+                UserName = "南山程序员阿杰",
+                AvatarEmoji = "🧑‍💻",
+                VipLevelText = "神券卡会员",
+                TimeText = "昨天 19:18",
+                Score = 4.9,
+                StarText = "★★★★★ 4.9 推荐",
+                DeliveryTimeTip = (minutes - 3) + "分钟送达",
+                OrderedDishesText = "人气双拼套餐",
+                Content = "味道很正宗，用美团膨胀神券抵扣了10块钱，性价比无敌！中午工作餐首选这家。",
+                MerchantReply = "商家回复：谢谢阿杰支持！用神券下单确实超划算，欢迎常来点餐！",
+                HasPictures = true,
+                PictureBadgeText = "📸 晒图×2 · 包装完好"
+            });
+            poi.Reviews.Add(new PoiReviewItemContract
+            {
+                ReviewId = "rev-" + id + "-03",
+                PoiId = id,
+                UserName = "爱吃美食的喵",
+                AvatarEmoji = "🐱",
+                VipLevelText = "尊享吃货 Lv.4",
+                TimeText = "2026-10-20",
+                Score = 4.5,
+                StarText = "★★★★☆ 4.5 满意",
+                DeliveryTimeTip = (minutes + 2) + "分钟送达",
+                OrderedDishesText = "主厨特色推荐",
+                Content = "口味一如既往地稳定，按备注做了少辣，很贴心，还送了餐巾纸。",
+                MerchantReply = "商家回复：您的满意是我们最大的动力，备注需求店员都会仔细核对的~",
+                HasPictures = false,
+                PictureBadgeText = ""
+            });
+            poi.Reviews.Add(new PoiReviewItemContract
+            {
+                ReviewId = "rev-" + id + "-04",
+                PoiId = id,
+                UserName = "匿名用户",
+                AvatarEmoji = "🙂",
+                VipLevelText = "普通会员",
+                TimeText = "2026-10-18",
+                Score = 3.5,
+                StarText = "★★★☆☆ 3.5 一般",
+                DeliveryTimeTip = (minutes + 8) + "分钟送达",
+                OrderedDishesText = "单人简餐",
+                Content = "饭点高峰期稍微等了一会儿，不过送来还是热乎的，味道还可以。",
+                MerchantReply = "商家回复：非常抱歉午高峰让您久等了，我们已增加后厨出餐人手，下次一定更快送达！",
+                HasPictures = false,
+                PictureBadgeText = ""
+            });
             return poi;
         }
 
@@ -1923,6 +2339,29 @@ namespace MeituanWaimai.Core
                     Expect(poi.Foods.Any(delegate(GoodsSpuContract food) { return food.Id == deal.TargetSpuId; }) && deal.PoiName == poi.Name, "秒杀门店、名称或商品ID不一致。");
                     Expect(deal.FlashPrice > 0 && deal.OriginPrice >= deal.FlashPrice && deal.SoldPercent >= 0 && deal.SoldPercent <= 100, "秒杀价格或已售比例无效。");
                 }
+            });
+            Run(results, "PASS-01", "通行证契约", "美团通行证 User 契约字段与手机号脱敏", "验证 com.meituan.passport.pojo.User 核心字段及 MaskMobile 脱敏算法。", delegate
+            {
+                PassportUserContract user = WaimaiSeedDataFactory.CreateDefaultPassportUser();
+                List<PassportUserContract> presets = WaimaiSeedDataFactory.CreatePresetPassportUsers();
+                Expect(user.IsLoggedIn && user.Id > 0 && !string.IsNullOrEmpty(user.Token) && !string.IsNullOrEmpty(user.Ticket), "默认通行证用户令牌或登录状态无效。");
+                EqualText("138****0001", PassportUserContract.MaskMobile("13800130001"), "11位手机号脱敏");
+                Expect(presets.Count >= 3 && presets.Select(delegate(PassportUserContract u) { return u.Id; }).Distinct().Count() == presets.Count, "预设快捷登录账号数量或唯一ID无效。");
+            });
+            Run(results, "POI-01", "门店详情契约", "门店评价列表与食品安全商家档案", "验证每家门店包含至少4条真实评论、商家回复及A级食安档案。", delegate
+            {
+                List<PoiContract> pois = WaimaiSeedDataFactory.CreateDefaultPois();
+                foreach (PoiContract poi in pois)
+                {
+                    Expect(poi.MerchantArchive != null && !string.IsNullOrEmpty(poi.MerchantArchive.Address) && !string.IsNullOrEmpty(poi.MerchantArchive.LicenseNumber), "门店商家档案或执照编号缺失。");
+                    Expect(poi.Reviews != null && poi.Reviews.Count >= 4 && poi.Reviews.Any(delegate(PoiReviewItemContract r) { return r.HasPictures; }), "门店评价数量不足或缺少带图评价。");
+                }
+            });
+            Run(results, "CASH-01", "收银台契约", "美团收银台支付渠道与月付随机立减", "验证 MTCashierActivity 四大支付方式及美团月付立减金额。", delegate
+            {
+                List<CashierPaymentMethodContract> methods = WaimaiSeedDataFactory.CreateDefaultPaymentMethods();
+                Expect(methods.Count >= 4 && methods.Count(delegate(CashierPaymentMethodContract m) { return m.IsSelected; }) == 1, "收银台支付方式数量或默认选中状态错误。");
+                Expect(methods[0].InstantDiscount > 0, "美团月付应包含随机立减优惠金额。");
             });
         }
 
