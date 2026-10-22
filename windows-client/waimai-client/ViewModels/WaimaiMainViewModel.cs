@@ -224,6 +224,7 @@ namespace MeituanWaimaiClient.ViewModels
         private string _loginPasswordInput;
         private string _qrCodeTokenText;
         private string _qrCodeStatusText;
+        private bool _isQrScanConfirmed;
         private bool _isPrivacyAccepted;
         private bool _isPrivacyConfirmDialogOpen;
         private bool _pendingCheckoutAfterLogin;
@@ -624,10 +625,25 @@ namespace MeituanWaimaiClient.ViewModels
                 if (!string.Equals(_loginMode, next, StringComparison.Ordinal))
                 {
                     _loginMode = next;
+                    _isQrScanConfirmed = false;
                     RaisePropertyChanged("LoginMode");
                     RaisePropertyChanged("IsSmsLoginMode");
                     RaisePropertyChanged("IsPasswordLoginMode");
                     RaisePropertyChanged("IsQrCodeLoginMode");
+                    RaisePropertyChanged("IsQrScanConfirmed");
+                }
+            }
+        }
+
+        public bool IsQrScanConfirmed
+        {
+            get { return _isQrScanConfirmed; }
+            set
+            {
+                if (_isQrScanConfirmed != value)
+                {
+                    _isQrScanConfirmed = value;
+                    RaisePropertyChanged("IsQrScanConfirmed");
                 }
             }
         }
@@ -1913,6 +1929,7 @@ namespace MeituanWaimaiClient.ViewModels
             RefreshQrCodeCommand = new RelayCommand(delegate
             {
                 string suffix = Guid.NewGuid().ToString("N").Substring(0, 6).ToUpperInvariant();
+                IsQrScanConfirmed = false;
                 QrCodeTokenText = "MT-QR-91293-" + suffix;
                 QrCodeStatusText = "安全二维码已刷新 (" + suffix + ")，请使用美团 APP 扫码";
                 StatusBannerText = "已刷新美团通行证扫码安全令牌：" + QrCodeTokenText;
@@ -1920,6 +1937,7 @@ namespace MeituanWaimaiClient.ViewModels
 
             SimulateQrScanConfirmCommand = new RelayCommand(delegate
             {
+                IsQrScanConfirmed = true;
                 QrCodeStatusText = "✅ 手机端已扫码并确认授权登录";
                 AttemptPassportLogin();
             });
@@ -2405,44 +2423,99 @@ namespace MeituanWaimaiClient.ViewModels
                 OrderContract order = (param as OrderContract) ?? _selectedOrder;
                 if (order != null)
                 {
-                    PoiContract targetPoi = _allPois.FirstOrDefault(delegate(PoiContract p) { return p.Id == order.PoiId; }) ?? _allPois.FirstOrDefault();
+                    PoiContract targetPoi = _allPois.FirstOrDefault(delegate(PoiContract p) { return p.Id == order.PoiId; });
                     if (targetPoi != null)
                     {
                         SelectedPoi = targetPoi;
                         ClearCurrentPoiCart();
                         int addedCount = 0;
+                        int savedPocket = _selectedPocketId;
                         if (order.FoodItems != null && order.FoodItems.Count > 0 && targetPoi.Foods != null)
                         {
                             for (int i = 0; i < order.FoodItems.Count; i++)
                             {
                                 OrderFoodItemContract item = order.FoodItems[i];
-                                if (item == null)
+                                if (item == null || item.Count <= 0)
                                 {
                                     continue;
                                 }
                                 GoodsSpuContract matchedFood = targetPoi.Foods.FirstOrDefault(delegate(GoodsSpuContract f)
                                 {
-                                    return string.Equals(f.Name, item.FoodName, StringComparison.Ordinal);
-                                }) ?? targetPoi.Foods.FirstOrDefault();
+                                    return (item.SpuId > 0 && f.Id == item.SpuId) ||
+                                           string.Equals(f.Name, item.FoodName, StringComparison.Ordinal);
+                                });
 
-                                if (matchedFood != null)
+                                if (matchedFood == null)
                                 {
-                                    int copies = Math.Max(1, item.Count);
-                                    for (int c = 0; c < copies; c++)
+                                    continue;
+                                }
+
+                                GoodsSkuContract matchedSku = null;
+                                string customAttr = null;
+                                string rawSpec = item.SpecText ?? string.Empty;
+                                int targetPocket = (item.PocketId == 1 || item.PocketId == 2) ? item.PocketId : 1;
+
+                                // 兼容 "1号口袋 · 标准份 / 微辣" 或 "标准份 · 微辣"
+                                if (rawSpec.StartsWith("1号口袋 · ", StringComparison.Ordinal))
+                                {
+                                    targetPocket = 1;
+                                    rawSpec = rawSpec.Substring("1号口袋 · ".Length);
+                                }
+                                else if (rawSpec.StartsWith("2号口袋 · ", StringComparison.Ordinal))
+                                {
+                                    targetPocket = 2;
+                                    rawSpec = rawSpec.Substring("2号口袋 · ".Length);
+                                }
+
+                                if (matchedFood.Skus != null && matchedFood.Skus.Count > 0)
+                                {
+                                    if (item.SkuId > 0)
                                     {
-                                        AddFoodToCartInternal(matchedFood, null, null);
-                                        addedCount++;
+                                        matchedSku = matchedFood.Skus.FirstOrDefault(delegate(GoodsSkuContract s) { return s.SkuId == item.SkuId; });
                                     }
+                                    if (matchedSku == null)
+                                    {
+                                        for (int sIdx = 0; sIdx < matchedFood.Skus.Count; sIdx++)
+                                        {
+                                            GoodsSkuContract candSku = matchedFood.Skus[sIdx];
+                                            if (string.Equals(rawSpec, candSku.SpecName, StringComparison.Ordinal) ||
+                                                rawSpec.StartsWith(candSku.SpecName + " / ", StringComparison.Ordinal) ||
+                                                rawSpec.StartsWith(candSku.SpecName + " · ", StringComparison.Ordinal))
+                                            {
+                                                matchedSku = candSku;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (matchedSku != null && !string.IsNullOrEmpty(matchedSku.SpecName))
+                                    {
+                                        if (rawSpec.StartsWith(matchedSku.SpecName + " / ", StringComparison.Ordinal))
+                                        {
+                                            customAttr = rawSpec.Substring((matchedSku.SpecName + " / ").Length);
+                                        }
+                                        else if (rawSpec.StartsWith(matchedSku.SpecName + " · ", StringComparison.Ordinal))
+                                        {
+                                            customAttr = rawSpec.Substring((matchedSku.SpecName + " · ").Length);
+                                        }
+                                    }
+                                }
+                                else if (!string.IsNullOrEmpty(rawSpec) && !string.Equals(rawSpec, "标准规格", StringComparison.Ordinal))
+                                {
+                                    customAttr = rawSpec;
+                                }
+
+                                _selectedPocketId = targetPocket;
+                                for (int c = 0; c < item.Count; c++)
+                                {
+                                    AddFoodToCartInternal(matchedFood, matchedSku, customAttr);
+                                    addedCount++;
                                 }
                             }
                         }
-                        if (addedCount == 0 && targetPoi.Foods != null && targetPoi.Foods.Count > 0)
-                        {
-                            AddFoodToCartInternal(targetPoi.Foods[0], null, null);
-                        }
+                        _selectedPocketId = savedPocket;
                         ActiveFullScreenPage = "PoiDetail";
                         SelectedPoiSubTab = "点菜";
-                        StatusBannerText = string.Format("已为您将订单「{0}」中的原选餐品 ({1}件) 重新加入购物车！", targetPoi.Name, _cartPrice != null ? _cartPrice.TotalItemCount : addedCount);
+                        StatusBannerText = string.Format("已为您将订单「{0}」中的原选餐品 ({1}件) 精确还原加入购物车！", targetPoi.Name, _cartPrice != null ? _cartPrice.TotalItemCount : addedCount);
                     }
                 }
             });
@@ -2900,9 +2973,10 @@ namespace MeituanWaimaiClient.ViewModels
             }
             else if (IsQrCodeLoginMode)
             {
-                if (string.IsNullOrEmpty(_qrCodeTokenText))
+                if (string.IsNullOrEmpty(_qrCodeTokenText) || !_isQrScanConfirmed)
                 {
-                    RefreshQrCodeCommand.Execute(null);
+                    StatusBannerText = "❌ 请先使用手机美团 APP 扫码并点击『📲 模拟手机扫码确认』完成授权";
+                    return;
                 }
             }
 
@@ -3574,6 +3648,9 @@ namespace MeituanWaimaiClient.ViewModels
                 ShopCartItemContract ci = poiItems[i];
                 orderFoods.Add(new OrderFoodItemContract
                 {
+                    SpuId = ci.SpuId,
+                    SkuId = ci.SkuId,
+                    PocketId = ci.PocketId,
                     FoodName = ci.FoodName,
                     SpecText = string.Format("{0}号口袋 · {1}", ci.PocketId, ci.SpecSummary),
                     Count = ci.Count,

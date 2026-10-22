@@ -413,10 +413,18 @@ namespace MeituanWaimai.Core
 
     public class OrderFoodItemContract
     {
+        public long SpuId { get; set; }
+        public long SkuId { get; set; }
+        public int PocketId { get; set; }
         public string FoodName { get; set; }
         public string SpecText { get; set; }
         public int Count { get; set; }
         public double Price { get; set; }
+
+        public OrderFoodItemContract()
+        {
+            PocketId = 1;
+        }
     }
 
     public class RiderTrackingStepContract

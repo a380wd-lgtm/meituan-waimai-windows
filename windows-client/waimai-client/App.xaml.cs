@@ -32,6 +32,7 @@ namespace MeituanWaimaiClient
 
             if (isSelfTestMode)
             {
+                ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 int exitCode = await ExecuteHeadlessSelfTestAsync(repoRoot, assetLoader);
                 Shutdown(exitCode);
                 return;
@@ -93,20 +94,22 @@ namespace MeituanWaimaiClient
                 bool wrongPwdRejected = !vm.IsUserLoggedIn;
                 vm.LoginPasswordInput = "mt884291";
 
-                // 校验扫码刷新与正确验证码登录成功
+                // 校验扫码刷新、未扫码确认直接点击登录必须被拦截，以及扫码确认后或正确验证码登录成功
                 vm.SwitchLoginModeCommand.Execute("QrCode");
                 string oldQr = vm.QrCodeTokenText;
                 vm.RefreshQrCodeCommand.Execute(null);
                 bool qrRefreshed = !string.Equals(oldQr, vm.QrCodeTokenText, StringComparison.Ordinal);
+                vm.SubmitLoginCommand.Execute(null);
+                bool unconfirmedQrBlocked = !vm.IsUserLoggedIn;
 
                 vm.SwitchLoginModeCommand.Execute("Sms");
                 vm.LoginSmsCodeInput = correctSms;
-                bool smsGenerated = vm.HasSimulatedSmsBanner && !string.IsNullOrEmpty( vm.LoginSmsCodeInput);
+                bool smsGenerated = vm.HasSimulatedSmsBanner && !string.IsNullOrEmpty(vm.LoginSmsCodeInput);
                 vm.ConfirmPrivacyAndLoginCommand.Execute(null);
-                bool loginFlowPassed = loggedOutGuestBar && privacyBlocked && wrongSmsRejected && wrongPwdRejected && qrRefreshed && smsGenerated && vm.IsUserLoggedIn && !vm.IsLoginViewOpen;
-                AppendTestItem(report, "ST-UI-02", "PASSPORT_LOGIN_FLOW", "美团通行证退出登录、未登录悬浮条、隐私协议拦截、错误验证码/密码拦截、扫码刷新与登录成功校验",
+                bool loginFlowPassed = loggedOutGuestBar && privacyBlocked && wrongSmsRejected && wrongPwdRejected && qrRefreshed && unconfirmedQrBlocked && smsGenerated && vm.IsUserLoggedIn && !vm.IsLoginViewOpen;
+                AppendTestItem(report, "ST-UI-02", "PASSPORT_LOGIN_FLOW", "美团通行证退出登录、未登录悬浮条、隐私协议拦截、错误验证码/密码/未确认扫码拦截与登录成功校验",
                     loginFlowPassed,
-                    string.Format("GuestBar={0}, PrivacyDialog={1}, WrongSmsBlocked={2}, WrongPwdBlocked={3}, QrRefreshed={4}, LoggedIn={5}", loggedOutGuestBar, privacyBlocked, wrongSmsRejected, wrongPwdRejected, qrRefreshed, vm.IsUserLoggedIn));
+                    string.Format("GuestBar={0}, PrivacyDialog={1}, WrongSmsBlocked={2}, WrongPwdBlocked={3}, UnconfirmedQrBlocked={4}, LoggedIn={5}", loggedOutGuestBar, privacyBlocked, wrongSmsRejected, wrongPwdRejected, unconfirmedQrBlocked, vm.IsUserLoggedIn));
 
                 // ST-UI-03: 门店详情全屏压栈与点菜/评价/商家三子页切换 + 收藏切换校验 (OBL-13~OBL-17)
                 vm.SelectPoiCommand.Execute(vm.FilteredPois[0]);
@@ -134,11 +137,35 @@ namespace MeituanWaimaiClient
                     string.Format("Coupons {0} -> {1}, ActiveCouponAmount={2:0.0}", couponsBefore, vm.Coupons.Count, vm.SelectedCoupon != null ? vm.SelectedCoupon.Amount : 0.0));
 
                 // ST-UI-05: 确认订单全屏页 (OrderConfirmActivity) -> 美团收银台 (MTCashierActivity) 倒计时跳秒 -> 确认支付生成订单并核销神券 (OBL-20~OBL-22, OBL-26)
-                if (vm.SelectedPoi != null && vm.SelectedPoi.Foods != null && vm.SelectedPoi.Foods.Count > 0)
+                vm.ClearCartCommand.Execute(null);
+                if (vm.SelectedPoi != null && vm.SelectedPoi.Foods != null && vm.SelectedPoi.Foods.Count > 1)
                 {
-                    vm.AddFoodCommand.Execute(vm.SelectedPoi.Foods[0]);
-                    vm.AddFoodCommand.Execute(vm.SelectedPoi.Foods[0]);
+                    // 特意选择第2道菜 + 第2个SKU + 第2个口袋，检验再来一单能否严格还原非首道菜与自定义规格
+                    GoodsSpuContract secondFood = vm.SelectedPoi.Foods[1];
+                    vm.SwitchPocketCommand.Execute(2);
+                    vm.OpenSpecModalCommand.Execute(secondFood);
+                    if (secondFood.Skus != null && secondFood.Skus.Count > 1)
+                    {
+                        vm.SelectSpecSkuCommand.Execute(secondFood.Skus[1]);
+                    }
+                    if (secondFood.AttrGroups != null && secondFood.AttrGroups.Count > 0)
+                    {
+                        vm.CycleAttrOptionCommand.Execute(secondFood.AttrGroups[0]);
+                    }
+                    vm.ConfirmSpecModalCommand.Execute(null);
+                    vm.OpenSpecModalCommand.Execute(secondFood);
+                    if (secondFood.Skus != null && secondFood.Skus.Count > 1)
+                    {
+                        vm.SelectSpecSkuCommand.Execute(secondFood.Skus[1]);
+                    }
+                    vm.ConfirmSpecModalCommand.Execute(null);
+                    vm.SwitchPocketCommand.Execute(1);
                 }
+                string expectedFoodName = vm.ActiveCartItems.Count > 0 ? vm.ActiveCartItems[0].FoodName : string.Empty;
+                long expectedSkuId = vm.ActiveCartItems.Count > 0 ? vm.ActiveCartItems[0].SkuId : 0;
+                string expectedSpecSummary = vm.ActiveCartItems.Count > 0 ? vm.ActiveCartItems[0].SpecSummary : string.Empty;
+                int expectedPocketId = vm.ActiveCartItems.Count > 0 ? vm.ActiveCartItems[0].PocketId : 1;
+
                 ShenQuanCouponContract couponToUse = vm.SelectedCoupon;
                 int orderCountBefore = vm.Orders.Count;
                 vm.CheckoutOrderCommand.Execute(null);
@@ -157,7 +184,7 @@ namespace MeituanWaimaiClient
                     checkoutPassed,
                     string.Format("EnteredConfirm={0}, Countdown={1}->{2}, CouponConsumed={3}, Orders {4}->{5}", enteredOrderConfirm, countdownBefore, countdownAfter, couponConsumed, orderCountBefore, orderCountAfter));
 
-                // ST-UI-06: 骑手/商家三方 IM 群聊 + 确认收货 + 订单评价写回 + 再来一单原餐品还原 + 退款归还神券校验 (OBL-27~OBL-30)
+                // ST-UI-06: 骑手/商家三方 IM 群聊 + 确认收货 + 订单评价写回 + 再来一单原餐品/SKU/属性/口袋精确还原 + 退款归还神券校验 (OBL-27~OBL-30)
                 OrderContract createdOrder = vm.SelectedOrder;
                 int expectedReorderCount = createdOrder != null ? createdOrder.ProductCount : 0;
                 int imCountBefore = createdOrder != null && createdOrder.ImMessages != null ? createdOrder.ImMessages.Count : 0;
@@ -171,18 +198,39 @@ namespace MeituanWaimaiClient
                 vm.SubmitOrderReviewCommand.Execute(null);
                 int poiReviewsAfter = vm.SelectedPoi.Reviews.Count;
 
-                // 校验再来一单严格还原原订单商品与件数
+                // 校验再来一单严格还原原订单非首道菜、SKU、口味属性、口袋与件数，且未知商品绝不回退替换为首道菜
+                OrderContract unknownFoodOrder = new OrderContract
+                {
+                    OrderId = 999999999L,
+                    PoiId = createdOrder.PoiId,
+                    PoiName = createdOrder.PoiName,
+                    FoodItems = new List<OrderFoodItemContract>
+                    {
+                        new OrderFoodItemContract { SpuId = -999, FoodName = "不存在的虚拟测试菜品", Count = 1, Price = 99.0 }
+                    }
+                };
+                vm.ReorderCommand.Execute(unknownFoodOrder);
+                bool unknownFoodNotReplacedByFirst = vm.ActiveCartItems.Count == 0;
+
                 vm.ReorderCommand.Execute(createdOrder);
-                bool reorderExactMatch = vm.CartPrice != null && vm.CartPrice.TotalItemCount == expectedReorderCount;
+                bool reorderExactMatch = unknownFoodNotReplacedByFirst &&
+                                         vm.CartPrice != null &&
+                                         vm.CartPrice.TotalItemCount == expectedReorderCount &&
+                                         vm.ActiveCartItems.Count == 1 &&
+                                         string.Equals(vm.ActiveCartItems[0].FoodName, expectedFoodName, StringComparison.Ordinal) &&
+                                         vm.ActiveCartItems[0].SkuId == expectedSkuId &&
+                                         string.Equals(vm.ActiveCartItems[0].SpecSummary, expectedSpecSummary, StringComparison.Ordinal) &&
+                                         vm.ActiveCartItems[0].PocketId == expectedPocketId &&
+                                         vm.ActiveCartItems[0].Count == expectedReorderCount;
 
                 // 校验取消/退款自动归还已核销神券
                 vm.CancelOrderCommand.Execute(createdOrder);
                 bool couponRefunded = couponToUse != null && !couponToUse.IsUsed && createdOrder.Status == 70;
 
                 bool imAndReviewPassed = (imCountAfter >= imCountBefore + 2) && createdOrder.IsComment && (poiReviewsAfter == poiReviewsBefore + 1) && reorderExactMatch && couponRefunded;
-                AppendTestItem(report, "ST-UI-06", "IM_CHAT_REORDER_REFUND_LOOP", "三方IM群聊、评价写回门店、再来一单原商品还原及退款归还神券校验",
+                AppendTestItem(report, "ST-UI-06", "IM_CHAT_REORDER_REFUND_LOOP", "三方IM群聊、评价写回门店、再来一单原商品/SKU/规格/口袋精确还原及退款归还神券校验",
                     imAndReviewPassed,
-                    string.Format("ImMessages {0}->{1}, PoiReviews {2}->{3}, ReorderItems={4}, CouponRefunded={5}", imCountBefore, imCountAfter, poiReviewsBefore, poiReviewsAfter, vm.CartPrice != null ? vm.CartPrice.TotalItemCount : 0, couponRefunded));
+                    string.Format("ImMessages {0}->{1}, PoiReviews {2}->{3}, ExactReorder({4}/{5}/Pocket{6})={7}, CouponRefunded={8}", imCountBefore, imCountAfter, poiReviewsBefore, poiReviewsAfter, expectedFoodName, expectedSpecSummary, expectedPocketId, reorderExactMatch, couponRefunded));
 
                 // ST-UI-07: 收货地址新增、已有地址编辑保存与消息通知中心全部已读校验 (OBL-32~OBL-33)
                 int addrBefore = vm.Addresses.Count;
@@ -243,8 +291,13 @@ namespace MeituanWaimaiClient
                 });
             }
 
-            // ST-UI-09: 真实加载 MainWindow XAML 可视树/逻辑树，校验 420×910 锁定尺寸与 100% 按钮有效绑定（零死按钮）
+            // ST-UI-09: 真实加载并 Show MainWindow XAML 可视树/逻辑树，校验 420×910 锁定尺寸、全树按钮运行时 ICommand 绑定与真实触发效果（零死按钮、零反射兜底）
             MainWindow xamlWin = new MainWindow(repoRoot, assetLoader);
+            xamlWin.WindowStartupLocation = WindowStartupLocation.Manual;
+            xamlWin.Left = -10000;
+            xamlWin.Top = -10000;
+            xamlWin.ShowActivated = false;
+            xamlWin.Show();
             xamlWin.Measure(new Size(420, 910));
             xamlWin.Arrange(new Rect(0, 0, 420, 910));
             xamlWin.UpdateLayout();
@@ -257,15 +310,72 @@ namespace MeituanWaimaiClient
                                   (int)xamlWin.MaxHeight == 910 &&
                                   xamlWin.ResizeMode == ResizeMode.CanMinimize;
 
+            HashSet<System.Windows.Controls.Button> visitedButtons = new HashSet<System.Windows.Controls.Button>();
             int totalButtons = 0;
             int deadButtons = 0;
-            ScanButtonsRecursive(xamlWin, xamlWin.ViewModel, ref totalButtons, ref deadButtons);
+            List<string> deadButtonNames = new List<string>();
+
+            // 依次展开主要视图与弹窗使所有 DataTemplate / 延迟容器中的 Button 均在可视树中具象化并完成运行时绑定求值
+            ScanButtonsRecursive(xamlWin, visitedButtons, ref totalButtons, ref deadButtons, deadButtonNames);
+
+            if (xamlWin.ViewModel != null)
+            {
+                xamlWin.ViewModel.OpenLoginViewCommand.Execute(null);
+                xamlWin.UpdateLayout();
+                ScanButtonsRecursive(xamlWin, visitedButtons, ref totalButtons, ref deadButtons, deadButtonNames);
+
+                xamlWin.ViewModel.CloseLoginViewCommand.Execute(null);
+                if (xamlWin.ViewModel.FilteredPois.Count > 0)
+                {
+                    xamlWin.ViewModel.SelectPoiCommand.Execute(xamlWin.ViewModel.FilteredPois[0]);
+                    xamlWin.UpdateLayout();
+                    ScanButtonsRecursive(xamlWin, visitedButtons, ref totalButtons, ref deadButtons, deadButtonNames);
+                }
+
+                xamlWin.ViewModel.SelectedTabBusinessId = 9;
+                xamlWin.UpdateLayout();
+                ScanButtonsRecursive(xamlWin, visitedButtons, ref totalButtons, ref deadButtons, deadButtonNames);
+
+                xamlWin.ViewModel.SelectedTabBusinessId = 2;
+                xamlWin.UpdateLayout();
+                ScanButtonsRecursive(xamlWin, visitedButtons, ref totalButtons, ref deadButtons, deadButtonNames);
+
+                xamlWin.ViewModel.SelectedTabBusinessId = 3;
+                xamlWin.UpdateLayout();
+                ScanButtonsRecursive(xamlWin, visitedButtons, ref totalButtons, ref deadButtons, deadButtonNames);
+            }
+
+            // 真实通过可视树中的 Button.Command.Execute(Button.CommandParameter) 触发交互并验证状态变化
+            int executedButtonEffects = 0;
+            foreach (System.Windows.Controls.Button btn in visitedButtons)
+            {
+                string paramStr = btn.CommandParameter as string;
+                if (btn.Command != null && string.Equals(paramStr, "Password", StringComparison.Ordinal))
+                {
+                    btn.Command.Execute(btn.CommandParameter);
+                    if (xamlWin.ViewModel != null && xamlWin.ViewModel.IsPasswordLoginMode)
+                    {
+                        executedButtonEffects++;
+                    }
+                }
+                else if (btn.Command != null && string.Equals(paramStr, "QrCode", StringComparison.Ordinal))
+                {
+                    btn.Command.Execute(btn.CommandParameter);
+                    if (xamlWin.ViewModel != null && xamlWin.ViewModel.IsQrCodeLoginMode)
+                    {
+                        executedButtonEffects++;
+                    }
+                }
+            }
+
             xamlWin.Close();
 
-            bool xamlAuditPassed = viewportLocked && totalButtons >= 35 && deadButtons == 0;
-            AppendTestItem(report, "ST-UI-09", "XAML_VISUAL_TREE_ZERO_DEAD_BUTTONS", "真实加载 MainWindow XAML 校验 420×910 锁定比例与全树按钮 100% 绑定零死按钮",
+            bool xamlAuditPassed = viewportLocked && totalButtons >= 85 && deadButtons == 0 && executedButtonEffects >= 2;
+            AppendTestItem(report, "ST-UI-09", "XAML_VISUAL_TREE_ZERO_DEAD_BUTTONS", "真实加载并具象化 MainWindow XAML 可视树/逻辑树，校验 420×910 锁定比例與全树按钮运行时 ICommand 绑定及触发效果",
                 xamlAuditPassed,
-                string.Format("ViewportLocked(420x910)={0}, TotalButtons={1}, DeadButtons={2}", viewportLocked, totalButtons, deadButtons));
+                string.Format("ViewportLocked(420x910)={0}, TotalButtons={1}, DeadButtons={2}, ExecutedEffects={3}{4}",
+                    viewportLocked, totalButtons, deadButtons, executedButtonEffects,
+                    deadButtonNames.Count > 0 ? ", Dead=[" + string.Join(";", deadButtonNames.ToArray()) + "]" : ""));
 
             await Task.Run(delegate
             {
@@ -284,7 +394,12 @@ namespace MeituanWaimaiClient
             return report.FailedCount == 0 && report.PassedCount >= 30 ? 0 : 1;
         }
 
-        private static void ScanButtonsRecursive(DependencyObject parent, WaimaiMainViewModel vm, ref int totalButtons, ref int deadButtons)
+        private static void ScanButtonsRecursive(
+            DependencyObject parent,
+            HashSet<System.Windows.Controls.Button> visitedButtons,
+            ref int totalButtons,
+            ref int deadButtons,
+            List<string> deadButtonNames)
         {
             if (parent == null)
             {
@@ -292,31 +407,30 @@ namespace MeituanWaimaiClient
             }
 
             System.Windows.Controls.Button btn = parent as System.Windows.Controls.Button;
-            if (btn != null)
+            if (btn != null && !visitedButtons.Contains(btn))
             {
+                visitedButtons.Add(btn);
                 totalButtons++;
-                bool hasValidCommand = btn.Command != null;
-                if (!hasValidCommand && vm != null)
+
+                System.Windows.Data.BindingExpression cmdExpr = System.Windows.Data.BindingOperations.GetBindingExpression(
+                    btn, System.Windows.Controls.Primitives.ButtonBase.CommandProperty);
+                if (cmdExpr != null)
                 {
-                    System.Windows.Data.Binding binding = System.Windows.Data.BindingOperations.GetBinding(
-                        btn, System.Windows.Controls.Primitives.ButtonBase.CommandProperty);
-                    if (binding != null && binding.Path != null && !string.IsNullOrEmpty(binding.Path.Path))
-                    {
-                        string propName = binding.Path.Path;
-                        if (propName.StartsWith("DataContext.", StringComparison.Ordinal))
-                        {
-                            propName = propName.Substring("DataContext.".Length);
-                        }
-                        System.Reflection.PropertyInfo pi = vm.GetType().GetProperty(propName);
-                        if (pi != null && pi.GetValue(vm, null) is System.Windows.Input.ICommand)
-                        {
-                            hasValidCommand = true;
-                        }
-                    }
+                    cmdExpr.UpdateTarget();
                 }
-                if (!hasValidCommand)
+                System.Windows.Data.BindingExpression paramExpr = System.Windows.Data.BindingOperations.GetBindingExpression(
+                    btn, System.Windows.Controls.Primitives.ButtonBase.CommandParameterProperty);
+                if (paramExpr != null)
+                {
+                    paramExpr.UpdateTarget();
+                }
+
+                bool hasValidRuntimeCommand = btn.Command != null && btn.Command.CanExecute(btn.CommandParameter);
+                if (!hasValidRuntimeCommand)
                 {
                     deadButtons++;
+                    string label = btn.Content != null ? btn.Content.ToString() : btn.Name;
+                    deadButtonNames.Add(string.IsNullOrEmpty(label) ? "UnnamedButton" : label);
                 }
             }
 
@@ -325,7 +439,20 @@ namespace MeituanWaimaiClient
                 DependencyObject depChild = child as DependencyObject;
                 if (depChild != null)
                 {
-                    ScanButtonsRecursive(depChild, vm, ref totalButtons, ref deadButtons);
+                    ScanButtonsRecursive(depChild, visitedButtons, ref totalButtons, ref deadButtons, deadButtonNames);
+                }
+            }
+
+            if (parent is System.Windows.Media.Visual || parent is System.Windows.Media.Media3D.Visual3D)
+            {
+                int visualCount = System.Windows.Media.VisualTreeHelper.GetChildrenCount(parent);
+                for (int i = 0; i < visualCount; i++)
+                {
+                    DependencyObject visualChild = System.Windows.Media.VisualTreeHelper.GetChild(parent, i);
+                    if (visualChild != null)
+                    {
+                        ScanButtonsRecursive(visualChild, visitedButtons, ref totalButtons, ref deadButtons, deadButtonNames);
+                    }
                 }
             }
         }
